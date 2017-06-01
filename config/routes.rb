@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/home', to: 'index#home'
   get '/about', to: 'index#about', as: 'about'
@@ -8,11 +9,14 @@ Rails.application.routes.draw do
   get '/search', to: 'index#search', as: 'search'
   get '/shareup/:id', to: 'index#share_up', as: 'shareup'
   get '/likeup/:id', to: 'index#like_up', as: 'likeup'
-  
+
   scope 'admin' do
     resources :companies
+    resources :categories
   end
 
   root 'index#home'
+
+  resources :admin, only: [:index,:create,:new]
 
 end
