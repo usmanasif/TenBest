@@ -60,7 +60,7 @@ class SubCategoriesController < ApplicationController
   def destroy
     @sub_category.destroy
     respond_to do |format|
-      format.html { redirect_to sub_categories_url, notice: 'sub category was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'sub category was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
