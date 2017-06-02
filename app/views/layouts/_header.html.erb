@@ -53,6 +53,9 @@
               </a>
               <div class="col-md-6 col-sm-8 col-xs-9 pages-section pull-right">
                 <ul class="pages-list">
+                  <% if admin_signed_in? %>
+                    <li class="page-link"><%= link_to 'Admin', admin_index_path %></li>
+                  <% end %>
                   <li class="page-link"><%= link_to 'Home', root_path %></li>
                   <li class="page-link"><%= link_to 'About', about_path %></li>
                   <li class="page-link"><%= link_to 'Contact', contact_path %></li>

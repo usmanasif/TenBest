@@ -3,8 +3,8 @@
   font-family: "Raleway";
   src: url(asset_path("assets/raleway/raleway-bold.eot"));
   src: url(asset_path("assets/raleway/raleway-bold.eot?#iefix")) format("embedded-opentype"),
-       url(asset_path("assets/raleway/raleway-bold.woff")) format("woff"), 
-       url(asset_path("assets/raleway/raleway-bold.ttf")) format("truetype"), 
+       url(asset_path("assets/raleway/raleway-bold.woff")) format("woff"),
+       url(asset_path("assets/raleway/raleway-bold.ttf")) format("truetype"),
        url(asset_path("assets/raleway/raleway-bold.svg#raleway-bold")) format("svg");
   font-style: normal;
   font-weight: 700; }
@@ -136,7 +136,7 @@
         color: #25252c; }
   .header .navbar .pages-section {
     margin-top: 22px;
-    padding-left: 63px;
+    padding-left: 25px;
     padding-right: 0px; }
     .header .navbar .pages-section .pages-list {
       padding-left: 0px;
@@ -2353,7 +2353,7 @@ footer {
     margin: 0 auto;
     top: 72px;
     display: block; }
-    
+
   .header .navbar .pages-section {
     padding-left: 0px; }
   .header .navbar .menu-list-wrapper .container {

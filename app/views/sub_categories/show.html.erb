@@ -1,0 +1,16 @@
+<% provide(:title, @sub_category.name) %>
+<% provide(:body_class, "category-page") %>
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<div>
+	No: <%= @sub_category.id %>
+</div>
+<div>
+	Name: <%= @sub_category.name %>
+</div>
+
+<%= link_to 'Edit', edit_sub_category_path(@sub_category) %> |
+<%= link_to 'Back', categories_path %>
+</div>

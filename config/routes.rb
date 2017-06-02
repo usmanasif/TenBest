@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   scope 'admin' do
     resources :companies
     resources :categories
+    resources :sub_categories
   end
 
   root 'index#home'

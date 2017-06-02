@@ -4,7 +4,11 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    # @companies = Company.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CompaniesDatatable.new(view_context) }
+    end
   end
 
   # GET /companies/1

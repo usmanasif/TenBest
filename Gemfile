@@ -31,6 +31,9 @@ gem 'json'
 gem 'social-share-button'
 gem 'pg'
 gem 'devise'
+gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'will_paginate'
+gem 'jquery-ui-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
