@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
 	def home
-			
+
 	end
 
 	def about
@@ -8,7 +8,7 @@ class IndexController < ApplicationController
 	end
 
 	def contact
-		unless params[:contact].nil?			
+		unless params[:contact].nil?
 			@user = params[:contact]
 			if ContactMailer.welcome_email(@user).deliver_now
 				@result = "Success!"
@@ -21,7 +21,7 @@ class IndexController < ApplicationController
 	def place
 		@no = params[:company].nil? ? 1 : Company.find_by_name( url_decode(params[:company]) ).id
 		@company = Company.find(@no)
-		@position =  get_info @company					
+		@position =  get_info @company
 	end
 
 	def ranking
@@ -31,12 +31,12 @@ class IndexController < ApplicationController
 		@positions = []
 		@companies.each do |company|
 			@positions << get_info(company)
-		end			
+		end
 	end
 
-	def search		
+	def search
 		if params[:search_select].nil? or params[:search_select] == ''
-			@category = nil	
+			@category = nil
 		else
 			@category = params[:search_select]
 		end
@@ -46,13 +46,13 @@ class IndexController < ApplicationController
 				@companies = nil
 			else
 				@search_str = params[:search]
-				@companies = Company.where("name LIKE ?", "%#{params[:search]}%") if Rails.env.development?
-				@companies = Company.where("name ILIKE ?", "%#{params[:search]}%") if Rails.env.production? 
+				# @companies = Company.where("name LIKE ?", "%#{params[:search]}%") if Rails.env.development?
+				@companies = Company.where("name ILIKE ?", "%#{params[:search]}%")
 			end
 		else
 			@search_str = params[:search]
-			@companies = Company.where( "name LIKE ? AND category = ?", "%#{params[:search]}%", @category)if Rails.env.development?
-			@companies = Company.where( "name ILIKE ? AND category = ?", "%#{params[:search]}%", @category)if Rails.env.production?
+			# @companies = Company.where( "name LIKE ? AND category = ?", "%#{params[:search]}%", @category)if Rails.env.development?
+			@companies = Company.where( "name ILIKE ? AND category = ?", "%#{params[:search]}%", @category)
 		end
 		if params[:limit].nil?
 			if @companies.to_a.length > 8
@@ -65,19 +65,19 @@ class IndexController < ApplicationController
 	def share_up
 		@company = Company.find(params[:id]) unless params[:id].nil?
 		ip = Ip.where( "address = ? AND company_id = ?", get_ip, params[:id] ).first
-		if ip.nil? 		
+		if ip.nil?
 			if @company.share.nil?
-				@share = 1 
+				@share = 1
 			else
-				@share = @company.share + 1 
-			end			
-			@company.update( :share => @share )			
+				@share = @company.share + 1
+			end
+			@company.update( :share => @share )
 			ip = Ip.new(:address => get_ip, :company_id => params[:id], :share => 1 )
 			ip.save
 		else
 			if ip.share.nil?
 				@share = @company.share + 1
-				@company.update( :share => @share )				
+				@company.update( :share => @share )
 				ip.update( :share => 1)
 			else
 				@share = @company.share
@@ -88,13 +88,13 @@ class IndexController < ApplicationController
 	def like_up
 		@company = Company.find(params[:id]) unless params[:id].nil?
 		ip = Ip.where( "address = ? AND company_id = ?", get_ip, params[:id] ).first
-		if ip.nil?			
+		if ip.nil?
 			if @company.like.nil?
-				@like = 1 
+				@like = 1
 			else
-				@like = @company.like + 1 
-			end			
-			@company.update( :like => @like )			
+				@like = @company.like + 1
+			end
+			@company.update( :like => @like )
 			ip = Ip.new(:address => get_ip, :company_id => params[:id], :like => 1 )
 			ip.save
 		else
@@ -105,9 +105,9 @@ class IndexController < ApplicationController
 			else
 				@like = @company.like
 			end
-			
+
 		end
 	end
-	
+
 
 end

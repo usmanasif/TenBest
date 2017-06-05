@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 						photo_reference = result_json['results'].first['photos'].first['photo_reference']
 						info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
 					end
-				end				
+				end
 			end
 			company.update( :lat => info['lat'], :lng => info['lng'], :photo => info['img'], :address => info['address'] )
 		else
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 			info['address'] = company.address
 		end
 
-		return info		
+		return info
 	end
 
 	def get_ip
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 
 	def url_decode url
 		decode_url = url.gsub("-", " ")
-		decode_url = decode_url.split.map(&:capitalize).join(' ')
-		return decode_url		
+		# decode_url = decode_url.split.map(&:capitalize).join(' ')
+		return decode_url
 	end
 end
