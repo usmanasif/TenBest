@@ -56,9 +56,12 @@
                   <% if admin_signed_in? %>
                     <li class="page-link"><%= link_to 'Admin', admin_index_path %></li>
                   <% end %>
-                  <li class="page-link"><%= link_to 'Home', root_path %></li>
+                  <% @active_links.each do |link|%>
+                    <li class="page-link"><%= link_to link.name, link.url %></li>
+                  <% end %>
+                  <!-- <li class="page-link"><%= link_to 'Home', root_path %></li>
                   <li class="page-link"><%= link_to 'About', about_path %></li>
-                  <li class="page-link"><%= link_to 'Contact', contact_path %></li>
+                  <li class="page-link"><%= link_to 'Contact', contact_path %></li> -->
                 </ul>
                 <div class="search-field-wrapper hidden">
                 <%= form_for(:search_form, url:search_path, :method => 'get') do |f| %>

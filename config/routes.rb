@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :companies
     resources :categories
     resources :sub_categories
+    resources :nav_links
   end
 
   root 'index#home'

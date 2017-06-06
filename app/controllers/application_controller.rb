@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :get_links
 
 	def get_info company
 		info = {}
@@ -52,5 +53,9 @@ class ApplicationController < ActionController::Base
 		decode_url = url.gsub("-", " ")
 		# decode_url = decode_url.split.map(&:capitalize).join(' ')
 		return decode_url
+	end
+
+	def get_links
+		@active_links = NavLink.where(active: true).order(:position)
 	end
 end
