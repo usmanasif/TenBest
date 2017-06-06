@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @nav_link do |f| %>
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Link</h4>
+        </div>
+        <% if flash.present? %>
+          <label class="label label-danger active_error"><%= flash[:alert] %></label>
+        <% end %>
+        <div class="modal-body">
+          <div class="field2 m-b">
+            <%= label_tag :name,"Name",class: "col-xs-3" %>
+            <%= f.text_field :name,class: "form-control col-xs-9 var_name",required: true,id: "edit_name" %>
+          </div>
+          <div class="field2 m-b">
+            <%= label_tag :url,"URL",class: "col-xs-3" %>
+            <%= f.text_field :url,class: "form-control col-xs-9 var_name",required: true %>
+          </div>
+          <div class="field2 m-b">
+            <%= label_tag :position,"Position",class: "col-xs-3" %>
+            <%= f.text_field :position,class: "form-control col-xs-9 var_name",required: true %>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+            <%= label_tag :active,"Active",class: "col-xs-3" %>
+            </div>
+            <div class="col-md-1">
+            <%= f.check_box :active,class: "" %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= submit_tag "Submit",class: "btn btn-success col-xs-4 add_variable" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
