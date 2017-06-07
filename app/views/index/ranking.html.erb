@@ -22,7 +22,7 @@
 
 <!--Start of places list section-->
 <section class="places-list-section">
-<% @companies.first(10).each_with_index do |company, index| %>
+<% @companies.each_with_index do |company, index| %>
   <div class="social-modal">
     <div class="container">
       <h1>Share</h1>
@@ -35,6 +35,7 @@
         <div class="place-container container">
             <div class="row">
                 <div class="col-md-12">
+                <%= company.rating %>
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
                         <%= link_to image_tag( company.photo, class: 'img-responsive' ), place_path( url_code(Category.find(company.category).name), url_code( company.name ) ) %>
                     </div>
