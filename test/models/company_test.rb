@@ -18,7 +18,7 @@ class CompanyTest < ActiveSupport::TestCase
   end
 
   test "category should be present" do
-    @company.category = nil
+    @company.category_id = nil
     assert_not @company.valid?
   end
 

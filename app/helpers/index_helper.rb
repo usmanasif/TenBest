@@ -1,8 +1,8 @@
 module IndexHelper
 
 	def modal_text company
-		modal_text = Category.find(company.category).name unless company.category.nil?
-		modal_text = SubCategory.find(company.subcategory).name unless company.subcategory.nil?
+		modal_text = company.category.name unless company.category_id.nil?
+		modal_text = company.subcategory.name unless company.subcategory_id.nil?
 		return modal_text
 	end
 

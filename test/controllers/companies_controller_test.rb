@@ -3,7 +3,7 @@ require 'test_helper'
 class CompaniesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @company = companies(:one)
-    @base_title = "10 Best SF"    
+    @base_title = "10 Best SF"
   end
 
   test "should get index" do
@@ -36,7 +36,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update company" do
-    patch company_url(@company), params: { company: { name: @company.name, city: @company.city, category: @company.category } }
+    patch company_url(@company), params: { company: { name: @company.name, city: @company.city, category: @company.category_id } }
     assert_redirected_to company_url(@company)
   end
 

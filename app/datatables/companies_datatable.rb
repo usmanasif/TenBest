@@ -22,7 +22,7 @@ private
         ERB::Util.h(company.id),
         link_to(company.name, company),
         ERB::Util.h(company.city),
-        ERB::Util.h(company.category),
+        ERB::Util.h(company.category.name),
       ]
     end
   end

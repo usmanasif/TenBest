@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
-                        <%= link_to image_tag( company.photo, class: 'img-responsive' ), place_path( url_code(Category.find(company.category).name), url_code( company.name ) ) %>
+                        <%= link_to image_tag( company.photo, class: 'img-responsive' ), place_path( url_code(company.category.name), url_code( company.name ) ) %>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12 info-container">
                         <div class="header-section">
@@ -75,14 +75,14 @@
                         </div>
                         <div class="main-text-container">
                             <p>
-                              <strong><%= index+1 %> of 10 Best <%= Category.find(company.category).name %> in SF</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                              <strong><%= index+1 %> of 10 Best <%= company.category.name %> in SF</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                               do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
                               nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
                               dolor in reprehenderit in voluptate velit.
                             </p>
                         </div>
                         <div class="buttons-container">
-                            <div class="learn-more-button"><%= link_to "LEARN MORE", place_path( url_code(Category.find(company.category).name), url_code( company.name ) ) %></div>
+                            <div class="learn-more-button"><%= link_to "LEARN MORE", place_path( url_code( company.category.name ), url_code( company.name ) ) %></div>
                             <div class="go-to-website-button"><a href="#">GO TO WEBSITE</a></div>
                         </div>
 
