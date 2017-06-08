@@ -27,7 +27,7 @@ class IndexController < ApplicationController
 	def ranking
 		category = params[:category].nil? ? 1 : Category.find_by_name( url_decode( params[:category] ) ).id
 		@category = Category.find(category)
-		@companies = Company.where("category_id = ?", category).order('id ASC')
+		@companies = Company.where("category_id = ?", category).order("rating DESC").first(10)
 		@positions = []
 		@companies.each do |company|
 			@positions << get_info(company)
