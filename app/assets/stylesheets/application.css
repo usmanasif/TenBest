@@ -14,8 +14,9 @@
  *= require dataTables/jquery.dataTables
  *= require_self
  *= require social-share-button
+ *= require bootstrap-tagsinput
  */
- 
+
 a:hover{
 	cursor: pointer;
 	text-decoration: none;
@@ -38,7 +39,7 @@ nav.navbar-default{
 	border-radius: 5px;
 }
 .contact-us *{
-	margin: 15px; 
+	margin: 15px;
 }
 .contact-us h1{
 	font-size: 35px;
@@ -70,7 +71,7 @@ nav.navbar-default{
 .alert-content{
 	width: 220px;
 	padding: 20px;
-	background: #c0392b;	
+	background: #c0392b;
 	text-align: center;
 	color: white;
 	margin-left: auto;
@@ -104,13 +105,13 @@ nav.navbar-default{
 }
 @media only screen and (max-width: 980px){
 	.contact-form{
-		width: 60%;		
+		width: 60%;
 	}
 }
 
 @media only screen and (max-width: 700px){
 	.contact-form{
-		width: 100%;		
+		width: 100%;
 	}
 	.contact-form *{
 		margin: 20px 0;
@@ -134,8 +135,8 @@ nav.navbar-default{
 	top: 0;
 	padding-top: 10%;
 	text-align: center;
-	color: white;	
-	overflow: scroll;	
+	color: white;
+	overflow: scroll;
 }
 .social-modal span{
 	font-size: 30px;
@@ -149,7 +150,7 @@ nav.navbar-default{
 	cursor: pointer;
     -ms-transform: scale(1.3)rotate(360deg); /* IE 9 */
     -webkit-transform: scale(1.3)rotate(360deg); /* Safari */
-    transform: scale(1.3)rotate(360deg); 
+    transform: scale(1.3)rotate(360deg);
 }
 .social-modal h1{
 	font-size: 60px;
