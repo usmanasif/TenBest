@@ -15,24 +15,26 @@ class SubCategoriesController < ApplicationController
 
   # GET /sub_categories/new
   def new
-    @category = Category.find(params[:id])
+    @category = Category.find_by_slug(params[:category_id])
     @sub_category = @category.sub_categories.new
   end
 
   # GET /sub_categories/1/edit
   def edit
-    @category = Category.find(params[:category_id])
+    # return render json: params
+    @category = Category.find_by_slug(params[:category_id])
   end
 
   # POST /sub_categories
   # POST /sub_categories.json
   def create
-    @category = Category.find(params[:category_id])
+    # return render json: params
+    @category = Category.find_by_slug(params[:category_id])
     @sub_category = @category.sub_categories.new(sub_category_params)
 
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to @sub_category, notice: 'sub category was successfully created.' }
+        format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully created.' }
         format.json { render :show, status: :created, location: @sub_category }
       else
         format.html { render :new }
@@ -46,7 +48,7 @@ class SubCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @sub_category.update(sub_category_params)
-        format.html { redirect_to @sub_category, notice: 'sub category was successfully updated.' }
+        format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_category }
       else
         format.html { render :edit }
@@ -68,7 +70,7 @@ class SubCategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sub_category
-      @sub_category = SubCategory.find(params[:id])
+      @sub_category = SubCategory.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

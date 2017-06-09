@@ -12,8 +12,9 @@ Rails.application.routes.draw do
 
   scope 'admin' do
     resources :companies
-    resources :categories
-    resources :sub_categories
+    resources :categories do
+      resources :sub_categories
+    end
     resources :nav_links
   end
 
