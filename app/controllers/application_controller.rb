@@ -1,3 +1,4 @@
+require 'csv'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :get_links
@@ -62,4 +63,20 @@ class ApplicationController < ActionController::Base
 	def get_links
 		@active_links = NavLink.where(active: true).order(:position)
 	end
+
+	# Creates a list of models according to required fields mentioned by Model returns nil if format is invalid
+	def import_from_csv(file, class_type)
+		headers = CSV.read(file.path)[0]
+		attributes = class_type.required_columns
+		if (attributes - headers).blank?
+			list = Array.new
+			CSV.foreach(file.path, headers: true) do |row|
+				item = class_type.where(name: row[0][1]).first_or_initialize row.to_hash
+				list.push item.attributes
+			end
+			return list
+		else
+			return nil
+		end
+    end
 end

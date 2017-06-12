@@ -18,3 +18,29 @@
   text-align: center;
   margin-bottom: 40px;
 }
+.blocked {
+  background: crimson;
+  color: aliceblue;
+}
+
+.dashboard_body {
+  color: #cfd2da;
+  background-color: #25282F;
+}
+
+.table_list {
+  border: 1px solid;
+  border-color: #eaedef;
+  min-height: 415px;
+  max-height: 415px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.red {
+  color: red
+}
+
+.upload-modal .modal-content {
+  padding: 15px;
+}
