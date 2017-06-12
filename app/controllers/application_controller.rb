@@ -12,14 +12,14 @@ class ApplicationController < ActionController::Base
 			rescue Exception => e
 				info['lat'] = 37.779044
 				info['lng'] = -122.418757
-				info['img'] = 'place-image.png'
+				info['img'] = 'public/assets/images/place-image.png'
 				info['address'] = '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'
 				info['rating'] = 2.5
 			else
 				if result_json['results'].nil? or result_json['results'].first.nil?
 					info['lat'] = 37.779044
 					info['lng'] = -122.418757
-					info['img'] = 'place-image.png'
+					info['img'] = 'public/assets/images/place-image.png'
 					info['address'] = '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102'
 					info['rating'] = 2.5
 				else
@@ -28,18 +28,23 @@ class ApplicationController < ActionController::Base
 					info['address'] = result_json['results'].first['formatted_address']
 					info['rating'] = result_json['results'].first['rating']
 					if result_json['results'].first['photos'].nil?
-						info['img'] = 'place-image.png'
+						info['img'] = 'public/assets/images/place-image.png'
 					else
 						photo_reference = result_json['results'].first['photos'].first['photo_reference']
 						info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
 					end
 				end
 			end
-			company.update( :lat => info['lat'], :lng => info['lng'], :photo => info['img'], :address => info['address'], :rating => info['rating'] )
+
+			# Set image from online url and update info['img'] with locally generated url from paperclip
+			company.photo_from_url(info['img'])
+			info['img'] = company.photo.url
+			company.update( :lat => info['lat'], :lng => info['lng'], :address => info['address'], :rating => info['rating'] )
 		else
 			info['lat'] = company.lat
 			info['lng'] = company.lng
-			info['img'] = company.photo
+			# update info['img'] with locally generated url from paperclip
+			info['img'] = company.photo.url
 			info['address'] = company.address
 			info['rating'] = company.rating
 		end

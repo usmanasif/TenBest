@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+# Paperclip gem for managing file uploads.  If you're not using rails 3 or 4, you'll need a different version.
+gem 'paperclip'
 
 gem 'rest-client'
 gem 'json'
