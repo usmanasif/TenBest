@@ -1,0 +1,79 @@
+<div class="dashhead">
+  <div class="dashhead-titles">
+    <h2 class="dashhead-title" style="text-align: center;">Orders from CSV</h2>
+  </div>
+  <div class="btn-toolbar dashhead-toolbar">
+    <div style="margin: 100px;"></div>
+  </div>
+</div>
+<div class="container">
+  <% if @csv_companies.count == @csv_companies.count %>
+    <div>
+        <p class="<%= 'red' if ( @csv_companies.count > @correct_companies.count) %>" >The rows highlighted in red could not be validated so they will not be saved</p>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-xs-9">
+      <div class="table-full">
+        <div class="table-responsive">
+          <table class="table table-stripped table-truncate">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Category</th>
+                <th>Latitute</th>
+                <th>Longitute</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @csv_companies.try(:each) do |temp| %>
+                <tr class="<%= 'red' if temp["error"] %>">
+                  <td>
+                    <%= temp["name"] %>
+                  </td>
+                  <td>
+                    <%= temp["city"] %>
+                  </td>
+                  <td>
+                    <%= @category %>
+                  </td>
+                  <td>
+                    <%= temp["lat"] %>
+                  </td>
+                  <td>
+                    <%= temp["lng"] %>
+                  </td>
+                  <td>
+                    <%= temp["address"] %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= link_to "Create Companies", create_from_list_companies_path(companies: @csv_companies, category_select: @category ), class: "btn btn-primary-outline" %>
+      <%= link_to "Cancel", :back, class: "btn btn-primary-outline pull-right" %>
+    </div>
+    <div class="col-xs-3">
+      <div class="card">
+        <div class="card-block">
+          <div class="hr-divider">
+            <h3 class="hr-divider-content hr-divider-heading">Order costs</h3>
+          </div>
+          <p>
+            <span>Number of companies:</span>
+            <span><%=@csv_companies.count%></span>
+          </p>
+          <p>
+            <span>Number of correct companies:</span>
+            <span><%=@correct_companies.count%></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="add-credits"></div>
+</div>

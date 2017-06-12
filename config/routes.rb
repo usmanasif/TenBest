@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   get '/likeup/:id', to: 'index#like_up', as: 'likeup'
 
   scope 'admin' do
-    resources :companies
+    resources :companies do
+      collection do
+        post 'import_csv'
+        get 'create_from_list'
+      end
+    end
     resources :categories do
       resources :sub_categories
     end
