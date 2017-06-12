@@ -21,12 +21,14 @@ class IndexController < ApplicationController
 	def place
 		@no = params[:company].nil? ? 1 : Company.find_by_name( url_decode(params[:company]) ).id
 		@company = Company.find(@no)
+		@keywords = @company.category.keywords.split(',')
 		@position =  get_info @company
 	end
 
 	def ranking
 		category = params[:category].nil? ? 1 : Category.find_by_name( url_decode( params[:category] ) ).id
 		@category = Category.find(category)
+		@keywords = @category.keywords.split(',')
 		@companies = Company.where("category_id = ?", category).order("rating DESC").first(10)
 		@positions = []
 		@companies.each do |company|

@@ -37,7 +37,7 @@
                 <div class="col-md-12">
                 <%= company.rating %>
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
-                        <%= link_to image_tag( company.photo, class: 'img-responsive' ), place_path( url_code(company.category.name), url_code( company.name ) ) %>
+                        <%= link_to image_tag( company.photo, class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ) ) %>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12 info-container">
                         <div class="header-section">
@@ -73,6 +73,13 @@
                         </div>
                         <div class="image-for-mobile hidden-lg hidden-md">
                             <%= image_tag "images-places-#{index+1}.png", class: 'img-responsive' %>
+                        </div>
+                        <div class="bootstrap-tagsinput">
+                            <% @keywords.each do |keyword| %>
+                                <span class="tag label label-info">
+                                    <%= keyword %>
+                                </span>
+                            <% end %>
                         </div>
                         <div class="main-text-container">
                             <p>
