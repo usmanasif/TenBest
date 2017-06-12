@@ -1,13 +1,6 @@
 <% provide(:title, @company.name) %>
 <% provide(:body_class, "company-page") %>
 
-<div class="container">
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
-</div>
-
 
 <% provide(:title, "#{@company.name} | Top #{@company.category.name} in SF") %>
 <% provide(:body_class, "place-page") %>
@@ -105,3 +98,9 @@
         </div>
     </div>
 </section>
+
+<div class="container">
+    <p id="notice"><%= notice %></p>
+    <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-default" %>
+    <%= link_to 'Back', companies_path, class: "btn btn-default" %>
+</div>
