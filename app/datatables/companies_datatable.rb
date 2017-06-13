@@ -1,4 +1,5 @@
 class CompaniesDatatable
+  include Rails.application.routes.url_helpers
   delegate :params, :h, :link_to, :number_to_currency, to: :@view
 
   def initialize(view)
@@ -23,6 +24,8 @@ private
         link_to(company.name, company),
         ERB::Util.h(company.city),
         ERB::Util.h(company.category.name),
+        link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_company_path(id: company.id)),
+        link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, company, method: :delete, data: { confirm: 'Are you sure?' })
       ]
     end
   end
