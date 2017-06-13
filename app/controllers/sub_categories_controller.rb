@@ -10,7 +10,8 @@ class SubCategoriesController < ApplicationController
   # GET /sub_categories/1
   # GET /sub_categories/1.json
   def show
-
+    # return render json: params
+    @category = Category.find_by_slug(params[:category_id])
   end
 
   # GET /sub_categories/new

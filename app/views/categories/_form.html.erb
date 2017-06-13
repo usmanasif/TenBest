@@ -26,6 +26,10 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", :class => 'btn btn-primary' %>
+      <%= link_to 'Back',categories_path, class: "btn btn-default" %>
+      <% if (category.id.present?) %>
+        <%= link_to 'Show',@category, class: "btn btn-default" %>
+      <% end %>
     </div>
   </div>
 <% end %>
