@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 		if company.lat.nil? or company.lng.nil? or company.photo.nil? or company.address.nil? or company.rating.nil?
 			begin
 				url = "#{Rails.application.secrets[:google_place_url]}query=#{company.name}+#{company.city}&key=#{Rails.application.secrets[:google_place_key]}"
+				puts url
 				result = RestClient.get url
 				result_json = JSON.parse result
 			rescue Exception => e
@@ -25,8 +26,8 @@ class ApplicationController < ActionController::Base
 				else
 					info['lat'] = result_json['results'].first['geometry']['location']['lat']
 					info['lng'] = result_json['results'].first['geometry']['location']['lng']
-					info['address'] = result_json['results'].first['formatted_address']
-					info['rating'] = result_json['results'].first['rating']
+					info['address'] = result_json['results'].first['formatted_address'].nil? ? '1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102' : result_json['results'].first['formatted_address']
+					info['rating'] = result_json['results'].first['rating'].nil? ? 2.5 : result_json['results'].first['rating']
 					if result_json['results'].first['photos'].nil?
 						info['img'] = 'public/assets/images/place-image.png'
 					else
