@@ -26,7 +26,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2" for="email">Category:</label>
     <div class="col-sm-10 ">
-     <%= f.select :category_id, options_for_select(Category.all.map {|category| [ category.name, category.id ]},company.category_id ),{}, class: "form-control" %>
+     <%= f.select :category_id, options_for_select(@categories.map {|category| [ category.name, category.id ]},company.category_id ),{}, class: "form-control" %>
     </div>
   </div><br><br>
   <div class="form-group">
