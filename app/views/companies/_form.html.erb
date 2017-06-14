@@ -33,9 +33,6 @@
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", :class => 'btn btn-primary' %>
       <%= link_to 'Back', companies_path, class: "btn btn-default" %>
-      <% if (company.id.present?) %>
-        <%= link_to 'Show', @company, class: "btn btn-default" %>
-      <% end %>
     </div>
   </div>
 <% end %>
