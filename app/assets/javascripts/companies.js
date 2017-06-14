@@ -9,4 +9,5 @@ $(document).on('turbolinks:load',function(){
     sAjaxSource: $('#companies').data('source')
   });
   });
+  $('#category_keywords').tagsinput();
 });
