@@ -35,11 +35,15 @@
         <div class="place-container container">
             <div class="row">
                 <div class="col-md-12">
-                <%= company.rating %>
+                <!-- <%= company.rating %> -->
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
-                        <%= link_to image_tag( company.photo, class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ) ) %>
+                        <%= link_to image_tag( company.photo.url, class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ) ) %>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12 info-container">
+                        <div class="star-ratings-css">
+                            <div class="star-ratings-css-top" style="width: <%= ( ( company.rating / 5 ) * 110 ) %>%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                            <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                        </div>
                         <div class="header-section">
                             <div class="number-container"><%= index+1 %></div>
                             <div class="separator"></div>

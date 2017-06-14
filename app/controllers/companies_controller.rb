@@ -22,10 +22,12 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
+    @categories = Category.all
   end
 
   # GET /companies/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /companies

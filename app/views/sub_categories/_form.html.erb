@@ -20,6 +20,10 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", :class => 'btn btn-primary' %>
+      <%= link_to 'Back', @category, class: "btn btn-default" %>
+      <% if sub_category.id.present? %>
+        <%= link_to 'Show', category_sub_category_path(@sub_category,category_id: @category.slug), class: "btn btn-default" %>
+      <% end %>
     </div>
   </div>
 <% end %>
