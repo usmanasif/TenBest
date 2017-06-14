@@ -31,9 +31,11 @@ class CategoriesController < ApplicationController
       if @category.save
         format.html { redirect_to @category, notice: 'category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
+        format.js {render json: { id: @category.id, value: @category.name } }
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js {render json: { id: @category.id, value: @category.name } }
       end
     end
   end

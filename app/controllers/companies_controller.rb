@@ -1,10 +1,12 @@
 class CompaniesController < ApplicationController
+  require 'net/http'
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
     # @companies = Company.all
+    @category = Category.new
     respond_to do |format|
       format.html
       format.json { render json: CompaniesDatatable.new(view_context) }
@@ -68,6 +70,36 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def import_csv
+    file = params[:file]
+    @category = params[:category]
+    @csv_companies = import_from_csv( file, Company )
+    if @csv_companies.present?
+      @correct_companies = Array.new
+        @csv_companies.each do |company|
+          if Company.invalid company
+            company["error"] = true
+          else
+            @correct_companies.push company  
+          end
+        end
+       render 'import_from_csv.html.erb'
+    else
+      redirect_to :back, notice: 'CSV is in invalid format'
+    end
+  end
+
+  def create_from_list
+    companies = params[:companies]
+    category = params[:category_select]
+    companies.each do |company|
+      company = company.slice(:name, :city, :category_id, :lat, :lng, :address)
+      company[:category_id] = category
+      Company.find_or_create_by! company.to_hash unless Company.invalid company
+    end
+    redirect_to companies_url, notice: 'Companies were successfully imported.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
@@ -76,6 +108,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit( :name, :city, :category_id)
+      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address)
     end
 end
