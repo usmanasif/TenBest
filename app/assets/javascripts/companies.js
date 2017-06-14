@@ -8,13 +8,13 @@ $(document).on('turbolinks:load', function () {
       bSortable: true,
       sAjaxSource: $('#companies').data('source')
     });
-    $('#new_category').hide();
+    $('#category_from').hide();
     $('#add_category').on('click', function () {
       // Show new category form and hide import csv from for the moment
-      $('#new_category').show();
+      $('#category_from').show();
       $("#import_csv_from").hide();
     });
-    $("#new_category").on("ajax:complete", function(xhr, data, status) {
+    $("#category_from").on("ajax:complete", function(xhr, data, status) {
       data = $.parseJSON(data.responseText);
       //If Category already exists then null is returned in id
       if(data.id !== null)
@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function () {
         alert("Category Already Exists");
       }
       // Show import csv form and hide new category from
-      $('#new_category').hide();
+      $('#category_from').hide();
       $("#import_csv_from").show();
     });
   });
