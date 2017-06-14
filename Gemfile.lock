@@ -38,6 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    analytics-ruby (2.2.2)
+      commander (~> 4.4)
     ansi (1.5.0)
     arel (7.1.4)
     bcrypt (3.1.11)
@@ -56,6 +58,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.11.1)
+    commander (4.4.3)
+      highline (~> 1.7.2)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.2.1)
@@ -87,6 +91,7 @@ GEM
     guard-minitest (2.4.4)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    highline (1.7.8)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -249,6 +254,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  analytics-ruby
   bootstrap-tagsinput-rails
   byebug
   coffee-rails (~> 4.2)
