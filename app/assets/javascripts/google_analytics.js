@@ -40,7 +40,7 @@ this.GoogleAnalytics = (function() {
   };
 
   GoogleAnalytics.analyticsId = function() {
-    return 'UA-XXXXXXX-XX';
+    return 'UA-101010430-1';
   };
 
   return GoogleAnalytics;
