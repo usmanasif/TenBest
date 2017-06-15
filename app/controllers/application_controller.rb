@@ -86,7 +86,19 @@ class ApplicationController < ActionController::Base
 		end
     end
 
+	def current_admin
+		super || Admin.new
+	end
+
 	def analytics
-		@analytics ||= Analytics
+		@analytics ||= CustomAnalytics.new(current_admin, google_analytics_client_id)
+	end
+
+	def google_analytics_client_id
+		google_analytics_cookie.gsub(/^GA\d\.\d\./, '')
+	end
+
+	def google_analytics_cookie
+		cookies['_ga'] || ''
 	end
 end

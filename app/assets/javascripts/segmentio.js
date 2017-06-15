@@ -56,15 +56,15 @@
   // you'd like to manually name or tag the page, edit or
   // move this call however you'd like.
   /*  */
-  window.analytics.page();
+  // window.analytics.page();
 
 // accommodate Turbolinks and track page views
 $(document).on('ready turbolinks:load', function() {
   analytics.page();
   // analytics.trackForm($('#new_visitor'), 'Signed Up');
   // analytics.trackForm($('#new_contact'), 'Contact Request');
-  analytics.track("Dummy", {
-        category: "Dummy",
+  analytics.track("Page-Loaded", {
+        category: "Page",
         label: "All",
         value: 0
     });

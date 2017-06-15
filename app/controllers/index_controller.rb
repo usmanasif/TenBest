@@ -24,30 +24,33 @@ class IndexController < ApplicationController
 		@keywords = @company.category.keywords.split(',')
 		@position =  get_info @company
 
-		analytics.track(
-			# user_id: current_admin.id,
-			anonymous_id: current_admin.id,
-			event: @company.name,
-			properties: { category: @company.name, label: "All-Links", value: 0 },
-			integrations: {all: true})
-		analytics.track(
-			# user_id: current_admin.id,
-			anonymous_id: current_admin.id,
-			event: @company.name,
-			properties: { category: @company.name, label: @company.category.name, value: 0 },
-			integrations: {all: true})
-		analytics.track(
-			# user_id: current_admin.id,
-			anonymous_id: current_admin.id,
-			event: "Ranking Postion " + @no.to_s,
-			properties: { category: "Ranking Postion " + @no.to_s, label: "All-Links", value: 0 },
-			integrations: {all: true})
-		analytics.track(
-			# user_id: current_admin.id,
-			anonymous_id: current_admin.id,
-			event: "Ranking Postion " + @no.to_s,
-			properties: { category: "Ranking Postion " + @no.to_s, label: @company.category.name, value: 0 },
-			integrations: {all: true})
+		def url_after_create
+			analytics.track_user_sign_in
+			super
+		end
+
+		analytics.track_user_sign_in
+
+		# analytics.track(
+		# 	user_id: current_admin.id,
+		# 	event: @company.name,
+		# 	properties: { category: @company.name, label: "All-Links", value: 0 },
+		# 	integrations: {all: true})
+		# analytics.track(
+		# 	user_id: current_admin.id,
+		# 	event: @company.name,
+		# 	properties: { category: @company.name, label: @company.category.name, value: 0 },
+		# 	integrations: {all: true})
+		# analytics.track(
+		# 	user_id: current_admin.id,
+		# 	event: "Ranking Postion " + @no.to_s,
+		# 	properties: { category: "Ranking Postion " + @no.to_s, label: "All-Links", value: 0 },
+		# 	integrations: {all: true})
+		# analytics.track(
+		# 	user_id: current_admin.id,
+		# 	event: "Ranking Postion " + @no.to_s,
+		# 	properties: { category: "Ranking Postion " + @no.to_s, label: @company.category.name, value: 0 },
+		# 	integrations: {all: true})
 	end
 
 	def ranking
