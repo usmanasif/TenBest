@@ -16,6 +16,11 @@
  *= require social-share-button
  *= require bootstrap-tagsinput
  */
+ 
+ // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap/variables";
+@import "bootstrap";
 
 a:hover{
 	cursor: pointer;
