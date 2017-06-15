@@ -63,4 +63,9 @@ $(document).on('ready turbolinks:load', function() {
   analytics.page();
   // analytics.trackForm($('#new_visitor'), 'Signed Up');
   // analytics.trackForm($('#new_contact'), 'Contact Request');
+  analytics.track("Dummy", {
+        category: "Dummy",
+        label: "All",
+        value: 0
+    });
 })
