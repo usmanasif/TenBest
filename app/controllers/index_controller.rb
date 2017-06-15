@@ -27,19 +27,23 @@ class IndexController < ApplicationController
 		analytics.track(
 			user_id: current_admin.id,
 			event: @company.name,
-			properties: { category: @company.name, label: "All-Links", value: 0 })
+			properties: { category: @company.name, label: "All-Links", value: 0 },
+			integrations: {'All': true})
 		analytics.track(
 			user_id: current_admin.id,
 			event: @company.name,
-			properties: { category: @company.name, label: @company.category.name, value: 0 })
+			properties: { category: @company.name, label: @company.category.name, value: 0 },
+			integrations: {'All': true})
 		analytics.track(
 			user_id: current_admin.id,
 			event: "Ranking Postion " + @no.to_s,
-			properties: { category: "Ranking Postion " + @no.to_s, label: "All-Links", value: 0 })
+			properties: { category: "Ranking Postion " + @no.to_s, label: "All-Links", value: 0 },
+			integrations: {'All': true})
 		analytics.track(
 			user_id: current_admin.id,
 			event: "Ranking Postion " + @no.to_s,
-			properties: { category: "Ranking Postion " + @no.to_s, label: @company.category.name, value: 0 })
+			properties: { category: "Ranking Postion " + @no.to_s, label: @company.category.name, value: 0 },
+			integrations: {'All': true})
 	end
 
 	def ranking
