@@ -24,12 +24,11 @@ class IndexController < ApplicationController
 		@keywords = @company.category.keywords.split(',')
 		@position =  get_info @company
 
-		def url_after_create
-			analytics.track_user_sign_in
-			super
-		end
-
-		analytics.track_user_sign_in
+		# Track an Event (all values optional)
+		staccato.event(category: 'Company', action: @company.name, label: 'All-Links', value: 1)
+		staccato.event(category: 'Company', action: @company.name, label: @company.category.name, value: 1)
+		staccato.event(category: 'Company Rank', action: @company.name + "#" + @company.id.to_s, label: 'All-Links', value: 1)
+		staccato.event(category: 'Company Rank', action: @company.name + "#" + @company.id.to_s, label: @company.category.name, value: 1)
 
 		# analytics.track(
 		# 	user_id: current_admin.id,

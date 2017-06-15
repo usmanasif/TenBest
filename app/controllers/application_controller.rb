@@ -94,6 +94,10 @@ class ApplicationController < ActionController::Base
 		@analytics ||= CustomAnalytics.new(current_admin, google_analytics_client_id)
 	end
 
+	def staccato
+		@tracker ||= Staccato.tracker('UA-101010430-1', google_analytics_client_id)	
+	end
+
 	def google_analytics_client_id
 		google_analytics_cookie.gsub(/^GA\d\.\d\./, '')
 	end
