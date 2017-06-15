@@ -60,13 +60,7 @@
 
 // accommodate Turbolinks and track page views
 $(document).on('ready turbolinks:load', function() {
-  console.log('page loaded');
   analytics.page();
   // analytics.trackForm($('#new_visitor'), 'Signed Up');
   // analytics.trackForm($('#new_contact'), 'Contact Request');
-  analytics.track('Logged In', {
-    category: 'Account',
-    label: 'Premium',
-    value: 50
-  });
 })
