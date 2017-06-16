@@ -59,10 +59,12 @@
             <div class="col-md-6 map-container">
             <%= @company.category.name %>
             <div class="bootstrap-tagsinput" style="width:100%">
-                <% @company.category.keywords.split(',').each do |keyword| %>
-                    <span class="tag label label-info">
-                        <%= keyword %>
-                    </span>
+                <% if !@company.category.keywords.nil? %>
+                    <% @company.category.try(:keywords).split(',').each do |keyword| %>
+                        <span class="tag label label-info">
+                            <%= keyword %>
+                        </span>
+                    <% end %>
                 <% end %>
             </div>
                 <div class="image-container"

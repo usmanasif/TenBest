@@ -21,15 +21,15 @@ class IndexController < ApplicationController
 	def place
 		@no = params[:company].nil? ? 1 : Company.find_by_name( url_decode(params[:company]) ).id
 		@company = Company.find(@no)
-		rank = params[:rank]
+		@rank = params[:rank]
 		@keywords = @company.category.keywords.split(',')
 		@position =  get_info @company
 
 		# Track an Event (all values optional)
 		staccato.event(category: 'All-Links', action: @company.name, label: "Company", value: @company.id)
 		staccato.event(category: @company.category.name, action: @company.name, label: "Company", value: @company.id)
-		staccato.event(category: 'All-Links', action: "Ranking Position # " + rank.to_s, label: @company.name, value: rank)
-		staccato.event(category: @company.category.name, action: "Ranking Position # " + rank.to_s, label: @company.name, value: rank)
+		staccato.event(category: 'All-Links', action: "Ranking Position # " + @rank.to_s, label: @company.name, value: @rank)
+		staccato.event(category: @company.category.name, action: "Ranking Position # " + @rank.to_s, label: @company.name, value: @rank)
 
 		# analytics.track(
 		# 	user_id: current_admin.id,
