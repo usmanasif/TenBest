@@ -23,11 +23,13 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @categories = Category.all
+    @cities = ["San Francisco", "New York", "Honolulu"]
   end
 
   # GET /companies/1/edit
   def edit
     @categories = Category.all
+    @cities = ["San Francisco", "New York", "Honolulu"]
   end
 
   # POST /companies
@@ -110,6 +112,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address)
+      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address, :url)
     end
 end
