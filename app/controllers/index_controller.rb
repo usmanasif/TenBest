@@ -21,14 +21,15 @@ class IndexController < ApplicationController
 	def place
 		@no = params[:company].nil? ? 1 : Company.find_by_name( url_decode(params[:company]) ).id
 		@company = Company.find(@no)
+		rank = params[:rank]
 		@keywords = @company.category.keywords.split(',')
 		@position =  get_info @company
 
 		# Track an Event (all values optional)
-		staccato.event(category: 'Company', action: @company.name, label: 'All-Links', value: 1)
-		staccato.event(category: 'Company', action: @company.name, label: @company.category.name, value: 1)
-		staccato.event(category: 'Company Rank', action: @company.name + "#" + @company.id.to_s, label: 'All-Links', value: 1)
-		staccato.event(category: 'Company Rank', action: @company.name + "#" + @company.id.to_s, label: @company.category.name, value: 1)
+		staccato.event(category: 'All-Links', action: @company.name, label: "Company", value: @company.id)
+		staccato.event(category: @company.category.name, action: @company.name, label: "Company", value: @company.id)
+		staccato.event(category: 'All-Links', action: "Ranking Position # " + rank.to_s, label: @company.name, value: rank)
+		staccato.event(category: @company.category.name, action: "Ranking Position # " + rank.to_s, label: @company.name, value: rank)
 
 		# analytics.track(
 		# 	user_id: current_admin.id,
@@ -58,8 +59,10 @@ class IndexController < ApplicationController
 		@keywords = @category.keywords.split(',')
 		@companies = Company.where("category_id = ?", category).order("rating DESC").first(10)
 		@positions = []
-		@companies.each do |company|
-			@positions << get_info(company)
+		@companies.each_with_index do |company, index|
+			position = get_info(company)
+			position["rank"] = index
+			@positions.push position
 		end
 	end
 

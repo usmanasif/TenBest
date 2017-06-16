@@ -59,13 +59,13 @@
   // window.analytics.page();
 
 // accommodate Turbolinks and track page views
-$(document).on('ready turbolinks:load', function() {
+$(document).on('turbolinks:load', function() {
   analytics.page();
   // analytics.trackForm($('#new_visitor'), 'Signed Up');
   // analytics.trackForm($('#new_contact'), 'Contact Request');
-  analytics.track("Page-Loaded", {
-        category: "Page",
-        label: "All",
-        value: 0
-    });
+  // analytics.track("Page-Loaded", {
+  //       category: "Page",
+  //       label: "All",
+  //       value: 0
+  //   });
 })
