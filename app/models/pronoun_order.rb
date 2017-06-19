@@ -1,5 +1,5 @@
 class PronounOrder < ApplicationRecord
-  require 'web-service'
+  require 'web_service'
 
   belongs_to :company
   after_create :place_order_with_pronoun
