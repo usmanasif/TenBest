@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615034716) do
+ActiveRecord::Schema.define(version: 20170616075750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,14 +48,19 @@ ActiveRecord::Schema.define(version: 20170615034716) do
     t.string   "city"
     t.integer  "share"
     t.integer  "like"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "lat"
     t.float    "lng"
     t.string   "photo"
     t.string   "address"
     t.float    "rating"
     t.string   "slug"
+    t.string   "url"
     t.text     "intro"
     t.text     "description"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
