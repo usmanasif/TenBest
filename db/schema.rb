@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609071525) do
+ActiveRecord::Schema.define(version: 20170615034716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20170609071525) do
     t.string   "address"
     t.float    "rating"
     t.string   "slug"
+    t.text     "intro"
+    t.text     "description"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
 
@@ -87,6 +89,20 @@ ActiveRecord::Schema.define(version: 20170609071525) do
     t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pronoun_orders", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "max_words"
+    t.integer  "min_words"
+    t.text     "submitted_text"
+    t.string   "keywords"
+    t.string   "state"
+    t.string   "description"
+    t.integer  "company_id"
+    t.integer  "pronun_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "sub_categories", force: :cascade do |t|

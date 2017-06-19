@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     resources :categories do
       resources :sub_categories
     end
+    resources :pronoun_orders, only: [:index,:show] do
+      get :text_submission_callback
+      get :order_review
+    end
     resources :nav_links
   end
 

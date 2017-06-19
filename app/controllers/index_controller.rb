@@ -22,7 +22,7 @@ class IndexController < ApplicationController
 		@no = params[:company].nil? ? 1 : Company.find_by_name( url_decode(params[:company]) ).id
 		@company = Company.find(@no)
 		@keywords = @company.category.keywords.split(',')
-		@position =  get_info @company
+		@position = @company.get_info
 	end
 
 	def ranking
@@ -32,7 +32,7 @@ class IndexController < ApplicationController
 		@companies = Company.where("category_id = ?", category).order("rating DESC").first(10)
 		@positions = []
 		@companies.each do |company|
-			@positions << get_info(company)
+			@positions << company.get_info
 		end
 	end
 

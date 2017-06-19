@@ -1,0 +1,16 @@
+<div class="container">
+  <h3 class="center"><%= @order.title %></h3>
+
+  <label>Order Description</label>
+  <p><%= @order.description %></p>
+
+  <label>Submitted Text</label>
+  <% unless @order.submitted_text.blank? %>
+    <p><%= @order.submitted_text %></p>
+    <%= link_to "Accept", pronoun_order_order_review_path(@order,button: "accept_order" ) %>
+    <%= link_to "Revise", pronoun_order_order_review_path(@order,button: "revise_order" ) %>
+    <%= link_to "Reject", pronoun_order_order_review_path(@order,button: "reject_order" ) %>
+  <% else %>
+    <p>Order placed with pronoun</p>
+  <% end %>
+</div>
