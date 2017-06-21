@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     resources :categories do
       resources :sub_categories
     end
+    resources :pronoun_orders, only: [:index,:show] do
+      get :text_submission_callback
+      post :order_review
+      get :place_order
+    end
     resources :nav_links
   end
 

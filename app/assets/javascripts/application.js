@@ -19,3 +19,43 @@
 //= require_tree .
 //= require social-share-button
 //= require bootstrap-tagsinput
+
+function get(url, success, error)
+{
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        method: "GET",
+        url: url,
+        contentType: "application/x-www-form-urlencoded",
+        dataType: "text/json",
+        success: success,
+        error: error
+    }).done(function (msg) {
+        if (console && console.log) {
+            console.log("Sample of data:", msg.slice(0, 100));
+        }
+    }).fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+}
+
+function post(url, data, success, error)
+{
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        method: "POST",
+        url: url,
+        contentType: "application/x-www-form-urlencoded",
+        dataType: "text/json",
+        success: success,
+        error: error
+    }).done(function (msg) {
+        if (console && console.log) {
+            console.log("Sample of data:", msg.slice(0, 100));
+        }
+    }).fail(function( jqXHR, textStatus ) {
+        alert( "Request failed: " + textStatus );
+    });
+}

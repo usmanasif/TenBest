@@ -1,0 +1,26 @@
+<div class="container">
+  <h3 class="center"><%= @order.title %></h3>
+
+  <label>Order Description</label>
+  <p><%= @order.description %></p>
+
+  <% if !@order.submitted_text.blank? %>
+    <label>Submitted Text</label>
+    <p><%= @order.submitted_text %></p>
+    <% if @order.state == "Ready For Pickup" %>
+      <%= form_tag pronoun_order_order_review_path(@order) do %>
+        <%= submit_tag "Accept", remote: true, class: "btn btn-default" %>
+        <%= button_tag "Revise", type: "button", id: "revise_button", class: "btn btn-default" %>
+        <%= button_tag "Reject", type: "button", id: "reject_button", class: "btn btn-default" %>
+      <% end %>
+    <% else %>
+        <h3 class=""><%= @order.get_status_string %><h3>
+    <% end %>
+  <% elsif @order.pronun_id.blank? %>
+    <%= link_to "Replace Order", pronoun_order_place_order_path(@order), class: "btn btn-success" %>
+  <% else %>
+    <label>Submitted Text</label>
+    <p>Order placed with pronoun</p>
+  <% end %>
+  <%= render "revise_order" %>
+</div>

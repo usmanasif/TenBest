@@ -1,0 +1,45 @@
+<% provide(:title, "Pronoun Orders") %>
+<% provide(:body_class, "orders-page") %>
+
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <div class="col-md-6">
+    <h1>Orders</h1>
+  </div>
+  <div class="col-md-6">
+    <%= link_to 'Place order', 'javascript:;', id: "place_order", class: "new-record btn btn-primary" %>
+  </div>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Keywords</th>
+        <th>For</th>
+        <th>Word Range</th>
+        <th>State</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= link_to order.title, order %></td>
+          <td><%= order.description %></td>
+          <td><%= order.keywords %></td>
+          <td><%= order.company.name %></td>
+          <td><%= "#{order.min_words}-#{order.max_words}" %></td>
+          <td><%= order.state %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+</div>
