@@ -35,7 +35,6 @@
         <div class="place-container container">
             <div class="row">
                 <div class="col-md-12">
-                <!-- <%= company.rating %> -->
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
                         <%= link_to image_tag( asset_path(company.photo.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
                     </div>
@@ -76,7 +75,7 @@
                             </div>
                         </div>
                         <div class="image-for-mobile hidden-lg hidden-md">
-                            <%= image_tag "images-places-#{index+1}.png", class: 'img-responsive' %>
+                            <%= link_to image_tag( asset_path(company.photo.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
                         </div>
                         <div class="bootstrap-tagsinput" style="width:100%;float:left">
                             <% @keywords.each do |keyword| %>
@@ -87,17 +86,13 @@
                         </div>
                         <div class="main-text-container">
                             <p>
-                              <strong><%= index+1 %> of 10 Best <%= company.category.name %> in SF</strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                              do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                              dolor in reprehenderit in voluptate velit.
+                              <strong><%= index+1 %> of 10 Best <%= company.category.name %> in SF</strong> - <%= company.intro %>
                             </p>
                         </div>
                         <div class="buttons-container">
                             <div class="learn-more-button"><%= link_to "LEARN MORE", place_path( url_code( company.category.name ), url_code( company.name ) ) %></div>
-                            <div class="go-to-website-button"><a href="#">GO TO WEBSITE</a></div>
+                            <div class="go-to-website-button"><%= link_to "GO TO WEBSITE", company.url %></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -134,7 +129,6 @@
                      </div>
                  </div>
              </div>
-
       </div>
   </div>
 <% end %>

@@ -4,4 +4,10 @@ class Category < ApplicationRecord
   has_many :companies
   extend FriendlyId
   friendly_id :name, use: :slugged
+
+  # default values for keywords if created from another page without keywords
+  before_save :default_values
+  def default_values
+    self.keywords = '' if self.keywords.nil?
+  end
 end

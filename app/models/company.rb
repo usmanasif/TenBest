@@ -6,7 +6,7 @@ class Company < ApplicationRecord
 	validates :category, presence: true
 	validates :city, presence: true
 	has_attached_file :photo, url: "/assets/images/companies/:id/:style/:basename.:extension", path: ":rails_root/public/assets/images/companies/:id/:style/:basename.:extension", default_url: "/assets/images/place-image.png"
-  	validates_attachment :photo, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+  validates_attachment :photo, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
 	def self.required_columns
 		return ["name", "category_id", "lat", "lng", "address" ]
@@ -67,6 +67,9 @@ class Company < ApplicationRecord
 
     return info
   end
+  def photo_from_url(url)
+    self.photo = open(url)
+  end
 
   private
 
@@ -77,8 +80,5 @@ class Company < ApplicationRecord
     title: self.name, max_words: 125, min_words: 75, keywords: "#{self.category.name} in #{self.city}")
     self.pronoun_orders.create(state: "order placed", description:"Please write a brief description of #{self.name} as one of the best #{self.category.name} in #{self.city}. They are located at #{self.address}. You can learn more about them by visiting their website.",
     title: self.name, max_words: 250, min_words: 150, keywords: "#{self.category.name} in #{self.city}")
-  end
-  def photo_from_url(url)
-    self.photo = open(url)
   end
 end

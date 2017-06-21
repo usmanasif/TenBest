@@ -54,104 +54,58 @@
     <div class="container">
       <div class="row">
         <!--Large Place Container-->
-        <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
-          <div class="place-content-container">
-            <%= link_to '', ranking_path('brunch-place'), class: 'place-link' %>
-            <%= image_tag 'image-places-brands.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-            <div class="info-container">
-              <div class="category-container">Best Food & Drink</div>
-              <div class="title-container">TOP TEN BRUNCH PLACES IN SAN FRANCISCO</div>
-              <div class="social-container">
-                <ul class="social-list">
-                  <li class="share-button">
-                    <a href="#"></a></li>
-                  <li class="like-button">
-                    <a href="#"></a>
-                  </li>
-                  <li class="chat-container">
-                    <a href="#"></a>
-                  </li>
-                </ul>
+        <% if @categories.length > 1 %>
+          <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="place-content-container">
+              <%= link_to '', ranking_path(@categories[0].name), class: 'place-link' %>
+              <%= image_tag 'image-places-brands.jpg', class: 'img-responsive', alt: @categories[0].name + ' in San Francisco' %>
+              <div class="info-container">
+                <div class="category-container">Best Food & Drink</div>
+                <div class="title-container">TOP TEN <%= @categories[0].name.titleize %> IN SAN FRANCISCO</div>
+                <div class="social-container">
+                  <ul class="social-list">
+                    <li class="share-button">
+                      <a href="#"></a></li>
+                    <li class="like-button">
+                      <a href="#"></a>
+                    </li>
+                    <li class="chat-container">
+                      <a href="#"></a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
         <!--End Large Place Container-->
 
         <!--Small places container-->
-        <div class="small-places-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', ranking_path('fashion-events'), class: 'place-link' %>
-                <%= image_tag 'image-places-events.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Events</div>
-                  <div class="title-container">TOP TEN FASHION EVENTS</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
+        
+          <div class="small-places-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="row">
+            <% @categories[1..5]&.each do |category| %>
+              <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
+                <div class="place-content-container">
+                  <%= link_to '', ranking_path(category.name), class: 'place-link' %>
+                  <%= image_tag 'image-places-events.jpg', class: 'img-responsive', alt: category.name + ' in San Francisco' %>
+                  <div class="info-container">
+                    <div class="category-container">Best Events</div>
+                    <div class="title-container"><%= category.name.titleize %></div>
+                    <div class="social-container">
+                      <ul class="social-list">
+                        <li class="share-button"><a href="#"></a></li>
+                        <li class="like-button"><a href="#"></a></li>
+                        <li class="chat-container"><a href="#"></a></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', ranking_path('hotel'), class: 'place-link' %>
-                <%= image_tag 'image-places-parks.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Places</div>
-                  <div class="title-container">TOP TEN HOTELS IN SF</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', ranking_path('travel-agency'), class: 'place-link' %>
-                <%= image_tag 'image-places-travel.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Services</div>
-                  <div class="title-container">TOP TEN TRAVEL AGENCIES</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', ranking_path('craft-breweire'), class: 'place-link' %>
-                <%= image_tag 'image-places-brewery.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Local Brands</div>
-                  <div class="title-container">TOP TEN CRAFT BREWERIES</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <% end %>
             </div>
           </div>
-        </div>
-
+        
       </div>
     </div>
 </section>

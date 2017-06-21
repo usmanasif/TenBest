@@ -1,6 +1,7 @@
 class IndexController < ApplicationController
 	def home
-
+		@categories = Category.limit(5)
+		puts @categories
 	end
 
 	def about
@@ -84,7 +85,7 @@ class IndexController < ApplicationController
 		else
 			@search_str = params[:search]
 			# @companies = Company.where( "name LIKE ? AND category = ?", "%#{params[:search]}%", @category)if Rails.env.development?
-			@companies = Company.where( "name ILIKE ? AND category = ?", "%#{params[:search]}%", @category)
+			@companies = Company.where( "name ILIKE ? AND category_id = ?", "%#{params[:search]}%", @category)
 		end
 		if params[:limit].nil?
 			if @companies.to_a.length > 8
