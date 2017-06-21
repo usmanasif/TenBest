@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     end
     resources :pronoun_orders, only: [:index,:show] do
       get :text_submission_callback
-      get :order_review
+      post :order_review
+      get :place_order
     end
     resources :nav_links
   end

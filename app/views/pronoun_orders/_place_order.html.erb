@@ -1,0 +1,23 @@
+<div class="modal fade" id="place_order_modal" role="document">
+    <div class="modal-dialog">
+        <%= form_tag pronoun_order_place_order_path do %>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Place Empty Orders</h4>
+                </div>
+                <% if flash.present? %>
+                    <label class="label label-danger active_error"><%= flash[:alert] %></label>
+                <% end %>
+                <div class="modal-body">
+                    <div class="field2 m-b">
+                        <%= label_tag :Company,"Name", class: "col-xs-3" %>
+                        <%= select_tag "people", options_from_collection_for_select(@empty_orders, "id", "title", :selected_value), class: "form-control", required: true, id: "empty_orders" %>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= submit_tag "Submit", id: "place_order_submit", class: "btn btn-success" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

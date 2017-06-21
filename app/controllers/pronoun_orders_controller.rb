@@ -3,6 +3,7 @@ class PronounOrdersController < ApplicationController
 
   def index
     @orders = PronounOrder.all
+    @empty_orders = @orders.select{ |item| item[:pronoun_id] == nil }
   end
 
   def show
@@ -10,26 +11,37 @@ class PronounOrdersController < ApplicationController
   end
 
   def text_submission_callback
-    puts "==============================="
-    puts "==============================="
-    puts params.inspect
-    puts "==============================="
-    puts "==============================="
-    puts "==============================="
     order = PronounOrder.find(params[:pronoun_order_id])
-    order.update_attributes(submitted_text: params[:valued_text],state: "Ready For Pickup",pronoun_id: params[:order_id])
+    order.update_attributes(submitted_text: params[:valued_text], state: "Ready For Pickup")
   end
 
   def order_review
-    return render json: params
     order = PronounOrder.find(params[:pronoun_order_id])
-    button = params[:button]
-    order.order_review_callback(button)
-    if button == "accept_order"
-      if order.max_words == 125
-        order.company.intro
+    button = params[:commit].downcase + "_order"
+    comment = params[:comment_text]
+    response = order.order_review_webhook(button, comment)
+    if response.code == "200"
+      if button == "accept_order"
+        if order.max_words == 125
+          order.company.update_attributes!(intro: order.submitted_text)
+        else
+          order.company.update_attributes!(description: order.submitted_text)
+        end
+        redirect_to company_path(order.company)
+      elsif button == "revise_order"
+        redirect_to pronoun_orders_path, notice: "Order Revised"
+      elsif button == "reject_order"
+        redirect_to pronoun_orders_path, notice: "Order Rejected"
       end
-      order.company.update_attribute(:)
+    end
+    order.update_attributes!(state: params[:commit])
   end
+  def place_order
+    order = PronounOrder.find(params[:pronoun_order_id])
+    order.place_order_with_pronoun
 
+    redirect_to pronoun_orders_path, notice: "Order Placed Successfully"
+
+    # render json: {msg: "Order Placed Successfully" }, status: 200
+  end
 end
