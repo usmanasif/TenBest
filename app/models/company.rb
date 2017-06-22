@@ -56,7 +56,7 @@ class Company < ApplicationRecord
           end
         end
       end
-      self.update( :lat => info['lat'], :lng => info['lng'], :photo => info['img'], :address => info['address'], :rating => info['rating'] )
+      self.update( :lat => info['lat'], :lng => info['lng'], :address => info['address'], :rating => info['rating'] )
     else
       info['lat'] = self.lat
       info['lng'] = self.lng
