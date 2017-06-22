@@ -1,5 +1,5 @@
 class PronounOrdersController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, except: [:text_submission_callback]
 
   def index
     @orders = PronounOrder.all
