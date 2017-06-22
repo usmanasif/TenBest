@@ -5,7 +5,7 @@ class Company < ApplicationRecord
 	validates :name, presence: true, uniqueness: true
 	validates :category, presence: true
 	validates :city, presence: true
-	has_attached_file :photo, url: "/assets/images/companies/:id/:style/:basename.:extension", path: ":rails_root/public/assets/images/companies/:id/:style/:basename.:extension", default_url: "/assets/images/place-image.png"
+	has_attached_file :photo, url: "/assets/images/companies/:name/:style/:basename.:extension", path: ":rails_root/public/assets/images/companies/:name/:style/:basename.:extension", default_url: "/assets/images/place-image.png"
   validates_attachment :photo, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
 	def self.required_columns
