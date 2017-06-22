@@ -53,6 +53,8 @@ class Company < ApplicationRecord
           else
             photo_reference = result_json['results'].first['photos'].first['photo_reference']
             info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
+            company.photo_from_url(info['img'])
+						info['img'] = company.photo.url
           end
         end
       end
@@ -60,7 +62,8 @@ class Company < ApplicationRecord
     else
       info['lat'] = self.lat
       info['lng'] = self.lng
-      info['img'] = self.photo
+      # update info['img'] with locally generated url from paperclip
+			info['img'] = company.photo.url
       info['address'] = self.address
       info['rating'] = self.rating
     end
