@@ -7,7 +7,7 @@ class PronounOrder < ApplicationRecord
 
   def place_order_with_pronoun
     url = "https://pronoun-io.herokuapp.com/api/v1/orders"
-    body = "category=industry&description=Please write a brief description of #{self.company.name} as one of the best #{self.company.category.name} in #{self.company.city}. They are located at #{self.company.address}. You can learn more about them by visiting their website.&title=#{self.company.name}&quality_level=4&processing_time=2&word_count_start=#{self.min_words}&word_count_end=#{self.max_words}&seo_words=#{self.company.category.name} in #{self.company.city}&callback_url=http://cd73ff6e.ngrok.io/admin/pronoun_orders/#{self.id}/text_submission_callback"
+    body = "category=industry&description=Please write a brief description of #{self.company.name} as one of the best #{self.company.category.name} in #{self.company.city}. They are located at #{self.company.address}. You can learn more about them by visiting their website.&title=#{self.company.name}&quality_level=4&processing_time=2&word_count_start=#{self.min_words}&word_count_end=#{self.max_words}&seo_words=#{self.company.category.name} in #{self.company.city}&callback_url=https://tenbestcity.herokuapp.com/admin/pronoun_orders/#{self.id}/text_submission_callback"
 
     WebService.post(url, body) do |response|
       body = JSON.parse response.read_body
