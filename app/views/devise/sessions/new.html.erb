@@ -1,0 +1,40 @@
+<!--Pulling Awesome Font -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-5 col-md-3">
+          <div class="form-login">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :defaults => { :input_html => { :class => "text" } }) do |f| %>
+            <h4>Log in</h4>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, class: "form-control input-sm chat-input", placeholder: "username" %>
+            </div>
+            </br>
+            <div class="field">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "off", class: "form-control input-sm chat-input", placeholder: "password" %>
+            </div>
+            </br>
+            <div class="wrapper">
+            <% if devise_mapping.rememberable? -%>
+              <div class="field">
+                <label class="btn btn-primary">Remember Me
+                  <%= f.check_box :remember_me, autocomplete: "off" %>
+                  <span class="glyphicon glyphicon-ok"></span>
+                </label>
+              </div>
+            <% end -%>
+            <span class="group-btn">
+                <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+            </span>
+            </div>
+            <% end %>
+            </div>
+          
+        </div>
+    </div>
+</div>
+
+<!-- <%= render "devise/shared/links" %> -->

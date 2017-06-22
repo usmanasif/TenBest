@@ -9,6 +9,8 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 # Use bootstrap 3 sass port
 gem 'bootstrap-sass', '~> 3.3.6'
+# Also use Bootstrap's font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.7.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
