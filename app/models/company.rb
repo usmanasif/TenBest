@@ -5,8 +5,12 @@ class Company < ApplicationRecord
 	validates :name, presence: true, uniqueness: true
 	validates :category, presence: true
 	validates :city, presence: true
-	has_attached_file :photo, url: "/assets/images/companies/:name/:style/:basename.:extension", path: ":rails_root/public/assets/images/companies/:name/:style/:basename.:extension", default_url: "/assets/images/place-image.png"
+	has_attached_file :photo, url: "/assets/images/companies/:id/:style/:basename.:extension", path: ":rails_root/public/assets/images/companies/:id/:style/:basename.:extension", default_url: "/assets/images/place-image.png"
   validates_attachment :photo, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  after_create :get_info,:create_pronoun_orders
+  # after_update :get_info
 
 	def self.required_columns
 		return ["name", "category_id", "lat", "lng", "address" ]
@@ -17,11 +21,6 @@ class Company < ApplicationRecord
 		present = Company.find_by_name( name ).present?
 		return present || company["name"].blank? || company["category_id"].blank? || company["lat"].blank? || company["lng"].blank? || company["address"].blank?
 	end
-	
-  extend FriendlyId
-  friendly_id :name, use: :slugged
-  after_create :get_info,:create_pronoun_orders
-  # after_update :get_info
 
   def get_info
     info = {}
