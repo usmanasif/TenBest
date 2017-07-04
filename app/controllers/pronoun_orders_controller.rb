@@ -4,6 +4,11 @@ class PronounOrdersController < ApplicationController
   def index
     @orders = PronounOrder.all
     @empty_orders = @orders.select{ |item| item[:pronoun_id] == nil }
+    @view_point = params[:view_point] || ''
+    respond_to do |format|
+      format.html
+      format.json { render json: ::Datatables::PronounOrderDatatable.new(view_context, current_admin, @view_point) }
+    end
   end
 
   def show
