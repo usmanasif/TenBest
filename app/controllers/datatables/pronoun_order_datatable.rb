@@ -24,14 +24,14 @@ class Datatables::PronounOrderDatatable
 	def data
 			orders.map do |order|
 		    [
-							link_to(order.id, order),
-							ERB::Util.h("<p class='entry-title'>#{order.title}</p>".html_safe),
-							ERB::Util.h(order.try(:category).try(:name)),
-							ERB::Util.h(order.description),
-							ERB::Util.h(order.keywords),
-							ERB::Util.h("#{order.min_words}-#{order.max_words}"),
-							link_to(create_tag(order.state).html_safe, order)
-					]
+						link_to(order.id, order),
+						ERB::Util.h("<p class='entry-title'>#{order.title}</p>".html_safe),
+						ERB::Util.h(order.try(:category).try(:name)),
+						ERB::Util.h(order.description),
+						ERB::Util.h(order.keywords),
+						ERB::Util.h("#{order.min_words}-#{order.max_words}"),
+						link_to(create_tag(order.state).html_safe, order)
+				]
 		end
 	end
 
@@ -43,7 +43,7 @@ class Datatables::PronounOrderDatatable
     orders = PronounOrder.all
     orders = orders.paginate(:page => page, :per_page => per_page)
     if params[:sSearch].present?
-    	result = result = fetch_search_result_orders(orders, params[:sSearch])
+    	result = fetch_search_result_orders(orders, params[:sSearch])
     	orders = result.uniq
     end
     orders.order('updated_at DESC')

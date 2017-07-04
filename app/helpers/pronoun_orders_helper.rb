@@ -1,4 +1,7 @@
 module PronounOrdersHelper
+    def fetch_search_result_orders(orders, params_search)
+        orders =  orders.where("title ILIKE :search or description ILIKE :search", search: "%#{params_search}%")
+    end
     def create_tag(state)
         if state === "order placed"
             return "<span class='tag label label-primary'>"+ state +"</span>".html_safe
