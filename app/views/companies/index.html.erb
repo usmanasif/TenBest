@@ -8,10 +8,8 @@
   <div class="col-md-6">
     <h1>Companies</h1>
   </div>
-  <div class="col-md-3">
-    <%= link_to 'New Company', new_company_path,class: "new-record btn btn-primary" %>
-  </div>
-  <div class="col-md-3">
+  <div class="col-md-6">
+    <%= link_to 'New Company', new_company_path, class: "new-record btn btn-primary col-md-offset-1" %>
     <%= link_to 'Import', "javascript:;", class: "new-record btn btn-primary", onclick: "showImportModal()" %>
   </div>
 </div>
@@ -39,6 +37,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Import From CSV</h4>
         </div>
       <div class="modal-body">
