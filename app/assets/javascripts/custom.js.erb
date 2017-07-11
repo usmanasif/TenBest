@@ -68,6 +68,19 @@ $( document ).on('turbolinks:load',function() {
             $(".menu-container").addClass("visible animated").slideDown('500');
         }
     });
+    $("section").click(function(event) { 
+        if(!$(event.target).closest('.menu-container').length) {
+            if($(".navbar .menu-button .menu-link").hasClass('pressed')) {
+                $(".navbar .menu-button .menu-link").removeClass('pressed');
+                $(".menu-button").removeClass('pressed');
+
+                $(".navbar .menu-button .menu-button-text").removeClass('hidden');
+                $(".navbar .pages-section .pages-list").removeClass('hidden');
+                $(".navbar .search-field-wrapper").addClass("hidden");
+                $(".menu-container").addClass("visible animated").slideUp('500');
+            }
+        }        
+    })
 
     $(".menu-container").removeClass('hidden').slideUp('10').addClass("visible");
 

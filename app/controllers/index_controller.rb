@@ -1,11 +1,11 @@
 class IndexController < ApplicationController
+	add_breadcrumb "home", :root_path
 	def home
 		@categories = Category.limit(5)
 		puts @categories
 	end
 
 	def about
-
 	end
 
 	def contact
@@ -52,19 +52,23 @@ class IndexController < ApplicationController
 		# 	event: "Ranking Postion " + @no.to_s,
 		# 	properties: { category: "Ranking Postion " + @no.to_s, label: @company.category.name, value: 0 },
 		# 	integrations: {all: true})
+
+		add_breadcrumb @company.category.name, ranking_path(@company.category)
+		add_breadcrumb @company.name, place_path(@company)
 	end
 
 	def ranking
-		category = params[:category].nil? ? 1 : Category.find_by_name( url_decode( params[:category] ) ).id
-		@category = Category.find(category)
+		@category = params[:category].nil? ? Category.first : Category.find_by_name( url_decode( params[:category].capitalize ) )
 		@keywords = @category.keywords.split(',')
-		@companies = Company.where("category_id = ?", category).order("rating DESC").first(10)
+		@companies = Company.where("category_id = ?", @category.id).order("rating DESC").first(10)
 		@positions = []
 		@companies.each_with_index do |company, index|
 			position = get_info(company)
 			position["rank"] = index
 			@positions.push position
 		end
+
+		add_breadcrumb @category.name, ranking_path(@category)
 	end
 
 	def search

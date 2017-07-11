@@ -50,6 +50,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap-tagsinput-rails (0.4.2.1)
       railties (>= 3.1)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.2)
     byebug (9.0.6)
     climate_control (0.1.0)
@@ -265,6 +266,7 @@ DEPENDENCIES
   analytics-ruby
   bootstrap-sass (~> 3.3.6)
   bootstrap-tagsinput-rails
+  breadcrumbs_on_rails
   byebug
   coffee-rails (~> 4.2)
   devise
@@ -299,4 +301,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.14.6
+   1.15.1
