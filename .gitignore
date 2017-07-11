@@ -36,3 +36,7 @@ config/database.yml
 
 # Ignore VSCode configuration files
 /.vscode/*
+jsconfig.json
+
+#Ignore eslint configuration file
+.eslintrc.json
