@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def staccato
-		@tracker ||= Staccato.tracker('UA-101010430-1', google_analytics_client_id)	
+		@tracker ||= Staccato.tracker('UA-102527882-1', google_analytics_client_id)	
 	end
 
 	def google_analytics_client_id

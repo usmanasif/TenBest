@@ -50,7 +50,7 @@
 
   // Load Analytics.js with your key, which will automatically
   // load the tools you've enabled for your account. Boosh!
-  window.analytics.load('3s0TPWLTY1CxsdDO0AD0ahMHodZ2zoy8');
+  window.analytics.load('piuCFQ869OSAXLy2zSSL5B8UFTnryJwb');
 
   // Make the first page call to load the integrations. If
   // you'd like to manually name or tag the page, edit or
