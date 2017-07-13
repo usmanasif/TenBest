@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Paperclip gem for managing file uploads.  If you're not using rails 3 or 4, you'll need a different version.
 gem 'paperclip'
+# Simple breadcrumb for rails
+gem "breadcrumbs_on_rails"
 
 gem 'rest-client'
 gem 'json'

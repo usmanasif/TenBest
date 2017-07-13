@@ -9,11 +9,11 @@
                     <div class="text-container">
                         <h1>
                             <div class="category-title col-xs-12 col-sm-12 col-lg-12">
-                                <span class="number"><%= @rank %> <span class="separator">of <a href="/top-<%= url_code( @company.category.name ) %>/" title="Top Brunch in SF" style="color:#787878; text-decoration: underline;">Best <%= @company.category.name %> in SF</a></span></span>
-                                <span class="category-name"><%= @company.name %></span>
+                                <h3 class="number"><%= @rank %> of 10 <a href="/top-<%= url_code( @company.category.name ) %>/" title="Top Brunch in SF" style="color:lightgray; text-decoration: underline;">Best <%= @company.category.name %> in SF</a></h3>
+                                <h1 class="category-name"><%= @company.name %></h1>
                             </div>
                             <div class="location-wrapper col-xs-12 col-sm-12 col-lg-12">
-                                <span class="location-container"><span class="location-icon"></span> <%= @position['address'] %></span>
+                                <p class="location-container"><span class="location-icon"></span> <%= @position['address'] %></p>
                                 <div class="share-container col-md-2 hidden-md hidden-lg  no-padding">
                                     <a href="#"><span class="text">Share</span><span class="icon-share"></span> <%= @company.share %> </a>
                                 </div>
@@ -142,3 +142,6 @@
 </section>
 
 <!--end of main info container-->
+<ol class="breadcrumb">
+    <%= render_breadcrumbs tag: :li, separator: "" %>
+</ol>
