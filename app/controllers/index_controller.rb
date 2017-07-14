@@ -32,10 +32,10 @@ class IndexController < ApplicationController
 		staccato.event(category: 'All-Links', action: "Ranking Position # " + @rank.to_s, label: @company.name, value: @rank)
 		staccato.event(category: @company.category.name, action: "Ranking Position # " + @rank.to_s, label: @company.name, value: @rank)
 
-		analytics.track_company_all @company.name
-		analytics.track_company_category @company.name, @company.category.name
-		track_company_rank_all @company.name, @no.to_s
-		track_company_rank_category @company.name, @no.to_s, @company.category.name
+		# analytics.track_company_all @company.name
+		# analytics.track_company_category @company.name, @company.category.name
+		# analytics.track_company_rank_all @company.name, @no.to_s
+		# analytics.track_company_rank_category @company.name, @no.to_s, @company.category.name
 
 		add_breadcrumb @company.category.name, ranking_path(@company.category)
 		add_breadcrumb @company.name, place_path(@company)

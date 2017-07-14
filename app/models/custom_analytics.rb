@@ -4,8 +4,8 @@ class CustomAnalytics
   self.backend = Analytics
 
   def initialize(user, client_id = nil)
-    @user = user
-    @client_id = client_id
+    user = user
+    client_id = client_id
   end
 
   def track_page
@@ -17,7 +17,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: 'Create User'
       }
     )
@@ -27,7 +27,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: 'Sign In User'
       }
     )
@@ -37,7 +37,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: "Company Clicked",
         properties: {
             category: "All-Links",
@@ -51,7 +51,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: "Company Clicked",
         properties: {
             category: category,
@@ -65,7 +65,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: "Company Rank",
         properties: {
             category: "All-Links",
@@ -79,7 +79,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: @user.id,
+        user_id: user.id,
         event: "Company Clicked",
         properties: {
             category: category,
@@ -98,14 +98,14 @@ class CustomAnalytics
   attr_reader :admin, :client_id
 
   def identify_params
-    if @user.id.nil?
+    if user.id.nil?
       {
-        anonymous_id: @client_id,
+        anonymous_id: client_id,
         traits: user_traits
       }
     else
       {
-        user_id: @user.id,
+        user_id: user.id,
         traits: user_traits
       }
     end
@@ -113,7 +113,7 @@ class CustomAnalytics
 
   def user_traits
     {
-      email: @user.email
+      email: user.email
     }.reject { |key, value| value.blank? }
   end
 
@@ -130,7 +130,7 @@ class CustomAnalytics
     backend.track(options)
   end
   def page(options)
-    if @user.id.present?
+    if user.id.present?
       options.merge!(
         client_id: @user.id
       )
