@@ -1,7 +1,7 @@
 require 'csv'
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
-	before_action :get_links
+	before_action :get_links, :analytics_track
 
 	def get_info company
 		info = {}
@@ -84,7 +84,12 @@ class ApplicationController < ActionController::Base
 		else
 			return nil
 		end
-    end
+	end
+	
+	def analytics_track
+		analytics.track_page()
+		# staccato.pageview()
+	end
 
 	def current_admin
 		super || Admin.new

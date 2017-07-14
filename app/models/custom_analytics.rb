@@ -8,11 +8,16 @@ class CustomAnalytics
     @client_id = client_id
   end
 
+  def track_page
+    identify
+    page({})
+  end
+
   def track_user_creation
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: 'Create User'
       }
     )
@@ -22,7 +27,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: 'Sign In User'
       }
     )
@@ -32,7 +37,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: "Company Clicked",
         properties: {
             category: "All-Links",
@@ -46,7 +51,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: "Company Clicked",
         properties: {
             category: category,
@@ -60,7 +65,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: "Company Rank",
         properties: {
             category: "All-Links",
@@ -74,7 +79,7 @@ class CustomAnalytics
     identify
     track(
       {
-        user_id: user.id,
+        user_id: @user.id,
         event: "Company Clicked",
         properties: {
             category: category,
@@ -93,15 +98,22 @@ class CustomAnalytics
   attr_reader :admin, :client_id
 
   def identify_params
-    {
-      user_id: user.id,
-      traits: user_traits
-    }
+    if @user.id.nil?
+      {
+        anonymous_id: @client_id,
+        traits: user_traits
+      }
+    else
+      {
+        user_id: @user.id,
+        traits: user_traits
+      }
+    end
   end
 
   def user_traits
     {
-      email: user.email
+      email: @user.email
     }.reject { |key, value| value.blank? }
   end
 
@@ -116,5 +128,17 @@ class CustomAnalytics
       )
     end
     backend.track(options)
+  end
+  def page(options)
+    if @user.id.present?
+      options.merge!(
+        client_id: @user.id
+      )
+    else
+      options.merge!(
+        anonymous_id: @client_id
+      )
+    end
+    backend.page(options)
   end
 end

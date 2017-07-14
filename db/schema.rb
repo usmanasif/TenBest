@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(version: 20170616075750) do
     t.string   "address"
     t.float    "rating"
     t.string   "slug"
-    t.string   "url"
     t.text     "intro"
     t.text     "description"
+    t.string   "url"
     t.index ["slug"], name: "index_companies_on_slug", unique: true, using: :btree
   end
 

@@ -1,6 +1,6 @@
 require 'segment/analytics'
 
 Analytics = Segment::Analytics.new({
-    write_key: '3s0TPWLTY1CxsdDO0AD0ahMHodZ2zoy8',
+    write_key: 't644WFwrpi5QqXP2flwFddEIj0wOAGyq',
     on_error: Proc.new { |status, msg| print msg }
 })
