@@ -1,7 +1,7 @@
 require 'csv'
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
-	before_action :get_links, :analytics_track
+	before_action :get_links
 
 	def get_info company
 		info = {}
