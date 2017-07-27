@@ -33,7 +33,6 @@
               <uL class="city-list col-lg-12">
                 <li class="city-item active"><a href="<%= root_url %>">SAN FRANCISCO</a> <span class="divider">/</span> </li>
                 <li class="city-item"><a href="<%= root_url %>">NEW YORK</a> <span class="divider">/</span> </li>
-                <!-- <li class="city-item"><a href="la.html">LOS ANGELES</a> <span class="divider">/</span> </li>-->
                 <li class="city-item"><a href="<%= root_url %>">HONOLULU</a></li>
               </uL>
             </div>
@@ -57,9 +56,6 @@
                     <li class="page-link"><%= link_to 'Admin', admin_index_path %></li>
                     <li class="page-link"><%= link_to "logout", destroy_admin_session_path, method: :delete %></li>
                   <% end %>
-                  <% @active_links.each do |link|%>
-                    <li class="page-link"><%= link_to link.name, link.url %></li>
-                  <% end %>
                 </ul>
                 <div class="search-field-wrapper hidden">
                 <%= form_for(:search_form, url:search_path, :method => 'get') do |f| %>
@@ -80,375 +76,38 @@
                   <div class="menu-header">
                     <!--Tabs-->
                     <ul class="menu-tabs-section">
-                      <li class="menu-tab active">
-                        <a class="food_and_drink_anchor" ><span class="icon-food"></span> Food & Drink</a>
-                        <!--Tabs Content -->
-                        <div class="container-fluid" id="food-and-drink">
-                          <div class="menu-listings-section">
-                            <div class="tab-content">
-                              <div class="list-wrapper" >
-                                <span class="list-heading sf restaraunts-anchor">BEST RESTAURANTS</span>
-                                <ul class="list restaraunts-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">See More...</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf bars-anchor">BEST BARS</span>
-                                <ul class="list bars-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">See More...</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf night-clubs-anchor">NIGHT CLUBS</span>
-                                <ul class="list night-clubs-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">See More...</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf best-cafes-anchor">RESTAURANTS BY AREA</span>
-                                <ul class="list best-cafes-list">
-                                  <li><a href="#">Restaurants in The Mission</a></li>
-                                  <li><a href="#">Restaurants in North Beach</a></li>
-                                  <li><a href="#">Restaurants in SOMA</a></li>
-                                  <li><a href="#">Restaurants in Hayes Valley</a></li>
-                                  <li><a href="#">Union Square</a></li>
-                                  <li><a href="#">Fisherman's Wharf</a></li>
-                                  <li><a href="#">See More...</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf markets-anchor">BEST BARS BY AREA</span>
-                                <ul class="list markets-list">
-                                  <li><a href="#">Bars in The Mission</a></li>
-                                  <li><a href="#">Bars in SOMA</a></li>
-                                  <li><a href="#">Bars in North Beach</a></li>
-                                  <li><a href="#">Bars in Hayes Valley</a></li>
-                                  <li><a href="#">Bars in The Marina</a></li>
-                                  <li><a href="#">Bars in The Castro</a></li>
-                                  <li><a href="#">See More...</a></li>
-                                </ul>
+                      <% @active_links.where(parent_id: nil).each do |link|%>
+                        <li class="menu-tab">
+                          <%= link_to link.url, class:  link.name + "_anchor" do %>
+                            <%= link.name %> <span class="<%= link.icon %>"></span>
+                          <% end %>
+                          <!--Tabs Content -->
+                          <div class="container-fluid" id="<%= link.name %>">
+                            <div class="menu-listings-section">
+                              <div class="tab-content">
+                                <% @active_links.where(parent_id: link.id).each do |sub_link| %>
+                                  <div class="list-wrapper" >
+                                    <span class="list-heading sf <%= sub_link.name %>-anchor"><%= sub_link.name %></span>
+                                    <ul class="list <%= sub_link.name %>-list">
+                                      <% @active_links.where(parent_id: sub_link.id).each do |third_link| %>
+                                        <li><%= link_to third_link.name, third_link.url %></li>
+                                      <% end %>
+                                    </ul>
+                                  </div>
+                                <% end %>
                               </div>
                             </div>
-
                           </div>
-                        </div>
-                        <!--End of Tabs Content-->
-                      </li>
-                      <li class="menu-tab">
-                        <a class="services_anchor"><span class="icon-comp"></span> Services</a>
-                        <!--Tabs Content Services-->
-                        <div class="container-fluid" id="services" >
-                          <div class="menu-listings-section">
-                            <div class="tab-content">
-                              <div class="list-wrapper" >
-                                <span class="list-heading sf restaraunts-anchor">BEST RESTAURANTS</span>
-                                <ul class="list restaraunts-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf bars-anchor">BEST BARS</span>
-                                <ul class="list bars-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf night-clubs-anchor">NIGHT CLUBS</span>
-                                <ul class="list night-clubs-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf best-cafes-anchor">BEST CAFES</span>
-                                <ul class="list best-cafes-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf markets-anchor">MARKETS</span>
-                                <ul class="list markets-list" >
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!--End of Tabs Content-->
-                      </li>
-                      <li class="menu-tab">
-                        <a class="events_anchor"><span class="icon-mic"></span> Events</a>
-                        <!--Tabs Content Events-->
-                        <div class="container-fluid" id="events">
-                          <div class="menu-listings-section">
-                            <div class="tab-content">
-                              <div class="list-wrapper" >
-                                <span class="list-heading sf restaraunts-anchor">BEST RESTAURANTS</span>
-                                <ul class="list restaraunts-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf bars-anchor">BEST BARS</span>
-                                <ul class="list bars-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf night-clubs-anchor">NIGHT CLUBS</span>
-                                <ul class="list night-clubs-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf best-cafes-anchor">BEST CAFES</span>
-                                <ul class="list best-cafes-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf markets-anchor">MARKETS</span>
-                                <ul class="list markets-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!--End of Tabs Content-->
-                      </li>
-                      <li class="menu-tab">
-                        <a class="places_anchor" ><span class="icon-map"></span> Places</a>
-                        <!--Tabs Content Places-->
-                        <div class="container-fluid" id="places">
-                          <div class="menu-listings-section">
-                            <div class="tab-content">
-                              <div class="list-wrapper" >
-                                <span class="list-heading sf restaraunts-anchor">BEST PLACES TO WORK</span>
-                                <ul class="list restaraunts-list">
-                                  <li><a href="#">Overall</a></li>
-                                  <li><a href="#">Tech Companies</a></li>
-                                  <li><a href="#">Spirits Companies</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Free Wifi Cafes</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf bars-anchor">Best Gyms</span>
-                                <ul class="list bars-list">
-                                  <li><a href="#">Top Yoga Shit</a></li>
-                                  <li><a href="#">Pilates</a></li>
-                                  <li><a href="#">Other Workout Stuff</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading night-clubs-anchor">NIGHT CLUBS</span>
-                                <ul class="list night-clubs-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf best-cafes-anchor">BEST CAFES</span>
-                                <ul class="list best-cafes-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf markets-anchor">MARKETS</span>
-                                <ul class="list markets-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!--End of Tabs Content-->
-                      </li>
-                      <li class="menu-tab">
-                        <a class="local_brands_anchor"><span class="icon-rocket"></span> Local Brands</a>
-                        <!--Tabs Content Local Brands-->
-                        <div class="container-fluid" id="local_brands">
-                          <div class="menu-listings-section">
-                            <div class="tab-content">
-                              <div class="list-wrapper" >
-                                <span class="list-heading sf restaraunts-anchor">BEST RESTAURANTS</span>
-                                <ul class="list restaraunts-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf bars-anchor">BEST BARS</span>
-                                <ul class="list bars-list" >
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf night-clubs-anchor">NIGHT CLUBS</span>
-                                <ul class="list night-clubs-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf best-cafes-anchor">BEST CAFES</span>
-                                <ul class="list best-cafes-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                              <div class="list-wrapper">
-                                <span class="list-heading sf markets-anchor">MARKETS</span>
-                                <ul class="list markets-list">
-                                  <li><a href="#">Italian Restaurants</a></li>
-                                  <li><a href="#">Seafood</a></li>
-                                  <li><a href="#">Indian</a></li>
-                                  <li><a href="#">Thai</a></li>
-                                  <li><a href="#">Chinese</a></li>
-                                  <li><a href="#">American</a></li>
-                                  <li><a href="#">Vietnamese</a></li>
-                                </ul>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!--End of Tabs Content-->
-                      </li>
+                          <!--End of Tabs Content-->
+                        </li>
+                      <% end %>
                     </ul>
                     <!--End of Tabs-->
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
-
           <!--End of Open Menu Section-->
         </div>
       </nav>
