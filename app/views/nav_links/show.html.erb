@@ -1,0 +1,90 @@
+<% provide(:title, @nav_link.name) %>
+<% provide(:body_class, "nav_link-page") %>
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+<div class="page-heading">
+  <h2><%= @nav_link.name %></h2>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Sub-Links</h3>
+  </div>
+  <div class="col-md-6">
+    <%= link_to "Add Link",'javascript:;', class: "col-md-5 col-md-offset-5 btn btn-success add_link" %>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th colspan="2">Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nav_links.where(parent_id: @nav_link.id).each do |nav_link| %>
+      <tr>
+        <td><%= nav_link.id %></td>
+        <td><%= nav_link.name %></td>
+        <td>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(nav_link) %>
+          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, nav_link_path(nav_link), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Back', nav_links_path, class: "btn btn-default" %>
+</div>
+
+<div class="modal fade" id="add-new-link" role="document">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for @new_link, remote: true do |f| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Link</h4>
+        </div>
+        <% if flash.present? %>
+          <label class="label label-danger active_error"><%= flash[:new_alert] %></label>
+        <% end %>
+        <div class="modal-body">
+          <div class="field2 m-b">
+            <%= label_tag :name,"Name",class: "col-xs-3" %>
+            <%= f.text_field :name,class: "form-control col-xs-9 var_name", required: true,id: "new_name" %>
+          </div>
+          <%= f.hidden_field :parent_id, value: @nav_link.id %>
+          <%= f.hidden_field :depth, value: @nav_link.depth + 1 %>
+          <div class="field2 m-b">
+            <%= label_tag :url,"URL",class: "col-xs-3" %>
+            <%= f.text_field :url,class: "form-control col-xs-9 var_name",required: true %>
+          </div>
+          <div class="field2 m-b">
+            <%= label_tag :position,"Position",class: "col-xs-3" %>
+            <%= f.text_field :position,class: "form-control col-xs-9 var_name",required: true %>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <%= label_tag :active,"Active",class: "col-xs-3" %>
+            </div>
+            <div class="col-md-1">
+            <%= f.check_box :active,class: "active_checkbox" %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "ADD",class: "btn btn-success col-xs-4 add_variable" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="edit-link" class="modal fade" role="document"></div>
+</div>
