@@ -11,45 +11,46 @@
   <%= link_to "Add Link",'javascript:;', class: "col-md-5 col-md-offset-5 btn btn-success add_link" %>
 </div>
 <br/>
-    <table class="table table-stripped table-truncate">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>URL</th>
-          <th>Position</th>
-          <th>Active</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @nav_links.all.try(:each) do |link| %>
-          <tr>
-            <td>
-              <%= link.name %>
-            </td>
-            <td>
-              <%= link.url %>
-            </td>
-            <td>
-              <%= link.position %>
-            </td>
-            <td>
-              <%= link.active %>
-            </td>
-            <td>
-              <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(id: link.id),remote: true %>
-              <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+<table class="table table-stripped table-truncate sortable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Position</th>
+      <th>Active</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @nav_links.where(depth: 1).try(:each) do |link| %>
+      <tr data-id="<%= link.id %>" data-parent-id="<%= link.parent_id %>">
+        <td>
+          <%= link_to link.name, link %>
+        </td>
+        <td>
+          <%= link.url %>
+        </td>
+        <td>
+          <%= link.position %>
+        </td>
+        <td>
+          <%= link.active %>
+        </td>
+        <td>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(id: link.id),remote: true %>
+          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br/>
 <div class="modal fade" id="add-new-link" role="document">
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_for @new_link, remote: true do |f| %>
         <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Link</h4>
         </div>
         <% if flash.present? %>
@@ -58,8 +59,13 @@
         <div class="modal-body">
           <div class="field2 m-b">
             <%= label_tag :name,"Name",class: "col-xs-3" %>
-            <%= f.text_field :name,class: "form-control col-xs-9 var_name",required: true,id: "new_name" %>
+            <%= f.text_field :name,class: "form-control col-xs-9 var_name", required: true,id: "new_name" %>
           </div>
+          <div class="field2 m-b">
+            <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
+            <%= f.select :parent_id, options_from_collection_for_select(@nav_links.where(depth: 0), 'id', 'name', @parent_id), {}, class: "form-control col-xs-9 var_name select2", required: true, id: "select_parent" %>
+          </div>
+          <%= f.hidden_field :depth, value: 1 %>
           <div class="field2 m-b">
             <%= label_tag :url,"URL",class: "col-xs-3" %>
             <%= f.text_field :url,class: "form-control col-xs-9 var_name",required: true %>

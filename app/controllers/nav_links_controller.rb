@@ -14,7 +14,8 @@ class NavLinksController < ApplicationController
   # GET /nav_link/1
   # GET /nav_link/1.json
   def show
-
+    @nav_links = NavLink.all
+    @new_link = NavLink.new
   end
 
   # GET /nav_link/new
@@ -24,6 +25,7 @@ class NavLinksController < ApplicationController
 
   # GET /nav_link/1/edit
   def edit
+    @nav_links = NavLink.all
     unless @nav_link.active
       unless @nav_link.active_count
         flash.now[:alert] = "Cannot make this active,already have 3 active links"
@@ -34,9 +36,7 @@ class NavLinksController < ApplicationController
   # POST /nav_link
   # POST /nav_link.json
   def create
-    # @nav_link = NavLink.find(params[:nav_link_id])
     @nav_link = NavLink.new(nav_link_params)
-
     respond_to do |format|
       if @nav_link.save
         format.html { redirect_to nav_links_path, notice: 'nav_link was successfully created.' }
@@ -80,7 +80,6 @@ class NavLinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nav_link_params
-      params.require(:nav_link).permit( :name, :url, :position, :active)
+      params.require(:nav_link).permit(:name, :url, :position, :active, :parent_id, :depth)
     end
-
 end
