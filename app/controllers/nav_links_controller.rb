@@ -5,7 +5,7 @@ class NavLinksController < ApplicationController
   # GET /nav_link.json
   def index
     @nav_links = NavLink.all
-    @new_link = NavLink.new
+    @new_link = NavLink.new(depth: 1)
     unless @new_link.active_count
       flash[:new_alert] = "not allowed any more active links"
     end
@@ -15,7 +15,10 @@ class NavLinksController < ApplicationController
   # GET /nav_link/1.json
   def show
     @nav_links = NavLink.all
-    @new_link = NavLink.new
+    @new_link = NavLink.new(depth: 2)
+    unless @new_link.active_count
+      flash[:new_alert] = "not allowed any more active links"
+    end
   end
 
   # GET /nav_link/new
@@ -28,7 +31,7 @@ class NavLinksController < ApplicationController
     @nav_links = NavLink.all
     unless @nav_link.active
       unless @nav_link.active_count
-        flash.now[:alert] = "Cannot make this active,already have 3 active links"
+        flash.now[:alert] = "Cannot make this active, already have 5 active links"
       end
     end
   end
@@ -37,6 +40,11 @@ class NavLinksController < ApplicationController
   # POST /nav_link.json
   def create
     @nav_link = NavLink.new(nav_link_params)
+    unless @nav_link.active
+      unless @nav_link.active_count
+        flash.now[:alert] = "Cannot make this active, already have 5 active links"
+      end
+    end
     respond_to do |format|
       if @nav_link.save
         format.html { redirect_to nav_links_path, notice: 'nav_link was successfully created.' }
