@@ -1,18 +1,14 @@
-<div class="table-full">
-  <div class="table-responsive">
-    <table id="pronoun_orders_table" class="table table-striped" data-source= "<%= pronoun_orders_url(format: :json, view_point: @view_point || '')%>" >
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Title</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Keywords</th>
-          <th>Word Range</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</div>
+<table id="pronoun_orders_table" class="table table-striped" data-source= "<%= pronoun_orders_url(format: :json, view_point: @view_point || '')%>" >
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Keywords</th>
+      <th>Word Range</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>

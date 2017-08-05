@@ -39,7 +39,7 @@ class SubCategoriesController < ApplicationController
         format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully created.' }
         format.json { render :show, status: :created, location: @sub_category }
       else
-        format.html { render :new }
+        format.html { render :new, alert: 'sub category could not be created.' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
     end
@@ -53,7 +53,7 @@ class SubCategoriesController < ApplicationController
         format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_category }
       else
-        format.html { render :edit }
+        format.html { render :edit, alert: 'sub category could not be updated.' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
     end

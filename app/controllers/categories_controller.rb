@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
         format.json { render :show, status: :created, location: @category }
         format.js {render json: { id: @category.id, value: @category.name } }
       else
-        format.html { render :new }
+        format.html { render :new, alert: "category could not be created" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
         format.js {render json: { id: @category.id, value: @category.name } }
       end
@@ -49,7 +49,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to @category, notice: 'category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
-        format.html { render :edit }
+        format.html { render :edit, alert: "category could not be updated" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end

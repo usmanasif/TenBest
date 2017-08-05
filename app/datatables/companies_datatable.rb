@@ -38,7 +38,7 @@ private
     companies = Company.order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
     if params[:sSearch].present?
-      companies = companies.where("name ILIKE :search or city ILIKE :search or CAST(category AS TEXT) ILIKE :search", search: "%#{params[:sSearch]}%")
+      companies = companies.where("name ILIKE :search or city ILIKE :search or CAST(category_id AS TEXT) ILIKE :search", search: "%#{params[:sSearch]}%")
     end
     companies
   end
