@@ -139,6 +139,8 @@ $la_color: #ffae00;
         position: relative;
         top: -8px;
         left: 4px;
+        padding-left: 78px;
+        height: 90%;
         .search-field-input {
           padding-left: 18px;
           padding-top: 13.4px;
@@ -151,16 +153,14 @@ $la_color: #ffae00;
           font-weight: 600;
           border-right: 0px;
           outline: none;
-
-
+          height: 90%;
         }
       }
 
       .menu-button {
-
         a {
           margin-top: 0px;
-          float: left;
+          float: right;
           border-radius: 4px;
           border: 1px solid #e9e9e9;
           width: 152px;
@@ -238,6 +238,10 @@ $la_color: #ffae00;
               background-color: $la_color;
             }
           }
+        }
+        &.sf {
+          float: right;
+          position: relative;
         }
       }
     }
