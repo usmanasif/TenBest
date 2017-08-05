@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Paperclip gem for managing file uploads.  If you're not using rails 3 or 4, you'll need a different version.
 gem 'paperclip'
+gem 'fog'
 # Simple breadcrumb for rails
 gem "breadcrumbs_on_rails"
 
@@ -55,6 +56,7 @@ gem 'staccato'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'sqlite3'
+  gem 'dotenv-rails'
   gem 'byebug', platform: :mri
 end
 
