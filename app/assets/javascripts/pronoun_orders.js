@@ -21,6 +21,9 @@ $(document).on('click', '#place_order_submit', function (event) {
     })
 });
 $(document).on('turbolinks:load', function () {
+  $(window).on('popstate', function(event) {
+    location.reload();
+  });
   order_index = 7;
   order_column = 2;
   bSortable_columns = [

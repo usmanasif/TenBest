@@ -1,6 +1,14 @@
 $(document).on('turbolinks:load', function () {
+	
+    $(window).on('popstate', function(event) {
+    location.reload();
+  });
   jQuery(function () {
-    $('#companies').dataTable({
+    if ( $.fn.dataTable.isDataTable( '#companies' ) ) {
+		    table = $('#companies').DataTable();
+		}
+		else {
+		    table = $('#companies').dataTable({
       sPaginationType: "full_numbers",
       bJQueryUI: true,
       bProcessing: true,
@@ -8,6 +16,9 @@ $(document).on('turbolinks:load', function () {
       bSortable: true,
       sAjaxSource: $('#companies').data('source')
     });
+		  }
+
+
     $('#category_from').hide();
     $('#add_category').on('click', function () {
       // Show new category form and hide import csv from for the moment
