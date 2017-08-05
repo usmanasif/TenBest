@@ -40,3 +40,6 @@ jsconfig.json
 
 #Ignore eslint configuration file
 .eslintrc.json
+
+#Ignore environment variable file
+.env
