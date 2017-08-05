@@ -15,7 +15,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>URL</th>
+      <th>Category</th>
       <th>Position</th>
       <th>Active</th>
       <th>Action</th>
@@ -28,7 +28,7 @@
           <%= link_to link.name, link %>
         </td>
         <td>
-          <%= link.url %>
+          <%= @nav_links.find(link.parent_id).name %>
         </td>
         <td>
           <%= link.position %>
