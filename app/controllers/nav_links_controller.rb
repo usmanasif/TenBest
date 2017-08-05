@@ -1,11 +1,12 @@
 class NavLinksController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_nav_link, only: [:show, :edit, :update, :destroy]
 
   # GET /nav_link
   # GET /nav_link.json
   def index
     @nav_links = NavLink.all
-    @new_link = NavLink.new(depth: 1)
+    @new_link = NavLink.new(parent_id: nil, depth: 1)
     unless @new_link.active_count
       flash[:new_alert] = "not allowed any more active links"
     end
@@ -15,7 +16,7 @@ class NavLinksController < ApplicationController
   # GET /nav_link/1.json
   def show
     @nav_links = NavLink.all
-    @new_link = NavLink.new(depth: 2)
+    @new_link = NavLink.new(parent_id: @nav_link.id, depth: 2)
     unless @new_link.active_count
       flash[:new_alert] = "not allowed any more active links"
     end
