@@ -19,6 +19,7 @@ $(document).on('turbolinks:load',function(){
         { "bSortable": true },
         { "bSortable": true },
         { "bSortable": true },
+        { "bSortable": true },
         { "bSortable": false },
         { "bSortable": false },
         { "bSortable": false }

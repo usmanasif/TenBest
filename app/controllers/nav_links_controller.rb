@@ -1,6 +1,7 @@
 class NavLinksController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_nav_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_layout
 
   # GET /nav_link
   # GET /nav_link.json
@@ -75,13 +76,16 @@ class NavLinksController < ApplicationController
 
   private
 
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def nav_link_params
+      params.require(:nav_link).permit(:name, :url, :position, :active, :parent_id, :depth)
+    end
+
+    def set_layout
+      self.class.layout "admin"
+    end
   # Use callbacks to share common setup or constraints between actions.
   def set_nav_link
     @nav_link = NavLink.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def nav_link_params
-    params.require(:nav_link).permit(:name, :url, :position, :active, :parent_id, :depth)
   end
 end

@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   require 'net/http'
   before_action :authenticate_admin!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_layout
 
   # GET /companies
   # GET /companies.json
@@ -106,13 +107,16 @@ class CompaniesController < ApplicationController
 
   private
 
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def company_params
+      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address, :url)
+    end
+
+    def set_layout
+        self.class.layout "admin"
+    end
   # Use callbacks to share common setup or constraints between actions.
   def set_company
     @company = Company.friendly.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def company_params
-    params.require(:company).permit(:name, :city, :category_id, :lat, :lng, :address, :url)
   end
 end

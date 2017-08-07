@@ -1,5 +1,6 @@
 class PronounOrdersController < ApplicationController
   before_action :authenticate_admin!, except: [:text_submission_callback]
+  before_action :set_layout
 
   def index
     @orders = PronounOrder.all
@@ -49,5 +50,10 @@ class PronounOrdersController < ApplicationController
     redirect_to pronoun_orders_path, notice: 'Order Placed Successfully'
 
     # render json: {msg: "Order Placed Successfully" }, status: 200
+  end
+
+  private
+  def set_layout
+    self.class.layout "admin"
   end
 end

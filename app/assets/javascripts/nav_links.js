@@ -13,3 +13,11 @@ $(document).on('click', '.add_variable', function(event) {
     alert("link name cannot be greater than 30 characters");
   }
 });
+
+
+$(document).on('click', '.add_category', function() {
+  $('#add-category').modal('show');
+});
+$(document).on('click', '.add_sub_category', function() {
+  $('#add-sub-category').modal('show');
+});
