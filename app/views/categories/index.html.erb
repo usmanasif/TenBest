@@ -1,14 +1,10 @@
-<% provide(:title, "Best Categories") %>
-<% provide(:body_class, "category-page") %>
-
 <div class="container">
-<p id="notice"><%= notice %></p>
 
 <div class="col-md-6">
-  <h1>Categories</h1>
+  <h1 class="header">Categories</h1>
 </div>
 <div class="col-md-6">
-  <%= link_to 'New category', new_category_path,class: "new-record btn btn-primary" %>
+  <%= link_to 'New category', "javascript:;",class: "new-record add_category btn btn-primary" %>
 </div>
 
 
@@ -17,6 +13,8 @@
     <tr>
       <th>#</th>
       <th>Name</th>
+      <th>Sub-Categories</th>
+      <th>Companies</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,9 +24,11 @@
       <tr>
         <td><%= category.id %></td>
         <td><%= category.name %></td>
+        <td><%= category.sub_categories.count %></td>
+        <td><%= category.companies.count %></td>
         <td>
           <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe, category %>
-          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_category_path(category) %>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_category_path(category),remote: true %>
           <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, category, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
@@ -39,3 +39,15 @@
 <br>
 
 </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="add-category">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New Category</h4>
+      </div>
+      <%= render 'categories/new' %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-category"></div>

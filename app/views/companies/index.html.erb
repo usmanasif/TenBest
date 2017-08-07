@@ -2,11 +2,10 @@
 <% provide(:body_class, "company-page") %>
 
 <div class="container">
-<p id="notice"><%= notice %></p>
 
 <div class="row">
   <div class="col-md-6">
-    <h1>Companies</h1>
+    <h1 class="header">Companies</h1>
   </div>
   <div class="col-md-6">
     <%= link_to 'New Company', new_company_path, class: "new-record btn btn-primary col-md-offset-1" %>
@@ -21,8 +20,9 @@
       <th>Name</th>
       <th>City</th>
       <th>Category</th>
+      <th>Rating</th>
       <th>Edit</th>
-      <th>Delete</th>
+      <th>Actions</th>
     </tr>
   </thead>
 

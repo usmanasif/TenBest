@@ -1,16 +1,19 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_layout
 
   # GET /categories
   # GET /categories.json
   def index
     @categories = Category.all
+    @category = Category.new
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @new_sub_category = SubCategory.new
     @sub_categories = @category.sub_categories.all
   end
 
@@ -34,7 +37,7 @@ class CategoriesController < ApplicationController
         format.json { render :show, status: :created, location: @category }
         format.js {render json: { id: @category.id, value: @category.name } }
       else
-        format.html { render :new, alert: "category could not be created" }
+        format.html { redirect_back(fallback_location: :back,alert: "category could not be created") }
         format.json { render json: @category.errors, status: :unprocessable_entity }
         format.js {render json: { id: @category.id, value: @category.name } }
       end
@@ -76,4 +79,7 @@ class CategoriesController < ApplicationController
       params.require(:category).permit( :name, :keywords)
     end
 
+    def set_layout
+        self.class.layout "admin"
+    end
 end

@@ -1,5 +1,6 @@
 class NavLinksController < ApplicationController
   before_action :set_nav_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_layout
 
   # GET /nav_link
   # GET /nav_link.json
@@ -89,5 +90,9 @@ class NavLinksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def nav_link_params
       params.require(:nav_link).permit(:name, :url, :position, :active, :parent_id, :depth)
+    end
+
+    def set_layout
+      self.class.layout "admin"
     end
 end

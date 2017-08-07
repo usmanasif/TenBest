@@ -1,105 +1,47 @@
-<section class="places-section">
-    <div class="container">
-      <div class="row">
-        <!--Large Place Container-->
-        <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
-          <div class="place-content-container">
-            <%= link_to '', companies_path, class: 'place-link' %>
-            <%= image_tag 'image-places-brands.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-            <div class="info-container">
-              <div class="category-container">Best Companies</div>
-              <div class="title-container">COMPANIES IN THE SYSTEM</div>
-              <div class="social-container">
-                <ul class="social-list">
-                  <li class="share-button">
-                    <a href="#"></a></li>
-                  <li class="like-button">
-                    <a href="#"></a>
-                  </li>
-                  <li class="chat-container">
-                    <a href="#"></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--End Large Place Container-->
-
-        <!--Small places container-->
-        <div class="small-places-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
-          <div class="row">
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', categories_path, class: 'place-link' %>
-                <%= image_tag 'image-places-events.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Categories</div>
-                  <div class="title-container">CATEGORIES IN THE SYSTEM</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', nav_links_path, class: 'place-link' %>
-                <%= image_tag 'image-places-parks.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Navigation links</div>
-                  <div class="title-container">Manage links for NAV</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', pronoun_orders_path, class: 'place-link' %>
-                <%= image_tag 'image-places-travel.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Writing Services</div>
-                  <div class="title-container">Pronoun Orders</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
-              <div class="place-content-container">
-                <%= link_to '', ranking_path('craft-breweire'), class: 'place-link' %>
-                <%= image_tag 'image-places-brewery.jpg', class: 'img-responsive', alt: 'brunch places in San Francisco' %>
-                <div class="info-container">
-                  <div class="category-container">Best Local Brands</div>
-                  <div class="title-container">TOP TEN CRAFT BREWERIES</div>
-                  <div class="social-container">
-                    <ul class="social-list">
-                      <li class="share-button"><a href="#"></a></li>
-                      <li class="like-button"><a href="#"></a></li>
-                      <li class="chat-container"><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+<!-- <div class="container">
+  <h2 class="header"><span class="icon"></span>Dashboard</h2>
+    <div class="monitor">
+      <h4>Right Now</h4>
+      <div class="clearfix">
+        <ul class="content">
+          <li>content</li>
+          <li class="categories"><span class="count"><%= @categories.count %></span><a href="">categories</a></li>
+          <li class="pronoun_orders"><span class="count"><%= @pronoun_orders.count %></span><a href="">pronoun_orders</a></li>
+          <li class="categories"><span class="count"><%= @companies.count %></span><a href="">companies</a></li>
+        </ul>
+     </div>
+   </div>
+ </div> -->
+ <div class="col-md-4">
+  <div class="card">
+    <a href="<%= categories_path %>">
+      <img src="<%= asset_path 'images-places-2' %>" alt="Avatar" style="width:100%">
+      <div class="container">
+        <h4><b>Categories</b></h4> 
+        <p><%= @categories.count %></p> 
       </div>
-    </div>
-</section>
+    </a>
+  </div>
+ </div>
+ <div class="col-md-4">
+  <div class="card">
+    <a href="<%= companies_path %>">
+      <img src="<%= asset_path 'images-places-3' %>" alt="Avatar" style="width:100%">
+      <div class="container">
+        <h4><b>Companies</b></h4>
+        <p><%= @companies.count %></p> 
+      </div>
+    </a> 
+  </div>
+ </div>
+ <div class="col-md-4">
+  <div class="card">
+    <a href="<%= pronoun_orders_path %>">
+      <img src="<%= asset_path 'images-places-4' %>" alt="Avatar" style="width:100%">
+      <div class="container">
+        <h4><b>Pronoun Orders</b></h4> 
+        <p><%= @pronoun_orders.count %></p> 
+      </div>
+    </a>
+  </div>
+ </div>
