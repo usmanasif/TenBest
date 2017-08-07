@@ -8,10 +8,10 @@ Paperclip::Attachment.default_options.merge!(
     provider: 'AWS',
     aws_access_key_id: ENV['AMAZON_ID'],
     aws_secret_access_key: ENV['AMAZON_KEY'],
-    preserve_files: false,
     region: ENV['REGION']
   },
   fog_directory: ENV['BUCKET'],
+  preserve_files: false,
   url: 'images/:class/:name/:style/:basename.:extension',
   path: 'images/:class/:name/:style/:basename.:extension',
   default_url: 'images/place-image.png'
