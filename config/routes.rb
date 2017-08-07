@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :categories do
       resources :sub_categories
     end
-    resources :pronoun_orders, only: [:index,:show] do
+    resources :pronoun_orders, only: [:index, :show] do
       get :text_submission_callback
       post :order_review
       get :place_order
@@ -30,6 +30,5 @@ Rails.application.routes.draw do
 
   root 'index#home'
 
-  resources :admin, only: [:index,:create,:new]
-
+  resources :admin, only: [:index, :create, :new]
 end
