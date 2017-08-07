@@ -72,7 +72,6 @@ class SubCategoriesController < ApplicationController
 
   private
 
-<<<<<<< HEAD
     # Never trust parameters from the scary internet, only allow the white list through.
     def sub_category_params
       params.require(:sub_category).permit( :name)
@@ -81,15 +80,8 @@ class SubCategoriesController < ApplicationController
     def set_layout
       self.class.layout "admin"
     end
-=======
   # Use callbacks to share common setup or constraints between actions.
   def set_sub_category
     @sub_category = SubCategory.friendly.find(params[:id])
-  end
->>>>>>> 9e1707ffc87dd96431f8083f3955328cf7ca30eb
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def sub_category_params
-    params.require(:sub_category).permit(:name)
   end
 end
