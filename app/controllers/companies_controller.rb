@@ -17,21 +17,19 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1
   # GET /companies/1.json
-  def show
-
-  end
+  def show; end
 
   # GET /companies/new
   def new
     @company = Company.new
     @categories = Category.all
-    @cities = ["San Francisco", "New York", "Honolulu"]
+    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 
   # GET /companies/1/edit
   def edit
     @categories = Category.all
-    @cities = ["San Francisco", "New York", "Honolulu"]
+    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 
   # POST /companies
@@ -44,7 +42,7 @@ class CompaniesController < ApplicationController
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
-        format.html { render :new, alert: "company could not be created" }
+        format.html { render :new, alert: 'company could not be created' }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +58,7 @@ class CompaniesController < ApplicationController
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
       else
-        format.html { render :edit, alert: "category could not be updated" }
+        format.html { render :edit, alert: 'category could not be updated' }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
@@ -80,17 +78,17 @@ class CompaniesController < ApplicationController
   def import_csv
     file = params[:file]
     @category = params[:category]
-    @csv_companies = import_from_csv( file, Company )
+    @csv_companies = import_from_csv(file, Company)
     if @csv_companies.present?
-      @correct_companies = Array.new
-        @csv_companies.each do |company|
-          if Company.invalid company
-            company["error"] = true
-          else
-            @correct_companies.push company  
-          end
+      @correct_companies = []
+      @csv_companies.each do |company|
+        if Company.invalid company
+          company['error'] = true
+        else
+          @correct_companies.push company
         end
-       render 'import_from_csv.html.erb'
+      end
+      render 'import_from_csv.html.erb'
     else
       redirect_to :back, alert: 'CSV is in invalid format'
     end
@@ -108,10 +106,6 @@ class CompaniesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_company
-      @company = Company.friendly.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
@@ -121,4 +115,8 @@ class CompaniesController < ApplicationController
     def set_layout
         self.class.layout "admin"
     end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_company
+    @company = Company.friendly.find(params[:id])
+  end
 end

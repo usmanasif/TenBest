@@ -3,13 +3,13 @@
 
 <div class="container">
 
-<div>
-	No: <%= @sub_category.id %>
-</div>
-<div>
-	Name: <%= @sub_category.name %>
-</div>
+	<div>
+		No: <%= @sub_category.id %>
+	</div>
+	<div>
+		Name: <%= @sub_category.name %>
+	</div>
 
-<%= link_to 'Edit', edit_category_sub_category_path(category_id: @category.slug, id: @sub_category.slug), class: "btn btn-default" %>
-<%= link_to 'Back', @sub_category.category, class: "btn btn-default" %>
+	<%= link_to 'Edit', edit_category_sub_category_path(category_id: @category.slug, id: @sub_category.slug), class: "btn btn-default" %>
+	<%= link_to 'Back', @sub_category.category, class: "btn btn-default" %>
 </div>

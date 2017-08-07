@@ -3,8 +3,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-          <div class="form-login">
+        <div class="col-md-offset-3 col-md-6 login-text-center">
+          <div class="form-login login-text-center">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), :defaults => { :input_html => { :class => "text" } }) do |f| %>
             <h4>Log in</h4>
             <div class="field">
@@ -19,16 +19,17 @@
             </br>
             <div class="wrapper">
             <% if devise_mapping.rememberable? -%>
-              <div class="field">
-                <label class="btn btn-primary">Remember Me
+              <span class="col-md-6 group-btn">
+                  <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+              </span>
+              <div class="checkbox checkbox-primary">
                   <%= f.check_box :remember_me, autocomplete: "off" %>
-                  <span class="glyphicon glyphicon-ok"></span>
-                </label>
+                  <%= f.label :remember_me do %>
+                    Remember Me
+                  <% end %>
               </div>
             <% end -%>
-            <span class="group-btn">
-                <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
-            </span>
+            
             </div>
             <% end %>
             </div>

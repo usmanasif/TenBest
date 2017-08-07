@@ -52,6 +52,8 @@
               </a>
               <div class="col-md-6 col-sm-8 col-xs-9 pages-section pull-right">
                 <ul class="pages-list">
+                  <li class="page-link"><%= link_to 'Home', home_path %></li>
+                  <li class="page-link"><%= link_to "Contact", contact_path %></li>
                   <% if !current_admin.id.nil? %>
                     <li class="page-link"><%= link_to 'Admin', admin_index_path %></li>
                     <li class="page-link"><%= link_to "logout", destroy_admin_session_path, method: :delete %></li>

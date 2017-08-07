@@ -8,9 +8,7 @@ class NavLinksController < ApplicationController
   def index
     @nav_links = NavLink.all
     @new_link = NavLink.new(parent_id: nil, depth: 1)
-    unless @new_link.active_count
-      flash[:new_alert] = "not allowed any more active links"
-    end
+    flash[:new_alert] = 'not allowed any more active links' unless @new_link.active_count
   end
 
   # GET /nav_link/1
@@ -18,9 +16,7 @@ class NavLinksController < ApplicationController
   def show
     @nav_links = NavLink.all
     @new_link = NavLink.new(parent_id: @nav_link.id, depth: 2)
-    unless @new_link.active_count
-      flash[:new_alert] = "not allowed any more active links"
-    end
+    flash[:new_alert] = 'not allowed any more active links' unless @new_link.active_count
   end
 
   # GET /nav_link/new
@@ -31,11 +27,7 @@ class NavLinksController < ApplicationController
   # GET /nav_link/1/edit
   def edit
     @nav_links = NavLink.all
-    unless @nav_link.active
-      unless @nav_link.active_count
-        flash.now[:alert] = "Cannot make this active, already have 5 active links"
-      end
-    end
+    flash.now[:alert] = 'Cannot make this active, already have 5 active links' unless @nav_link.active && @nav_link.active_count
   end
 
   # POST /nav_link
@@ -44,7 +36,7 @@ class NavLinksController < ApplicationController
     @nav_link = NavLink.new(nav_link_params)
     unless @nav_link.active
       unless @nav_link.active_count
-        flash.now[:alert] = "Cannot make this active, already have 5 active links"
+        flash.now[:alert] = 'Cannot make this active, already have 5 active links'
       end
     end
     respond_to do |format|
@@ -83,10 +75,6 @@ class NavLinksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_nav_link
-      @nav_link = NavLink.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nav_link_params
@@ -96,4 +84,8 @@ class NavLinksController < ApplicationController
     def set_layout
       self.class.layout "admin"
     end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_nav_link
+    @nav_link = NavLink.find(params[:id])
+  end
 end
