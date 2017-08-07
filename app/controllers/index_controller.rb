@@ -40,7 +40,7 @@ class IndexController < ApplicationController
   end
 
   def ranking
-    @category = params[:category].nil? ? Category.first : Category.find_by_name(url_decode(params[:category].capitalize))
+    @category = params[:category].nil? ? Category.first : Category.find_by_name(url_decode(params[:category]))
     @keywords = @category.keywords.split(',')
     @companies = Company.where('category_id = ?', @category.id).order('rating DESC').first(10)
     @positions = []
