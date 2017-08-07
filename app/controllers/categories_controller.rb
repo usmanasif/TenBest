@@ -20,8 +20,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /categories
   # POST /categories.json
@@ -32,12 +31,11 @@ class CategoriesController < ApplicationController
       if @category.save
         format.html { redirect_to @category, notice: 'category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
-        format.js {render json: { id: @category.id, value: @category.name } }
       else
-        format.html { render :new, alert: "category could not be created" }
+        format.html { render :new, alert: 'category could not be created' }
         format.json { render json: @category.errors, status: :unprocessable_entity }
-        format.js {render json: { id: @category.id, value: @category.name } }
       end
+      format.js { render json: { id: @category.id, value: @category.name } }
     end
   end
 
@@ -49,7 +47,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to @category, notice: 'category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
-        format.html { render :edit, alert: "category could not be updated" }
+        format.html { render :edit, alert: 'category could not be updated' }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -66,14 +64,14 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit( :name, :keywords)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.friendly.find(params[:id])
+  end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def category_params
+    params.require(:category).permit(:name, :keywords)
+  end
 end

@@ -6,7 +6,7 @@ class CompaniesDatatable
     @view = view
   end
 
-  def as_json(options = {})
+  def as_json(_options = {})
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: companies.count,
@@ -15,7 +15,7 @@ class CompaniesDatatable
     }
   end
 
-private
+  private
 
   def data
     companies.map do |company|
@@ -38,13 +38,13 @@ private
     companies = Company.order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
     if params[:sSearch].present?
-      companies = companies.where("name ILIKE :search or city ILIKE :search or CAST(category_id AS TEXT) ILIKE :search", search: "%#{params[:sSearch]}%")
+      companies = companies.where('name ILIKE :search or city ILIKE :search or CAST(category_id AS TEXT) ILIKE :search', search: "%#{params[:sSearch]}%")
     end
     companies
   end
 
   def page
-    params[:iDisplayStart].to_i/per_page + 1
+    params[:iDisplayStart].to_i / per_page + 1
   end
 
   def per_page
@@ -57,6 +57,6 @@ private
   end
 
   def sort_direction
-    params[:sSortDir_0] == "desc" ? "desc" : "asc"
+    params[:sSortDir_0] == 'desc' ? 'desc' : 'asc'
   end
 end

@@ -36,7 +36,7 @@ class SubCategoriesController < ApplicationController
 
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully created.' }
+        format.html { redirect_to category_sub_category_path(@sub_category, category_id: @sub_category.category.slug), notice: 'sub category was successfully created.' }
         format.json { render :show, status: :created, location: @sub_category }
       else
         format.html { render :new, alert: 'sub category could not be created.' }
@@ -50,7 +50,7 @@ class SubCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @sub_category.update(sub_category_params)
-        format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully updated.' }
+        format.html { redirect_to category_sub_category_path(@sub_category, category_id: @sub_category.category.slug), notice: 'sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_category }
       else
         format.html { render :edit, alert: 'sub category could not be updated.' }
@@ -70,14 +70,14 @@ class SubCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sub_category
-      @sub_category = SubCategory.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sub_category_params
-      params.require(:sub_category).permit( :name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sub_category
+    @sub_category = SubCategory.friendly.find(params[:id])
+  end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sub_category_params
+    params.require(:sub_category).permit(:name)
+  end
 end

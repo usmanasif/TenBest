@@ -54,7 +54,7 @@
     <div class="container">
       <div class="row">
         <!--Large Place Container-->
-        <% if @categories.length > 1 %>
+        <% if @categories.length >= 1 %>
           <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="place-content-container">
               <%= link_to '', ranking_path(@categories[0].name), class: 'place-link' %>
