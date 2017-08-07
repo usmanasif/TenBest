@@ -1,6 +1,6 @@
 class NavLinksController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_nav_link, only: %i[show edit update destroy]
+  before_action :set_nav_link, only: [:show, :edit, :update, :destroy]
 
   # GET /nav_link
   # GET /nav_link.json

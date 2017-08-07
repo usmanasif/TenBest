@@ -8,8 +8,8 @@ $(document).on('click', '.active_checkbox', function(event) {
   }
 });
 $(document).on('click', '.add_variable', function(event) {
-  if ($('#new_name').val().length > 12 || $('#edit_name').val().length > 12) {
+  if ($('#new_name').val().length > 30 || $('#edit_name').val().length > 30) {
     event.preventDefault();
-    alert("link name cannot be greater than 12 characters");
+    alert("link name cannot be greater than 30 characters");
   }
 });
