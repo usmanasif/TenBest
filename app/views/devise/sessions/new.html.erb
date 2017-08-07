@@ -19,16 +19,17 @@
             </br>
             <div class="wrapper">
             <% if devise_mapping.rememberable? -%>
-              <div class="field">
-                <label class="btn btn-primary">Remember Me
+              <span class="col-md-6 group-btn">
+                  <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+              </span>
+              <div class="checkbox checkbox-primary">
                   <%= f.check_box :remember_me, autocomplete: "off" %>
-                  <span class="glyphicon glyphicon-ok"></span>
-                </label>
+                  <%= f.label :remember_me do %>
+                    Remember Me
+                  <% end %>
               </div>
             <% end -%>
-            <span class="group-btn">
-                <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
-            </span>
+            
             </div>
             <% end %>
             </div>
