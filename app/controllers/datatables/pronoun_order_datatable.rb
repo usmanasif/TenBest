@@ -27,7 +27,7 @@ class Datatables::PronounOrderDatatable
       [
         link_to(order.id, order),
         ERB::Util.h("<p class='entry-title'>#{order.title}</p>".html_safe),
-        ERB::Util.h(order.try(:category).try(:name)),
+        ERB::Util.h(order.try(:company).try(:name)),
         ERB::Util.h(order.description),
         ERB::Util.h(order.keywords),
         ERB::Util.h("#{order.min_words}-#{order.max_words}"),
@@ -41,13 +41,13 @@ class Datatables::PronounOrderDatatable
   end
 
   def fetch_orders
-    orders = PronounOrder.all
+    orders = PronounOrder.order("#{sort_column} #{sort_direction}")
     orders = orders.paginate(page: page, per_page: per_page)
     if params[:sSearch].present?
       result = fetch_search_result_orders(orders, params[:sSearch])
       orders = result.uniq
     end
-    orders.order('updated_at DESC')
+    orders
   end
 
   def page
@@ -56,5 +56,14 @@ class Datatables::PronounOrderDatatable
 
   def per_page
     params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
+  end
+
+  def sort_column
+    columns = ["id", "title", "company_id", "description", "keywords", "word_range", "state"]
+    columns[params[:iSortCol_0].to_i]
+  end
+
+  def sort_direction
+    params[:sSortDir_0] == 'desc' ? 'desc' : 'asc'
   end
 end

@@ -37,6 +37,15 @@ $(document).on('turbolinks:load',function(){
       bProcessing: true,
       bServerSide: true,
       bSortable: true,
+      aoColumns: [
+        { "bSortable": true },
+        { "bSortable": true },
+        { "bSortable": true },
+        { "bSortable": false },
+        { "bSortable": true },
+        { "bSortable": false },
+        { "bSortable": true }
+      ],
       sAjaxSource: table.data('source')
     });
 
