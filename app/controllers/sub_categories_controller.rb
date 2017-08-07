@@ -1,6 +1,7 @@
 class SubCategoriesController < ApplicationController
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
+  before_action :set_layout
 
   # GET /sub_categories
   # GET /sub_categories.json
@@ -36,10 +37,10 @@ class SubCategoriesController < ApplicationController
 
     respond_to do |format|
       if @sub_category.save
-        format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully created.' }
+        format.html { redirect_to category_path(@sub_category.category), notice: 'sub category was successfully created.' }
         format.json { render :show, status: :created, location: @sub_category }
       else
-        format.html { render :new }
+        format.html { render :new, alert: 'sub category could not be created.' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
     end
@@ -53,7 +54,7 @@ class SubCategoriesController < ApplicationController
         format.html { redirect_to category_sub_category_path(@sub_category,category_id: @sub_category.category.slug), notice: 'sub category was successfully updated.' }
         format.json { render :show, status: :ok, location: @sub_category }
       else
-        format.html { render :edit }
+        format.html { render :edit, alert: 'sub category could not be updated.' }
         format.json { render json: @sub_category.errors, status: :unprocessable_entity }
       end
     end
@@ -78,6 +79,10 @@ class SubCategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sub_category_params
       params.require(:sub_category).permit( :name)
+    end
+    
+    def set_layout
+      self.class.layout "admin"
     end
 
 end

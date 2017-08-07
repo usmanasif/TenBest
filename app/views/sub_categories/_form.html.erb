@@ -17,13 +17,10 @@
     </div>
     <%= hidden_field_tag :category_id ,sub_category.category_id.blank? ? @category.id : sub_category.category_id %>
   </div><br><br>
-  <div class="form-group">
+  <div class="modal-footer">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", :class => 'btn btn-primary' %>
-      <%= link_to 'Back', @category, class: "btn btn-default" %>
-      <% if sub_category.id.present? %>
-        <%= link_to 'Show', category_sub_category_path(@sub_category,category_id: @category.slug), class: "btn btn-default" %>
-      <% end %>
+      <%#= link_to 'Back',categories_path, class: "btn btn-default" %>
     </div>
   </div>
 <% end %>

@@ -24,6 +24,7 @@ private
         link_to(company.name, company),
         ERB::Util.h(company.city),
         ERB::Util.h(company.category.name),
+        ERB::Util.h(company.rating),
         link_to("<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_company_path(id: company.id)),
         link_to("<span class='glyphicon glyphicon-remove'></span>".html_safe, company, method: :delete, data: { confirm: 'Are you sure?' })
       ]
@@ -38,7 +39,7 @@ private
     companies = Company.order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
     if params[:sSearch].present?
-      companies = companies.where("name ILIKE :search or city ILIKE :search or CAST(category AS TEXT) ILIKE :search", search: "%#{params[:sSearch]}%")
+      companies = companies.where("name ILIKE :search or city ILIKE :search or CAST(category_id AS TEXT) ILIKE :search", search: "%#{params[:sSearch]}%")
     end
     companies
   end
@@ -52,7 +53,7 @@ private
   end
 
   def sort_column
-    columns = %w[id name city category]
+    columns = %w[id name city category_id rating]
     columns[params[:iSortCol_0].to_i]
   end
 

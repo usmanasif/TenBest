@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   require 'net/http'
   before_action :authenticate_admin!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_layout
 
   # GET /companies
   # GET /companies.json
@@ -43,7 +44,7 @@ class CompaniesController < ApplicationController
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
-        format.html { render :new }
+        format.html { render :new, alert: "company could not be created" }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
@@ -59,7 +60,7 @@ class CompaniesController < ApplicationController
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
       else
-        format.html { render :edit }
+        format.html { render :edit, alert: "category could not be updated" }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
     end
@@ -91,7 +92,7 @@ class CompaniesController < ApplicationController
         end
        render 'import_from_csv.html.erb'
     else
-      redirect_to :back, notice: 'CSV is in invalid format'
+      redirect_to :back, alert: 'CSV is in invalid format'
     end
   end
 
@@ -115,5 +116,9 @@ class CompaniesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
       params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address, :url)
+    end
+
+    def set_layout
+        self.class.layout "admin"
     end
 end

@@ -1,0 +1,20 @@
+<%= render 'layouts/header' %>
+<%= render 'layouts/flash_messages' %>
+<div class="admin-panel clearfix" data-turbolinks="false">
+  <div class="slidebar">
+    <div class="logo">
+      <a href=""></a>
+    </div>
+    <ul>
+      <li><a href="<%= admin_index_path %>" id="targeted">dashboard</a></li>
+      <li><a href="<%= categories_path %>">categories</a></li>
+      <li><a href="<%= companies_path %>">companies</a></li>
+      <li><a href="<%= pronoun_orders_path %>">pronoun orders</a></li>
+      <li><a href="<%= nav_links_path %>">links</a></li>
+    </ul>
+  </div>
+</div>
+<div class="admin-body">
+  <%= yield %>
+</div>
+<%= render 'layouts/footer' %>

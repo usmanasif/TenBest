@@ -12,11 +12,11 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require turbolinks
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require turbolinks
 //= require_tree .
 //= require social-share-button
 //= require bootstrap-tagsinput
@@ -60,3 +60,9 @@ function post(url, data, success, error)
         alert( "Request failed: " + textStatus );
     });
 }
+$( document ).ready(function() {
+
+    return setTimeout((function() {
+    return $('.alert').slideUp();
+  }), 3000);
+  });

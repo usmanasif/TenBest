@@ -1,3 +1,4 @@
+'use strict';
 $(document).on('click', '#place_order', function (event) {
   $("#place_order_modal").modal("show");
 });
@@ -20,45 +21,28 @@ $(document).on('click', '#place_order_submit', function (event) {
       $("#place_order_modal").modal("hide");
     })
 });
-$(document).on('turbolinks:load', function () {
-  $(window).on('popstate', function(event) {
-    location.reload();
-  });
-  order_index = 7;
-  order_column = 2;
-  bSortable_columns = [
-    { "bSortable": false },
-    { "bSortable": true },
-    { "bSortable": false },
-    { "bSortable": false },
-    { "bSortable": false },
-    { "bSortable": false },
-    { "bSortable": true }
-  ]
-  if ($.fn.dataTable.isDataTable('#pronoun_orders_table')) {
-    table = $('#pronoun_orders_table').DataTable();
+$(document).on('turbolinks:before-visit', function(){
+  var table = $('#pronoun_orders_table');
+  if (table.length) {
+    var dt = table.data('my-dt1');
+    
+    dt.destroy();
   }
-  else {
-    table = $('#pronoun_orders_table').dataTable({
-      autoWidth: false,
+});
+$(document).on('turbolinks:load',function(){
+  var table = $('#pronoun_orders_table');
+  var dt = table.DataTable({
       sPaginationType: "full_numbers",
-      iDisplayLength: 10,
-      bLengthChange: false,
       bJQueryUI: true,
       bProcessing: true,
       bServerSide: true,
-      order: [],
-      sAjaxSource: $('#pronoun_orders_table').data('source'),
-      aoColumns: bSortable_columns,
-      fnCreatedRow: function (nRow, aData, iDataIndex) {
-        $(nRow).attr('id', $(aData[order_index]).val());
-        $(nRow).attr('field', 'orders');
-      },
-      fnDrawCallback: function (oSettings) {
-      }
+      bSortable: true,
+      sAjaxSource: table.data('source')
     });
 
-    $(".dataTables_filter_search_input").tooltip();
-    $(".dataTables_paginate").addClass('text-center');
-  }
+  table.data('my-dt1', dt);
+
+  $(".dataTables_filter_search_input").tooltip();
+  $(".dataTables_paginate").addClass('text-center');
+    
 });

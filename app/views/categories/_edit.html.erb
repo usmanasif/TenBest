@@ -1,0 +1,15 @@
+
+<!-- <div class="container">
+	<h1>Edit category</h1>
+
+	<%#= render 'form', category: @category %>
+</div> -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Category</h4>
+      </div>
+      <%= render 'categories/form', category: @category %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
