@@ -53,7 +53,7 @@ class CompaniesDatatable
   end
 
   def sort_column
-    columns = ["id", "name", "city", "category_id","rating"]
+    columns = ['name', 'city', 'category_id', 'rating']
     columns[params[:iSortCol_0].to_i]
   end
 
