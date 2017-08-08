@@ -68,7 +68,7 @@ $(document).on('turbolinks:load',function(){
             $(".menu-container").addClass("visible animated").slideDown('500');
         }
     });
-    $("section").click(function(event) { 
+    $("section, .admin-panel, .admin-body, footer").on('click', function(event) { 
         if(!$(event.target).closest('.menu-container').length) {
             if($(".navbar .menu-button .menu-link").hasClass('pressed')) {
                 $(".navbar .menu-button .menu-link").removeClass('pressed');
