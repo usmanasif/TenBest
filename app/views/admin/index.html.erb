@@ -1,47 +1,35 @@
-<!-- <div class="container">
-  <h2 class="header"><span class="icon"></span>Dashboard</h2>
-    <div class="monitor">
-      <h4>Right Now</h4>
-      <div class="clearfix">
-        <ul class="content">
-          <li>content</li>
-          <li class="categories"><span class="count"><%= @categories.count %></span><a href="">categories</a></li>
-          <li class="pronoun_orders"><span class="count"><%= @pronoun_orders.count %></span><a href="">pronoun_orders</a></li>
-          <li class="categories"><span class="count"><%= @companies.count %></span><a href="">companies</a></li>
-        </ul>
-     </div>
+<div class="container">
+   <div class="col-md-4">
+    <div class="card">
+      <a href="<%= categories_path %>">
+        <img src="<%= asset_path 'images-places-2' %>" alt="Avatar" style="width:100%">
+        <div class="container">
+          <h4><b>Categories</b></h4> 
+          <p><%= @categories.count %></p> 
+        </div>
+      </a>
+    </div>
    </div>
- </div> -->
- <div class="col-md-4">
-  <div class="card">
-    <a href="<%= categories_path %>">
-      <img src="<%= asset_path 'images-places-2' %>" alt="Avatar" style="width:100%">
-      <div class="container">
-        <h4><b>Categories</b></h4> 
-        <p><%= @categories.count %></p> 
-      </div>
-    </a>
-  </div>
- </div>
- <div class="col-md-4">
-  <div class="card">
-    <a href="<%= companies_path %>">
-      <img src="<%= asset_path 'images-places-3' %>" alt="Avatar" style="width:100%">
-      <div class="container">
-        <h4><b>Companies</b></h4>
-        <p><%= @companies.count %></p> 
-      </div>
-    </a> 
-  </div>
- </div>
- <div class="col-md-4">
-  <div class="card">
-    <a href="<%= pronoun_orders_path %>">
-      <img src="<%= asset_path 'images-places-4' %>" alt="Avatar" style="width:100%">
-      <div class="container">
-        <h4><b>Pronoun Orders</b></h4> 
-        <p><%= @pronoun_orders.count %></p> 
-      </div>
-    </a>
-  </div>
- </div>
+   <div class="col-md-4">
+    <div class="card">
+      <a href="<%= companies_path %>">
+        <img src="<%= asset_path 'images-places-3' %>" alt="Avatar" style="width:100%">
+        <div class="container">
+          <h4><b>Companies</b></h4>
+          <p><%= @companies.count %></p> 
+        </div>
+      </a> 
+    </div>
+   </div>
+   <div class="col-md-4">
+    <div class="card">
+      <a href="<%= pronoun_orders_path %>">
+        <img src="<%= asset_path 'images-places-4' %>" alt="Avatar" style="width:100%">
+        <div class="container">
+          <h4><b>Pronoun Orders</b></h4> 
+          <p><%= @pronoun_orders.count %></p> 
+        </div>
+      </a>
+    </div>
+   </div>
+</div>
