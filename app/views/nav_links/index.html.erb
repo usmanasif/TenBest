@@ -23,13 +23,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @nav_links.where(depth: 1).try(:each) do |link| %>
+    <% @nav_links.try(:each) do |link| %>
       <tr data-id="<%= link.id %>" data-parent-id="<%= link.parent_id %>">
         <td>
           <%= link_to link.name, link %>
         </td>
         <td>
-          <%= @nav_links.find(link.parent_id).name %>
+          <%= link.parent.name %>
         </td>
         <td>
           <%= link.position %>
@@ -38,7 +38,7 @@
           <%= link.active %>
         </td>
         <td>
-          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(id: link.id),remote: true %>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(link), remote: true %>
           <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
@@ -64,7 +64,7 @@
           </div>
           <div class="field2 m-b">
             <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
-            <%= f.select :parent_id, options_from_collection_for_select(@nav_links.where(depth: 0), 'id', 'name', @parent_id), {}, class: "form-control col-xs-9 var_name select2", required: true, id: "select_parent" %>
+            <%= f.select :parent_id, options_from_collection_for_select(@parents, 'id', 'name', 1), {include_blank: false}, class: "form-control col-xs-9 var_name select2", id: "select_parent" %>
           </div>
           <%= f.hidden_field :depth, value: 1 %>
           <div class="field2 m-b">

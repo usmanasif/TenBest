@@ -26,13 +26,13 @@
   </thead>
 
   <tbody>
-    <% @nav_links.where(parent_id: @nav_link.id).each do |nav_link| %>
+    <% @nav_links.each do |nav_link| %>
       <tr>
         <td colspan="2"><%= nav_link.name %></td>
         <td><%= nav_link.position %></td>
         <td><%= nav_link.active %></td>
         <td colspan="3">
-          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(nav_link) %>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(nav_link), remote: true %>
           <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, nav_link_path(nav_link), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
@@ -58,17 +58,17 @@
         <div class="modal-body">
           <div class="field2 m-b">
             <%= label_tag :name,"Name", class: "col-xs-3" %>
-            <%= f.text_field :name, class: "form-control col-xs-9 var_name", required: true,id: "new_name" %>
+            <%= f.text_field :name, class: "form-control col-xs-9 var_name", required: true, id: "new_name" %>
           </div>
           <%= f.hidden_field :parent_id, value: @nav_link.id %>
-          <%= f.hidden_field :depth, value: @nav_link.depth + 1 %>
+          <%= f.hidden_field :depth, value: 2 %>
           <div class="field2 m-b">
             <%= label_tag :url,"URL", class: "col-xs-3" %>
-            <%= f.text_field :url, class: "form-control col-xs-9 var_name",required: true %>
+            <%= f.text_field :url, class: "form-control col-xs-9 var_name", required: true %>
           </div>
           <div class="field2 m-b">
             <%= label_tag :position,"Position",class: "col-xs-3" %>
-            <%= f.text_field :position, class: "form-control col-xs-9 var_name",required: true %>
+            <%= f.text_field :position, class: "form-control col-xs-9 var_name", required: true %>
           </div>
           <div class="row">
             <div class="col-md-2">

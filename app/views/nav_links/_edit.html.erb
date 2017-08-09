@@ -13,11 +13,15 @@
           <%= label_tag :name, "Name", class: "col-xs-3" %>
           <%= f.text_field :name, class: "form-control col-xs-9 var_name", required: true, id: "edit_name" %>
         </div>
-        <div class="field2 m-b">
-          <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
-          <%= f.select :parent_id, options_from_collection_for_select(@nav_links.where(depth: @nav_link.depth - 1), 'id', 'name', @parent_id), {}, class: "form-control col-xs-9 var_name select2", required: true, id: "select_parent" %>
-        </div>
-        <%= f.hidden_field :depth, value: @nav_link.depth + 1 %>
+        <% if @nav_link.depth == 1 %>
+          <div class="field2 m-b">
+            <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
+            <%= f.select :parent_id, options_from_collection_for_select(@parents, 'id', 'name', @nav_link.parent_id), {include_blank: false}, class: "form-control col-xs-9 var_name select2", id: "select_parent" %>
+          </div>
+        <% else %>
+          <%= f.hidden_field :parent_id, value: @nav_link.parent_id %>
+        <% end %>
+        <%= f.hidden_field :depth, value: @nav_link.depth %>
         <div class="field2 m-b">
           <%= label_tag :url, "URL", class: "col-xs-3" %>
           <%= f.text_field :url, class: "form-control col-xs-9 var_name", required: true %>
