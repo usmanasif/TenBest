@@ -7,7 +7,7 @@ class NavLinksController < ApplicationController
   # GET /nav_link.json
   def index
     @nav_links = NavLink.where(depth: 1).includes(:parent)
-    @parents = NavLink.where(depth: 0)
+    @parents = NavLink.where(depth: 0).includes(:children)
     @new_link = NavLink.new(parent_id: nil, depth: 1)
     flash[:new_alert] = 'not allowed any more active links' unless @new_link.active_count
   end
