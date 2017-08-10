@@ -39,13 +39,13 @@
         <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12 buttons-wrapper">
                 <div class="directions-container col-md-2 col-xs-3 no-padding">
-                    <a href="#">Directions</a>
+                    <a href="#" data-toggle="modal" data-target="#mapModal">Directions</a>
                 </div>
                 <div class="contact-container col-md-2 col-xs-3 no-padding">
                     <a href="#">Contact</a>
                 </div>
                 <div class="website-container col-md-2 col-xs-3 no-padding">
-                    <a href="#">Website</a>
+                    <%= link_to "Website", @company.url %>
                 </div>
                 <div class="view-menu-container col-md-2 col-xs-3 no-padding">
                     <a href="#">View menu</a>
@@ -93,7 +93,7 @@
                 <% end %>
             </div>
                 <div class="image-container">
-                    <%= image_tag asset_path(@company.photo.url), class: 'img-responsive', alt: @keywords %>
+                    <%= image_tag asset_path(@company.image.url), class: 'img-responsive', alt: @keywords %>
                 </div>
                 <div class="google-map-container">
                     <div id="map"></div>
@@ -101,16 +101,26 @@
                 <script type="text/javascript">
                   function initialize() {
                         var mapCanvas = document.getElementById('map');
+                        var mapCanvas2 = document.getElementById('mapInModal');
                         var mapOptions = {
                             center: new google.maps.LatLng(<%= @position['lat'] %>, <%= @position['lng'] %>),
                             zoom: 14
                         };
                         var map = new google.maps.Map(mapCanvas, mapOptions);
+                        var map2 = new google.maps.Map(mapCanvas2, mapOptions);
                         var icon = "<%= asset_path('icon-google-map.png') %>";
                         var pointMarker = new google.maps.Marker({
                             position: new google.maps.LatLng(<%= @position['lat'] %>, <%= @position['lng'] %>),
                             map: map,
                             icon: icon
+                        });
+                        var pointMarker2 = new google.maps.Marker({
+                            position: new google.maps.LatLng(<%= @position['lat'] %>, <%= @position['lng'] %>),
+                            map: map2,
+                            icon: icon
+                        });
+                        $("#mapModal").on("shown.bs.modal", function () {
+                            google.maps.event.trigger(map2, "resize");
                         });
                     }
                     // google.maps.event.addDomListener(window, 'load', initialize);
@@ -127,14 +137,9 @@
         <div class="row">
             <div class="col-md-12 b_slider_wrapper">
                 <div class="b_slider">
-                    <%= image_tag 'place-slide-1.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-2.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-3.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-4.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-1.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-2.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-3.jpg', class: 'b_slider__slide img-responsive' %>
-                    <%= image_tag 'place-slide-4.jpg', class: 'b_slider__slide img-responsive' %>
+                    <% @company.images.each do |image| %>
+                        <%= image_tag asset_path(image.url), class: 'b_slider__slide img-responsive' %>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -145,3 +150,15 @@
 <ol class="breadcrumb">
     <%= render_breadcrumbs tag: :li, separator: "" %>
 </ol>
+
+<!-- Modal -->
+<div id="mapModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="mapInModal" style="width: 500px; height: 400px"></div>
+      </div>
+    </div>
+  </div>
+</div>
