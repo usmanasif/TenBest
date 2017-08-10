@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    # @companies = Company.all
+    @companies = Company.all
     @category = Category.new
     respond_to do |format|
       format.html
@@ -35,10 +35,10 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(company_params)
-
+    @company = Company.new(name: company_params[:name], city: company_params[:city], url: company_params[:url], category_id: company_params[:category_id])
     respond_to do |format|
       if @company.save!
+        @company.images = company_params[:images]
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
@@ -107,16 +107,17 @@ class CompaniesController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def company_params
-      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address, :url)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def company_params
+    params.require(:company).permit(:name, :city, :category_id, :lat, :lng, :address, :url, images: [])
+  end
 
-    def set_layout
-        self.class.layout "admin"
-    end
+  def set_layout
+    self.class.layout 'admin'
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.friendly.find(params[:id])
+    @company = Company.friendly.includes(:pictures).find(params[:id])
   end
 end
