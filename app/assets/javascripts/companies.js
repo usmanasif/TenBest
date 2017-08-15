@@ -55,8 +55,4 @@ $(document).on('turbolinks:load',function(){
   });
 
   $('#category_keywords').tagsinput();
- 
-  function showImportModal() {
-    $("#add-new-category").modal("show");
-  }
 });
