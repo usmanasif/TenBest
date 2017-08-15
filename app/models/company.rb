@@ -9,6 +9,7 @@ class Company < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   after_create :get_info, :create_pronoun_orders
+  serialize :settings
   # after_update :get_info
 
   def self.required_columns
@@ -88,15 +89,15 @@ class Company < ApplicationRecord
     end
   end
 
-  def setting
-    settings
-  end
+  # def setting
+  #   settings
+  # end
 
-  def setting=(pairs)
-    for i in 0..pairs.length - 1 do
-      settings[pairs[i.to_s][:key]] = pairs[i.to_s][:value]
-    end
-  end
+  # def setting=(pairs)
+  #   for i in 0..pairs.length - 1 do
+  #     settings[pairs[i.to_s][:key]] = pairs[i.to_s][:value]
+  #   end
+  # end
 
   private
 

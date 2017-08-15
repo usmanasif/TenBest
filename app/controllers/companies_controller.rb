@@ -35,8 +35,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(name: company_params[:name], city: company_params[:city], url: company_params[:url], category_id: company_params[:category_id])
-    @company.setting = company_params[:settings]
+    @company = Company.new(name: company_params[:name], city: company_params[:city], url: company_params[:url], category_id: company_params[:category_id], settings: company_params[:settings])
     respond_to do |format|
       if @company.save!
         @company.images = company_params[:images]
