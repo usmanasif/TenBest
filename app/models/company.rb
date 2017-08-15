@@ -9,7 +9,6 @@ class Company < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   after_create :get_info, :create_pronoun_orders
-
   # after_update :get_info
 
   def self.required_columns
@@ -84,8 +83,18 @@ class Company < ApplicationRecord
   end
 
   def images=(files)
-    files.each do |file|
+    files.try(:each) do |file|
       pictures.create(name: name, position: images.count + 1, image: file)
+    end
+  end
+
+  def setting
+    settings
+  end
+
+  def setting=(pairs)
+    for i in 0..pairs.length - 1 do
+      settings[pairs[i.to_s][:key]] = pairs[i.to_s][:value]
     end
   end
 

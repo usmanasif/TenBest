@@ -36,6 +36,7 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(name: company_params[:name], city: company_params[:city], url: company_params[:url], category_id: company_params[:category_id])
+    @company.setting = company_params[:settings]
     respond_to do |format|
       if @company.save!
         @company.images = company_params[:images]
@@ -109,7 +110,8 @@ class CompaniesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
-    params.require(:company).permit(:name, :city, :category_id, :lat, :lng, :address, :url, images: [])
+    params.require(:company).permit(:name, :city, :category_id, :lat, :lng, :address, :url, :contact, images: [], settings: [:key, :value])
+    params.require(:company).permit!
   end
 
   def set_layout
