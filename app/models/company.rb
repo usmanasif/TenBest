@@ -95,10 +95,8 @@ class Company < ApplicationRecord
 
   def setting=(pairs)
     self.settings = {}
-    if pairs != nil?
-      for i in 0..pairs.length - 1 do
-        self.settings[pairs[i.to_s][:key]] = pairs[i.to_s][:value]
-      end
+    pairs.try(:each) do |key, value|
+      self.settings[value[:key]] = value[:value]
     end
   end
 

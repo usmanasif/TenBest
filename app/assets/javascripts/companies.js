@@ -1,5 +1,5 @@
 'use strict';
-var count = 0;
+// This count for additional fields is overwridden by index from form view
 function deleteParent(event) {
   event.preventDefault();
   $(event.target).parents('.form-group').remove();
@@ -60,6 +60,8 @@ $(document).on('turbolinks:load',function(){
   });
 
   $('#category_keywords').tagsinput();
+
+  var count = parseInt( $('#field-count').html());
 
   $('#add-new-field').click(function () {
     const html = '<div class="form-group"><div class="col-md-4"><label class="control-label col-md-4" for="settings">Field:</label><input class="form-control col-sm-8" name="company[setting][' + count + '][key]"/></div><div class="col-sm-8"><label class="control-label col-md-3" for="settings">Value:</label><input class="form-control col-md-8" type="text" name="company[setting][' + count + '][value]"><span class="col-sm-1 col-md-1"><icon onClick="deleteParent(event)" >&#10006;</icon></span></div></div><br><br>'
