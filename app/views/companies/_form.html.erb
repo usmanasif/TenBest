@@ -47,6 +47,21 @@
      <%= f.select :category_id, options_for_select(@categories.map {|category| [ category.name, category.id ]}, company.category_id ), {}, class: "form-control" %>
     </div>
   </div><br><br>
+  <% company.setting.try(:each).with_index do |setting, index| %>
+    <div class="form-group">
+      <div class="col-md-4">
+        <label class="control-label col-md-4" for="settings">Field:</label>
+        <input class="form-control col-sm-8" name="company[setting][<%= index %>][key]" value="<%= setting[0] %>"/>
+      </div>
+      <div class="col-sm-8">
+        <label class="control-label col-md-3" for="settings">Value:</label>
+        <input class="form-control col-md-8" type="text" name="company[setting][<%= index %>][value]" value="<%= setting[1] %>">
+        <span class="col-sm-1 col-md-1">
+          <icon onClick="deleteParent(event)" >&#10006;</icon>
+        </span>
+      </div>
+    </div><br><br>
+  <% end %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", class: 'btn btn-primary' %>
