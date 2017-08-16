@@ -29,7 +29,7 @@
 <div class="social-modal">
     <div class="container">
       <h1>Share</h1>
-      <%= social_share_button_tag(@company.name, :image => asset_path(@position['img'])) %>
+      <%= social_share_button_tag(@company.name, image: asset_path(@position['img'])) %>
       <span class="glyphicon glyphicon-remove-circle"></span>
     </div>
 </div>
@@ -39,16 +39,16 @@
         <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12 buttons-wrapper">
                 <div class="directions-container col-md-2 col-xs-3 no-padding">
-                    <a href="#" data-toggle="modal" data-target="#mapModal">Directions</a>
+                    <a href="javascript:;" data-toggle="modal" data-target="#mapModal">Directions</a>
                 </div>
                 <div class="contact-container col-md-2 col-xs-3 no-padding">
-                    <a href="#">Contact</a>
+                    <%= link_to "Contact", "mailto:" + @company.contact, target: :_blank %>
                 </div>
                 <div class="website-container col-md-2 col-xs-3 no-padding">
-                    <%= link_to "Website", @company.url %>
+                    <%= link_to "Website", @company.url, target: :_blank %>
                 </div>
                 <div class="view-menu-container col-md-2 col-xs-3 no-padding">
-                    <a href="#">View menu</a>
+                    <%= link_to @company.setting.first[0], @company.setting.first[1], target: :_blank %>
                 </div>
                 <div class="share-container col-md-2 hidden-xs hidden-sm  no-padding">
                     <%= link_to shareup_path( @company.id ), remote: true do %>
