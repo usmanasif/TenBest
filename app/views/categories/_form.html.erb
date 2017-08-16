@@ -23,6 +23,12 @@
       <%= f.text_field :keywords, 'data-role'=>'tagsinput', class: "form-control" %>
     </div>
   </div><br><br>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="featured">Featured:</label>
+    <div class="col-sm-10 ">
+     <%= f.check_box :featured, class: "form-control" %>
+    </div>
+  </div><br><br>
   <div class="modal-footer">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit "Submit", :class => 'btn btn-primary' %>
