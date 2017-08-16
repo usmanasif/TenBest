@@ -64,7 +64,7 @@ $(document).on('turbolinks:load',function(){
   var count = parseInt( $('#field-count').html());
 
   $('#add-new-field').click(function () {
-    const html = '<div class="form-group"><div class="col-md-4"><label class="control-label col-md-4" for="settings">Field:</label><input class="form-control col-sm-8" name="company[setting][' + count + '][key]"/></div><div class="col-sm-8"><label class="control-label col-md-3" for="settings">Value:</label><input class="form-control col-md-8" type="text" name="company[setting][' + count + '][value]"><span class="col-sm-1 col-md-1"><icon onClick="deleteParent(event)" >&#10006;</icon></span></div></div><br><br>'
+    const html = '<div class="form-group"><div class="row"><div class="col-md-5"><label class="control-label col-sm-2" for="settings">Field:</label><div class="col-sm-10"><input class="form-control" name="company[setting][' + count + '][key]"/></div></div><div class="col-sm-6"><label class="control-label col-sm-2" for="settings">Value:</label><div class="col-sm-10"><input class="form-control" type="text" name="company[setting][' + count + '][value]"></div></div><div class="col-sm-1 icon-close"><icon onClick="deleteParent(event)" >&#10006;</icon></div></div></div>'
     $(html).insertBefore('form:last .form-group:last-child:last');
     count++;
   })
