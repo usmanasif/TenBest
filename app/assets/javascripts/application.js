@@ -11,18 +11,18 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
-//= require turbolinks
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require bootstrap-sprockets
+//= require bootstrap-switch
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require_tree .
 //= require social-share-button
 //= require bootstrap-tagsinput
+//= require_tree .
+//= require turbolinks
 
-function get(url, success, error)
-{
+function get(url, success, error) {
     $.ajax({
         async: true,
         crossDomain: true,
@@ -36,13 +36,12 @@ function get(url, success, error)
         if (console && console.log) {
             console.log("Sample of data:", msg.slice(0, 100));
         }
-    }).fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+    }).fail(function (jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
     });
 }
 
-function post(url, data, success, error)
-{
+function post(url, data, success, error) {
     $.ajax({
         async: true,
         crossDomain: true,
@@ -56,13 +55,15 @@ function post(url, data, success, error)
         if (console && console.log) {
             console.log("Sample of data:", msg.slice(0, 100));
         }
-    }).fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+    }).fail(function (jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
     });
 }
-$( document ).ready(function() {
-
-    return setTimeout((function() {
-    return $('.alert').slideUp();
-  }), 3000);
-  });
+$(document).ready(function () {
+    return setTimeout((function () {
+        return $('.alert').slideUp();
+    }), 3000);
+});
+$(document).ready(function () {
+    $('.bootstrap-switch').bootstrapSwitch();
+})

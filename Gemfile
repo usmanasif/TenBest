@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use Puma as the app server
@@ -11,6 +10,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 # Also use Bootstrap's font-awesome-sass'
 gem 'font-awesome-sass', '~> 4.7.0'
+gem 'bootstrap-switch-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'paperclip'
 gem 'fog'
 # Simple breadcrumb for rails
-gem "breadcrumbs_on_rails"
+gem 'breadcrumbs_on_rails'
 
 gem 'rest-client'
 gem 'json'
@@ -48,8 +48,8 @@ gem 'jquery-ui-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap-tagsinput-rails'
 
-#Segment.io Analytics
-gem 'analytics-ruby', :require => 'segment/analytics'
+# Segment.io Analytics
+gem 'analytics-ruby', require: 'segment/analytics'
 # staccato Google Analytics gem
 gem 'staccato'
 
