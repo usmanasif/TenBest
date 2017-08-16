@@ -53,6 +53,7 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1.json
   def update
     respond_to do |format|
+      company_params[:setting] ||= {}
       if @company.update(company_params)
         if @company.save!
           format.html { redirect_to @company, notice: 'Company was successfully updated.' }

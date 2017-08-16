@@ -47,9 +47,11 @@
                 <div class="website-container col-md-2 col-xs-3 no-padding">
                     <%= link_to "Website", @company.url, target: :_blank %>
                 </div>
-                <div class="view-menu-container col-md-2 col-xs-3 no-padding">
-                    <%= link_to @company.setting.first[0], @company.setting.first[1], target: :_blank %>
-                </div>
+                <% if @company.setting.length > 0 %>
+                    <div class="view-menu-container col-md-2 col-xs-3 no-padding">
+                        <%= link_to @company.setting.first[0], @company.setting.first[1], target: :_blank, rel: "nofollow" %>
+                    </div>
+                <% end %>
                 <div class="share-container col-md-2 hidden-xs hidden-sm  no-padding">
                     <%= link_to shareup_path( @company.id ), remote: true do %>
                         <span class="text">Share</span><span class="icon-share"></span> <span class="separator"></span>
