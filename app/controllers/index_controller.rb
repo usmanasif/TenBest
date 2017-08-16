@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   add_breadcrumb 'home', :root_path
   def home
-    @categories = Category.first(5)
+    @categories = Category.where(active: true).first(5)
   end
 
   def about; end
