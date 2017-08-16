@@ -35,10 +35,9 @@ class CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.json
   def create
-    @company = Company.new(name: company_params[:name], city: company_params[:city], url: company_params[:url], category_id: company_params[:category_id], settings: company_params[:settings])
+    @company = Company.new(company_params)
     respond_to do |format|
       if @company.save!
-        @company.images = company_params[:images]
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
@@ -55,8 +54,13 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: @company }
+        if @company.save!
+          format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+          format.json { render :show, status: :ok, location: @company }
+        else
+          format.html { render :new, alert: 'company could not be updated' }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit, alert: 'category could not be updated' }
         format.json { render json: @company.errors, status: :unprocessable_entity }

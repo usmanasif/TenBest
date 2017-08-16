@@ -62,7 +62,7 @@ $(document).on('turbolinks:load',function(){
   $('#category_keywords').tagsinput();
 
   $('#add-new-field').click(function () {
-    const html = '<div class="form-group"><div class="col-md-4"><label class="control-label col-md-4" for="settings">Field:</label><input class="form-control col-sm-8" name="company[settings][' + count + '][key]"/></div><div class="col-sm-8"><label class="control-label col-md-3" for="settings">Value:</label><input class="form-control col-md-8" type="text" name="company[settings][' + count + '][value]"><span class="col-sm-1 col-md-1"><icon onClick="deleteParent(event)" >&#10006;</icon></span></div></div><br><br>'
+    const html = '<div class="form-group"><div class="col-md-4"><label class="control-label col-md-4" for="settings">Field:</label><input class="form-control col-sm-8" name="company[setting][' + count + '][key]"/></div><div class="col-sm-8"><label class="control-label col-md-3" for="settings">Value:</label><input class="form-control col-md-8" type="text" name="company[setting][' + count + '][value]"><span class="col-sm-1 col-md-1"><icon onClick="deleteParent(event)" >&#10006;</icon></span></div></div><br><br>'
     $(html).insertBefore('form:last .form-group:last-child:last');
     count++;
   })
