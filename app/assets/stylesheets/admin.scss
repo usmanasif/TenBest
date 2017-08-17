@@ -332,9 +332,9 @@ body {
 	font-style: normal;
 }
 .slidebar {
-	    position: absolute;
-    left: 0;
-    top: 110px;
+	  position: absolute;
+		left: 0;    
+		top: 138px;
     z-index: 90;
 }
 .admin-body {
@@ -349,7 +349,11 @@ body {
 
 .header {
 	margin-bottom: 40px;
-    color: #cf0f45;
+	color: #cf0f45;
+	float: left;
+	width: 100%;
+	min-height: 137px;
+
 }
 
 

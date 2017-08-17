@@ -113,7 +113,7 @@
   border: 0px;
   background-color: #ffffff; }
   .header .navbar .logo-section-wrapper {
-    min-height: 69px; }
+    min-height: 89px; }
   .header .navbar .logo-section {
     margin-top: 16px;
     display: block; }
@@ -137,7 +137,9 @@
   .header .navbar .pages-section {
     margin-top: 22px;
     padding-left: 25px;
-    padding-right: 0px; }
+    padding-right: 0px;
+    min-height: 47px;
+   }
     .header .navbar .pages-section .pages-list {
       padding-left: 0px;
       float: left; }
@@ -234,8 +236,10 @@
     display: none; }
     .header .navbar .menu-container.visible {
       position: absolute;
-      top: 130%;
-      width: 100%; }
+      top: 100%;
+      width: 100%;
+      left: 0;
+     }
   .header .navbar .menu-list-wrapper {
     background-color: #232f39; }
     .header .navbar .menu-list-wrapper.active {
