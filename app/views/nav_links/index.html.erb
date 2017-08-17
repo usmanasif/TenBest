@@ -63,9 +63,9 @@
             <%= label_tag :name,"Name",class: "col-xs-3" %>
             <%= f.text_field :name,class: "form-control col-xs-9 var_name", required: true,id: "new_name" %>
           </div>
-          <div class="field2 m-b">
+          <div class="field2 m-b parent-div">
             <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
-            <%= f.select :parent_id, options_from_collection_for_select(@parents, 'id', 'name', 1), {include_blank: false}, class: "form-control col-xs-9 var_name select2", id: "select_parent" %>
+            <%= f.select :parent_id, options_from_collection_for_select(@parents, 'id', 'name', 1), {include_blank: false}, class: "form-control col-xs-9 var_name", id: "select_parent" %>
           </div>
           <%= f.hidden_field :depth, value: 1 %>
           <div class="field2 m-b">

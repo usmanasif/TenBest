@@ -1,19 +1,18 @@
 var nav_link_parents;
 $(document).on('ready', function () {
-  if (document.getElementById("nav-link-parents") != null)
-  {
+  if (document.getElementById("nav-link-parents") != null) {
     nav_link_parents = JSON.parse($('#nav-link-parents').html());
   }
 })
 $(document).on('click', '.add_link', function () {
   $('#add-new-link').modal('show');
 });
-$(document).on('click', '.active_checkbox', function (event) {
+$(document).on('switchChange.bootstrapSwitch', '#nav_link_active', function (event) {
   if ($('.active_error').length) {
     event.preventDefault();
     event.stopPropagation();
   }
-  checkParentLimit();
+  checkParentLimit($(this).parents('.modal-body').children('.parent-div').children('select').val());
 });
 $(document).on('click', '.add_variable', function (event) {
   if ($('#new_name').val().length > 30 || $('#edit_name').val().length > 30) {
@@ -24,7 +23,7 @@ $(document).on('click', '.add_variable', function (event) {
 
 // Check nav links parent select change
 $(document).on('change', '#select_parent', function () {
-  checkParentLimit(this.value);
+  checkParentLimit($(this).val());
 });
 
 // Check Parent nav link children limit exceeding limit
@@ -32,10 +31,9 @@ function checkParentLimit(parent_id) {
   var selected_parent = nav_link_parents.find(function (item) {
     return item.id == parent_id;
   })
-  if (selected_parent.child_count > 5) {
+  if (selected_parent.child_count >= 5) {
     showErrorLabel()
-    $("#nav_link_active").prop('checked', false);
-    $("#nav_link_active").val(0);
+    $("#nav_link_active").bootstrapSwitch('state', false);
   }
   else {
     hideErrorLabel();
@@ -50,9 +48,13 @@ function showErrorLabel() {
 
 // hide error on changing selection
 function hideErrorLabel() {
-  if ($(".modal-body").children(0).is('label')) {
-    $(".modal-body").children(0)[0].remove();
-  }
+  var modal_body = $(".modal-body")
+  modal_body.each(function (index, element) {
+    if ($(this).children().first().is('label')) {
+      var label = $(this).children().first();
+      label.remove();
+    }
+  });
 }
 
 $(document).on('click', '.add_category', function () {
