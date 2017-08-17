@@ -35,12 +35,14 @@
             <%= label_tag :active, "Active", class: "col-xs-3" %>
           </div>
           <div class="col-md-1">
-            <%= f.check_box :active, class: "" %>
+            <%= f.check_box :active, class: "active_checkbox bootstrap-switch" %>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <%= submit_tag "Submit", class: "btn btn-success col-xs-4 add_variable" %>
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit "Submit", class: 'btn btn-primary' %>
+        </div>
       </div>
     <% end %>
   </div>

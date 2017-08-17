@@ -8,7 +8,7 @@
     <h1 class="header">Navigation Links</h1>
   </div>
   <div class="col-md-6">
-    <%= link_to "Add Link",'javascript:;', class: "col-md-5 col-md-offset-5 btn btn-success add_link" %>
+    <%= link_to "Add Link",'javascript:;', class: "new-record add_link btn btn-primary" %>
   </div>
 </div>
 <br/>
@@ -81,12 +81,14 @@
             <%= label_tag :active,"Active",class: "col-xs-3" %>
             </div>
             <div class="col-md-1">
-            <%= f.check_box :active,class: "active_checkbox" %>
+            <%= f.check_box :active,class: "active_checkbox bootstrap-switch" %>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <%= submit_tag "ADD",class: "btn btn-success col-xs-4 add_variable" %>
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "Submit", class: 'btn btn-primary' %>
+          </div>
         </div>
       <% end %>
     </div>

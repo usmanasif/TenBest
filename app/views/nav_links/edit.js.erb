@@ -1,2 +1,4 @@
 $("#edit-link").html("<%= escape_javascript(render 'edit') %>")
+$('.bootstrap-switch').bootstrapSwitch('destroy');
+$('.bootstrap-switch').bootstrapSwitch()
 $("#edit-link").modal("show")

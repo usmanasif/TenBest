@@ -68,4 +68,7 @@ $(document).on('turbolinks:load',function(){
     $(html).insertBefore('form:last .form-group:last-child:last');
     count++;
   })
+
+  $(".dataTables_filter_search_input").tooltip();
+  $(".dataTables_paginate").addClass('text-center');
 });
