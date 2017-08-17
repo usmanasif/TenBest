@@ -1,4 +1,5 @@
 $("#edit-category").html("<%= escape_javascript(render 'edit') %>")
 $('.bootstrap-switch').bootstrapSwitch('destroy');
-$('.bootstrap-switch').bootstrapSwitch()
+$('.bootstrap-switch').bootstrapSwitch();
+$("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
 $("#edit-category").modal("show")
