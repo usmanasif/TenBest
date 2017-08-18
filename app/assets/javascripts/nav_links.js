@@ -33,7 +33,7 @@ function checkParentLimit(parent_id) {
   })
   if (selected_parent.child_count >= 5) {
     showErrorLabel()
-    $("#nav_link_active").bootstrapSwitch('state', false);
+    $(".active_checkbox").bootstrapSwitch('state', false);
   }
   else {
     hideErrorLabel();
