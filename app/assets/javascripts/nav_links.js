@@ -9,8 +9,7 @@ $(document).on('click', '.add_link', function () {
 });
 $(document).on('switchChange.bootstrapSwitch', '#nav_link_active', function (event) {
   if ($('.active_error').length) {
-    event.preventDefault();
-    event.stopPropagation();
+    $(".active_checkbox").bootstrapSwitch('state', false);
   }
   checkParentLimit($(this).parents('.modal-body').children('.parent-div').children('select').val());
 });
@@ -33,7 +32,7 @@ function checkParentLimit(parent_id) {
   })
   if (selected_parent.child_count >= 5) {
     showErrorLabel()
-    $("#nav_link_active").bootstrapSwitch('state', false);
+    $(".active_checkbox").bootstrapSwitch('state', false);
   }
   else {
     hideErrorLabel();
