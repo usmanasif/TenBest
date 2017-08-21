@@ -1,5 +1,5 @@
 class Picture < ApplicationRecord
-  belongs_to :company
+  belongs_to :imageable, polymorphic: true
   default_scope { order(position: :asc) }
   has_attached_file :image
   validates_attachment :image, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }

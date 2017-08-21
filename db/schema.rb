@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816112351) do
+ActiveRecord::Schema.define(version: 20170821110932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,13 @@ ActiveRecord::Schema.define(version: 20170816112351) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "slug"
     t.string   "keywords"
     t.boolean  "featured"
+    t.integer  "pictures_id"
+    t.index ["pictures_id"], name: "index_categories_on_pictures_id", using: :btree
     t.index ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
   end
 
@@ -92,11 +94,17 @@ ActiveRecord::Schema.define(version: 20170816112351) do
     t.string   "url"
     t.boolean  "active"
     t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "parent_id"
     t.string   "icon"
-    t.integer  "depth"
+    t.integer  "depth",          default: 0, null: false
+    t.integer  "lft",            default: 0, null: false
+    t.integer  "rgt",            default: 0, null: false
+    t.integer  "children_count", default: 0, null: false
+    t.index ["lft"], name: "index_nav_links_on_lft", using: :btree
+    t.index ["parent_id"], name: "index_nav_links_on_parent_id", using: :btree
+    t.index ["rgt"], name: "index_nav_links_on_rgt", using: :btree
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -104,12 +112,13 @@ ActiveRecord::Schema.define(version: 20170816112351) do
     t.integer  "position"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.integer  "company_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["company_id"], name: "index_pictures_on_company_id", using: :btree
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
   end
 
   create_table "pronoun_orders", force: :cascade do |t|
@@ -138,6 +147,5 @@ ActiveRecord::Schema.define(version: 20170816112351) do
   end
 
   add_foreign_key "companies", "pictures", column: "pictures_id"
-  add_foreign_key "pictures", "companies"
   add_foreign_key "sub_categories", "categories"
 end

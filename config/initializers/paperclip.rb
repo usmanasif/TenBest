@@ -2,6 +2,9 @@
 Paperclip.interpolates('name') do |attachment, _style|
   attachment.instance.name.parameterize
 end
+Paperclip.interpolates(:placeholder) do |attachment, style|
+  ActionController::Base.helpers.asset_path("place-image.png")
+end
 Paperclip::Attachment.default_options.merge!(
   storage: :fog,
   fog_credentials: {
@@ -14,5 +17,5 @@ Paperclip::Attachment.default_options.merge!(
   preserve_files: false,
   url: 'images/:class/:name/:style/:basename.:extension',
   path: 'images/:class/:name/:style/:basename.:extension',
-  default_url: 'images/place-image.png'
+  default_url: ':placeholder'
 )

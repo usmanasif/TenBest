@@ -2,7 +2,7 @@ require 'open-uri'
 class Company < ApplicationRecord
   belongs_to :category
   has_many :pronoun_orders
-  has_many :pictures, dependent: :destroy
+  has_many :pictures, as: :imageable, dependent: :destroy
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
   validates :city, presence: true
@@ -75,7 +75,11 @@ class Company < ApplicationRecord
   end
 
   def image
-    pictures.first
+    if pictures.count != 0
+      pictures.first
+    else
+      Picture.new
+    end
   end
 
   def images
