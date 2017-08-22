@@ -2,8 +2,9 @@
 Paperclip.interpolates('name') do |attachment, _style|
   attachment.instance.name.parameterize
 end
-Paperclip.interpolates(:placeholder) do |attachment, style|
-  ActionController::Base.helpers.asset_path("place-image.png")
+Paperclip.interpolates(:placeholder) do |_attachment, _style|
+  arr = ['brands', 'brewery', 'events', 'parks', 'travel']
+  ActionController::Base.helpers.asset_path("image-places-#{arr[rand(arr.length)]}.jpg")
 end
 Paperclip::Attachment.default_options.merge!(
   storage: :fog,
