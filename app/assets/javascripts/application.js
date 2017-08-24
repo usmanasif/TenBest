@@ -64,6 +64,7 @@ $(document).ready(function () {
         return $('.alert').slideUp();
     }), 3000);
 });
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
+    $('.bootstrap-switch').bootstrapSwitch('destroy');
     $('.bootstrap-switch').bootstrapSwitch();
 })
