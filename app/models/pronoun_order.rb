@@ -12,7 +12,11 @@ class PronounOrder < ApplicationRecord
     WebService.post(url, body) do |response|
       body = JSON.parse response.read_body
       update_attributes!(pronun_id: body['order_id']) unless body['order_id'].nil?
-      update_attributes!(state: body['errors']) unless body['errors'].nil?
+      if body['errors'].nil?
+        update_attributes!(state: 'order placed')
+      else
+        update_attributes!(state: body['errors'])
+      end
     end
   end
 
