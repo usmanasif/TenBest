@@ -332,10 +332,10 @@ body {
 	font-style: normal;
 }
 .slidebar {
-	  position: absolute;
-		left: 0;    
-		top: 138px;
-    z-index: 90;
+	position: absolute;
+	left: 0;    
+	top: 128px;
+	z-index: 90;
 }
 .admin-body {
 	margin-left: 195px;
@@ -352,11 +352,11 @@ body {
 	color: #cf0f45;
 }
 
-#header {
+/*#header {
 	float: left;
 	width: 100%;
 	min-height: 137px;
-}
+}*/
 
 
 .card {
@@ -385,7 +385,7 @@ body {
 }
 
 .nav-header {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 	.navbar {
 		min-height: 50px;
     margin-bottom: 0;
