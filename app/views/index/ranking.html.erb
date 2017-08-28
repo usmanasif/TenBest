@@ -22,6 +22,11 @@
 
 <!--Start of places list section-->
 <section class="places-list-section">
+    <div class="place-container container">
+        <% if @companies.blank? %>
+            <h3>There are no Companies in this category</h3>
+        <% end %> 
+    </div>   
 <% @companies.each_with_index do |company, index| %>
   <div class="social-modal">
     <div class="container">

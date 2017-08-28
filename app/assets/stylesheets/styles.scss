@@ -106,7 +106,7 @@
         .header .cities-section .cities-inner .city-list li a {
           font-family: "Raleway", sans-serif;
           font-size: 12px;
-          line-height: 39.79px;
+          line-height: 35.79px;
           color: #25252c; }
 .header .navbar {
   border-radius: 0px;
@@ -115,7 +115,7 @@
   .header .navbar .logo-section-wrapper {
     min-height: 69px; }
   .header .navbar .logo-section {
-    margin-top: 16px;
+    margin-top: 14px;
     display: block; }
     .header .navbar .logo-section .tenbest-logo {
       color: #cf0f40;
@@ -135,8 +135,8 @@
       .header .navbar .logo-section .city-logo.san-franc {
         color: #25252c; }
   .header .navbar .pages-section {
-    margin-top: 22px;
-    padding-left: 25px;
+    margin-top: 20px;
+    padding-left: 63px;
     padding-right: 0px; }
     .header .navbar .pages-section .pages-list {
       padding-left: 0px;
@@ -152,7 +152,7 @@
           text-transform: uppercase;
           color: #323232;
           font-family: "Raleway",sans-serif;
-          margin-right: 35px; }
+          margin-right: 40px; }
     .header .navbar .pages-section .search-field-wrapper {
       float: left;
       position: relative;
@@ -3035,3 +3035,9 @@ footer {
     margin-right: 0px; } }
 
 /*# sourceMappingURL=styles.css.map */
+.pages-section ~ .pressed {
+  padding-left: 25px !important;
+}
+.container {
+  max-width: 1045px;
+}

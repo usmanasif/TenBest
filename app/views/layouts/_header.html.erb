@@ -25,7 +25,7 @@
 
   <body class="<%= yield(:body_class) %>">
   <!-- Header Section -->
-    <div class="header">
+    <div class="header nav-header">
       <div class="cities-section">
         <div class="container">
           <div class="row">
@@ -34,6 +34,12 @@
                 <li class="city-item active"><a href="<%= root_url %>">SAN FRANCISCO</a> <span class="divider">/</span> </li>
                 <li class="city-item"><a href="<%= root_url %>">NEW YORK</a> <span class="divider">/</span> </li>
                 <li class="city-item"><a href="<%= root_url %>">HONOLULU</a></li>
+                <% if !current_admin.id.nil? %>
+                  <div class=" pull-right">
+                    <li class="page-link"><%= link_to 'Admin', admin_index_path %><span class="divider">/</span></li>
+                    <li class="page-link"><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+                  </div>
+                <% end %>
               </uL>
             </div>
           </div>
@@ -46,18 +52,15 @@
           <div class="container logo-section-wrapper">
             <div class="row">
               <a href="/">
-              <div class="col-md-4 col-sm-4 col-xs-3 logo-section" style="margin-left: -115px">
+              <div class="col-md-4 col-sm-4 col-xs-3 logo-section">
                 <span class="tenbest-logo sf">10BEST</span><span class="city-logo san-franc">SF</span>
               </div>
               </a>
               <div class="col-md-6 col-sm-8 col-xs-9 pages-section pull-right">
                 <ul class="pages-list">
                   <li class="page-link"><%= link_to 'Home', home_path %></li>
+                  <li class="page-link"><%= link_to 'About', about_path %></li>
                   <li class="page-link"><%= link_to "Contact", contact_path %></li>
-                  <% if !current_admin.id.nil? %>
-                    <li class="page-link"><%= link_to 'Admin', admin_index_path %></li>
-                    <li class="page-link"><%= link_to "logout", destroy_admin_session_path, method: :delete %></li>
-                  <% end %>
                 </ul>
                 <div class="search-field-wrapper hidden">
                 <%= form_for(:search_form, url:search_path, :method => 'get') do |f| %>

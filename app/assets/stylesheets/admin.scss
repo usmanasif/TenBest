@@ -377,3 +377,11 @@ body {
 .card a {
 	color: black;
 }
+
+.nav-header {
+	margin-bottom: 20px;
+	.navbar {
+		min-height: 50px;
+    margin-bottom: 0;
+	}
+}

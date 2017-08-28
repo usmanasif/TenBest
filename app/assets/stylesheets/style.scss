@@ -35,7 +35,7 @@ $la_color: #ffae00;
   //padding: 0px;
 }
 .no-padding {
-  padding: 0px;
+  padding: 0px !important;
 }
 .col-centered{
   float: none;
@@ -85,7 +85,7 @@ $la_color: #ffae00;
     }
     .logo-section {
       //padding-left: 0px;
-      margin-top: 16px;
+      margin-top: 14px;
       display: block;
       .tenbest-logo {
         color: #cf0f40;
@@ -139,7 +139,7 @@ $la_color: #ffae00;
         position: relative;
         top: -8px;
         left: 4px;
-        padding-left: 78px;
+        padding-left: 0;
         height: 90%;
         .search-field-input {
           padding-left: 18px;
@@ -238,10 +238,6 @@ $la_color: #ffae00;
               background-color: $la_color;
             }
           }
-        }
-        &.sf {
-          float: right;
-          position: relative;
         }
       }
     }
