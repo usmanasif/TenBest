@@ -2,11 +2,10 @@ require 'open-uri'
 class Company < ApplicationRecord
   belongs_to :category
   has_many :pronoun_orders
+  has_many :pictures, as: :imageable, dependent: :destroy
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
   validates :city, presence: true
-  has_attached_file :photo
-  validates_attachment :photo, content_type: { content_type: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'] }
   extend FriendlyId
   friendly_id :name, use: :slugged
   after_create :get_info, :create_pronoun_orders
@@ -24,7 +23,7 @@ class Company < ApplicationRecord
 
   def get_info
     info = {}
-    if lat.nil? || lng.nil? || photo.nil? || address.nil? || rating.nil?
+    if lat.nil? || lng.nil? || pictures.count.zero? || address.nil? || rating.nil?
       begin
         url = "#{Rails.application.secrets[:google_place_url]}query=#{name}+#{city}&key=#{Rails.application.secrets[:google_place_key]}"
         result = RestClient.get url
@@ -53,7 +52,7 @@ class Company < ApplicationRecord
             photo_reference = result_json['results'].first['photos'].first['photo_reference']
             info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
             photo_from_url(info['img'])
-            info['img'] = photo.url
+            info['img'] = pictures.first.url
           end
         end
       end
@@ -62,7 +61,7 @@ class Company < ApplicationRecord
       info['lat'] = lat
       info['lng'] = lng
       # update info['img'] with locally generated url from paperclip
-      info['img'] = photo.url
+      info['img'] = pictures.first.url
       info['address'] = address
       info['rating'] = rating
     end
@@ -71,7 +70,38 @@ class Company < ApplicationRecord
   end
 
   def photo_from_url(url)
-    self.photo = open(url)
+    picture = pictures.new name: name, position: pictures.count + 1
+    picture.photo_from_url(url)
+  end
+
+  def image
+    if pictures.count != 0
+      pictures.first
+    else
+      Picture.new
+    end
+  end
+
+  def images
+    pictures
+  end
+
+  def images=(files)
+    pictures.clear
+    files.try(:each) do |file|
+      pictures.new(name: name, position: images.count + 1, image: file)
+    end
+  end
+
+  def setting
+    settings
+  end
+
+  def setting=(pairs)
+    self.settings = {}
+    pairs.try(:each) do |key, value|
+      self.settings[value[:key]] = value[:value]
+    end
   end
 
   private

@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-4 image-container no-padding hidden-sm hidden-xs">
-                        <%= link_to image_tag( asset_path(company.photo.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
+                        <%= link_to image_tag( asset_path(company.image.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12 info-container">
                         <!-- <div class="star-ratings-css" style="width:100%;float:left">
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="image-for-mobile hidden-lg hidden-md">
-                            <%= link_to image_tag( asset_path(company.photo.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
+                            <%= link_to image_tag( asset_path(company.image.url), class: 'img-responsive', alt: @keywords ), place_path( url_code(company.category.name), url_code( company.name ), rank: index + 1 ) %>
                         </div>
                         <div class="bootstrap-tagsinput" style="width:100%;float:left">
                             <% @keywords.each do |keyword| %>

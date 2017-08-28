@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   add_breadcrumb 'home', :root_path
   def home
-    @categories = Category.first(5)
+    @categories = Category.where(featured: true).first(5)
   end
 
   def about; end
@@ -54,27 +54,31 @@ class IndexController < ApplicationController
   end
 
   def search
-    @category = if params[:search_select].nil? || params[:search_select] == ''
-                  nil
-                else
-                  params[:search_select]
-                end
+    @category_id = if params[:search_select].nil? || params[:search_select] == ''
+                     nil
+                   else
+                     params[:search_select]
+                   end
 
-    if @category.nil?
+    if @category_id.nil?
       if params[:search] == '' || params[:search].nil?
         @companies = nil
+        @categories = nil
       else
         @search_str = params[:search]
         # @companies = Company.where("name LIKE ?", "%#{params[:search]}%") if Rails.env.development?
         @companies = Company.where('name ILIKE ?', "%#{params[:search]}%")
+        @categories = Category.where('name ILIKE ?', "%#{params[:search]}%")
       end
     else
       @search_str = params[:search]
       # @companies = Company.where( "name LIKE ? AND category = ?", "%#{params[:search]}%", @category)if Rails.env.development?
-      @companies = Company.where('name ILIKE ? AND category_id = ?', "%#{params[:search]}%", @category)
+      @companies = Company.where('name ILIKE ? AND category_id = ?', "%#{params[:search]}%", @category_id)
+      @categories = Company.where('id = ? ', @category_id)
     end
     if params[:limit].nil?
       @companies = @companies.to_a.slice(0, 8) if @companies.to_a.length > 8
+      @categories = @categories.to_a.slice(0, 8) if @categories.to_a.length > 8
     end
     @limit = params[:limit]
   end

@@ -1,5 +1,7 @@
-
-<%= form_for(company, class: 'form-horizontal') do |f| %>
+<%= form_for(company, class: 'form-horizontal', multipart: true) do |f| %>
+  <div id="field-count" hidden>
+    <%= company.setting.length %>
+  </div>
   <% if company.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
@@ -12,33 +14,72 @@
     </div>
   <% end %>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Name:</label>
+    <label class="control-label col-sm-2" for="name">Name:</label>
     <div class="col-sm-10">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
   </div><br><br>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">City:</label>
+    <label class="control-label col-sm-2" for="city">City:</label>
     <div class="col-sm-10">
-      <!-- <%= f.text_field :city, :class => 'form-control' %> -->
       <%= f.select :city, @cities.each {|city| [city]}, {}, class: "form-control" %>
     </div>
   </div><br><br>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Url:</label>
+    <label class="control-label col-sm-2" for="url">Url:</label>
     <div class="col-sm-10">
-      <%= f.text_field :url, :class => 'form-control' %>
+      <%= f.url_field :url, class: 'form-control', pattern: "[^\s]+", oninvalid: "this.setCustomValidity('White Space not allowed')", oninput: "setCustomValidity('')" %>
     </div>
   </div><br><br>
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Category:</label>
+    <label class="control-label col-sm-2" for="contact">Contact:</label>
+    <div class="col-sm-10">
+      <%= f.telephone_field :contact, class: 'form-control' %>
+    </div>
+  </div><br><br>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="rating">Rating:</label>
+    <div class="col-sm-10">
+      <%= f.number_field :rating, class: 'form-control', step: "0.1", min: '0' %>
+    </div>
+  </div><br><br>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="images">Images:</label>
+    <div class="col-sm-10">
+      <%= f.file_field :images, multiple: true, class: 'form-control' %>
+    </div>
+  </div><br><br>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="category">Category:</label>
     <div class="col-sm-10 ">
      <%= f.select :category_id, options_for_select(@categories.map {|category| [ category.name, category.id ]}, company.category_id ), {}, class: "form-control" %>
     </div>
   </div><br><br>
+  <% company.setting.try(:each).with_index do |setting, index| %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label col-sm-2" for="settings">Field:</label>
+          <div class="col-sm-10">
+            <input class="form-control" name="company[setting][<%= index %>][key]" value="<%= setting[0] %>"/>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <label class="control-label col-sm-2" for="settings">Value:</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="company[setting][<%= index %>][value]" value="<%= setting[1] %>">
+          </div>
+        </div>
+        <div class="col-sm-1 icon-close">
+            <icon onClick="deleteParent(event)" >&#10006;</icon>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit "Submit", :class => 'btn btn-primary' %>
+    <div class="col-sm-offset-2 col-sm-10 btn-area">
+      <%= f.submit "Submit", class: 'btn btn-primary' %>
+      <%= button_tag "Add New Field", id: "add-new-field", type: "button", class: "btn btn-primary"%>
       <%= link_to 'Back', companies_path, class: "btn btn-default" %>
     </div>
   </div>

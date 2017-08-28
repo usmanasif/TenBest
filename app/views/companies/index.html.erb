@@ -9,7 +9,8 @@
   </div>
   <div class="col-md-6">
     <%= link_to 'New Company', new_company_path, class: "new-record btn btn-primary col-md-offset-1" %>
-    <%= link_to 'Import', "javascript:;", class: "new-record btn btn-primary", onclick: "showImportModal()" %>
+    <%# <%= link_to 'Import', "javascript:;", class: "new-record btn btn-primary", onclick: "showImportModal()" %>
+    <%= button_tag "Import", type: "button", class: "new-record btn btn-primary", data: { toggle: "modal", target: "#add-new-category" }%>
   </div>
 </div>
 

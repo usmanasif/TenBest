@@ -1,4 +1,9 @@
 'use strict';
+// This count for additional fields is overwridden by index from form view
+function deleteParent(event) {
+  event.preventDefault();
+  $(event.target).parents('.form-group').remove();
+}
 $(document).on('turbolinks:before-visit', function(){
   var table = $('#companies');
   if (table.length) {
@@ -55,8 +60,15 @@ $(document).on('turbolinks:load',function(){
   });
 
   $('#category_keywords').tagsinput();
- 
-  function showImportModal() {
-    $("#add-new-category").modal("show");
-  }
+
+  var count = parseInt( $('#field-count').html());
+
+  $('#add-new-field').click(function () {
+    const html = '<div class="form-group"><div class="row"><div class="col-md-5"><label class="control-label col-sm-2" for="settings">Field:</label><div class="col-sm-10"><input class="form-control" name="company[setting][' + count + '][key]"/></div></div><div class="col-sm-6"><label class="control-label col-sm-2" for="settings">Value:</label><div class="col-sm-10"><input class="form-control" type="text" name="company[setting][' + count + '][value]"></div></div><div class="col-sm-1 icon-close"><icon onClick="deleteParent(event)" >&#10006;</icon></div></div></div>'
+    $(html).insertBefore('form:last .form-group:last-child:last');
+    count++;
+  })
+
+  $(".dataTables_filter_search_input").tooltip();
+  $(".dataTables_paginate").addClass('text-center');
 });

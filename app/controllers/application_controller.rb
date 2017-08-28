@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def get_info(company)
     info = {}
-    if company.lat.nil? || company.lng.nil? || !company.photo? || company.address.nil? || company.rating.nil?
+    if company.lat.nil? || company.lng.nil? || !company.image || company.address.nil? || company.rating.nil?
       begin
         url = "#{Rails.application.secrets[:google_place_url]}query=#{company.name}+#{company.city}&key=#{Rails.application.secrets[:google_place_key]}"
         puts url
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
             photo_reference = result_json['results'].first['photos'].first['photo_reference']
             info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
             company.photo_from_url(info['img'])
-            info['img'] = company.photo.url
+            info['img'] = company.image.url
           end
         end
       end
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
       info['lat'] = company.lat
       info['lng'] = company.lng
       # update info['img'] with locally generated url from paperclip
-      info['img'] = company.photo.url
+      info['img'] = company.image.url
       info['address'] = company.address
       info['rating'] = company.rating
     end

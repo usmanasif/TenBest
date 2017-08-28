@@ -8,10 +8,11 @@
     <h1 class="header">Navigation Links</h1>
   </div>
   <div class="col-md-6">
-    <%= link_to "Add Link",'javascript:;', class: "col-md-5 col-md-offset-5 btn btn-success add_link" %>
+    <%= link_to "Add Link",'javascript:;', class: "new-record add_link btn btn-primary" %>
   </div>
 </div>
 <br/>
+<div id="nav-link-parents" hidden><%= @parents.to_json %></div>
 <table class="table table-stripped table-truncate sortable">
   <thead>
     <tr>
@@ -23,13 +24,13 @@
     </tr>
   </thead>
   <tbody>
-    <% @nav_links.where(depth: 1).try(:each) do |link| %>
+    <% @nav_links.try(:each) do |link| %>
       <tr data-id="<%= link.id %>" data-parent-id="<%= link.parent_id %>">
         <td>
           <%= link_to link.name, link %>
         </td>
         <td>
-          <%= @nav_links.find(link.parent_id).name %>
+          <%= link.parent.name %>
         </td>
         <td>
           <%= link.position %>
@@ -38,7 +39,7 @@
           <%= link.active %>
         </td>
         <td>
-          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(id: link.id),remote: true %>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe, edit_nav_link_path(link), remote: true %>
           <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, link, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
@@ -52,7 +53,7 @@
       <%= form_for @new_link, remote: true do |f| %>
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Link</h4>
+          <h4 class="modal-title">Add Navigation Link</h4>
         </div>
         <% if flash.present? %>
           <label class="label label-danger active_error"><%= flash[:new_alert] %></label>
@@ -62,9 +63,9 @@
             <%= label_tag :name,"Name",class: "col-xs-3" %>
             <%= f.text_field :name,class: "form-control col-xs-9 var_name", required: true,id: "new_name" %>
           </div>
-          <div class="field2 m-b">
+          <div class="field2 m-b parent-div">
             <%= label_tag :parent_id, "Parent", class: "col-xs-3" %>
-            <%= f.select :parent_id, options_from_collection_for_select(@nav_links.where(depth: 0), 'id', 'name', @parent_id), {}, class: "form-control col-xs-9 var_name select2", required: true, id: "select_parent" %>
+            <%= f.select :parent_id, options_from_collection_for_select(@parents, 'id', 'name', 1), {include_blank: false}, class: "form-control col-xs-9 var_name", id: "select_parent" %>
           </div>
           <%= f.hidden_field :depth, value: 1 %>
           <div class="field2 m-b">
@@ -80,12 +81,14 @@
             <%= label_tag :active,"Active",class: "col-xs-3" %>
             </div>
             <div class="col-md-1">
-            <%= f.check_box :active,class: "active_checkbox" %>
+            <%= f.check_box :active,class: "active_checkbox bootstrap-switch" %>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <%= submit_tag "ADD",class: "btn btn-success col-xs-4 add_variable" %>
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "Submit", class: 'btn btn-primary' %>
+          </div>
         </div>
       <% end %>
     </div>
