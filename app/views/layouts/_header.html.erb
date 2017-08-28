@@ -36,7 +36,7 @@
                 <li class="city-item"><a href="<%= root_url %>">HONOLULU</a></li>
                 <% if !current_admin.id.nil? %>
                   <div class=" pull-right">
-                    <li class="page-link"><%= link_to 'Admin', admin_index_path %><span class="divider">/</span></li>
+                    <li class="page-link"><%= link_to 'Admin', admin_index_path %><span class="divider">|</span></li>
                     <li class="page-link"><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
                   </div>
                 <% end %>
