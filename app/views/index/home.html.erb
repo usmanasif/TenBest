@@ -58,7 +58,7 @@
           <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="place-content-container">
               <%= link_to '', ranking_path(@categories[0].name), class: 'place-link' %>
-              <%= image_tag @categories[0].image.url, class: 'img-responsive', alt: @categories[0].name + ' in San Francisco' %>
+              <%= image_tag @categories[0].image.url, class: 'img-responsive large-image', alt: @categories[0].name + ' in San Francisco' %>
               <div class="info-container">
                 <div class="category-container">Best Food & Drink</div>
                 <div class="title-container">TOP TEN <%= @categories[0].name.titleize %> IN SAN FRANCISCO</div>
