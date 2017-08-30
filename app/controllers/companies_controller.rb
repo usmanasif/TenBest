@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   require 'net/http'
   before_action :authenticate_admin!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit]
   before_action :set_layout
 
   # GET /companies
@@ -22,15 +23,10 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    @categories = Category.all
-    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 
   # GET /companies/1/edit
-  def edit
-    @categories = Category.all
-    @cities = ['San Francisco', 'New York', 'Honolulu']
-  end
+  def edit; end
 
   # POST /companies
   # POST /companies.json
@@ -138,5 +134,10 @@ class CompaniesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_company
     @company = Company.friendly.includes(:pictures).find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all
+    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 end

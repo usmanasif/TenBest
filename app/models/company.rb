@@ -23,7 +23,7 @@ class Company < ApplicationRecord
 
   def get_info
     info = {}
-    if lat.nil? || lng.nil? || pictures.count.zero? || address.nil? || rating.nil?
+    if lat.nil? || lng.nil? || images.count.zero? || address.nil? || rating.nil?
       begin
         url = "#{Rails.application.secrets[:google_place_url]}query=#{name}+#{city}&key=#{Rails.application.secrets[:google_place_key]}"
         result = RestClient.get url
@@ -52,16 +52,16 @@ class Company < ApplicationRecord
             photo_reference = result_json['results'].first['photos'].first['photo_reference']
             info['img'] = "#{Rails.application.secrets[:google_photo_url]}maxheight=400&photoreference=#{photo_reference}&key=#{Rails.application.secrets[:google_photo_key]}"
             photo_from_url(info['img'])
-            info['img'] = pictures.first.url
+            info['img'] = image.url
           end
         end
       end
-      update(lat: info['lat'], lng: info['lng'], address: info['address'], rating: info['rating'])
+      update_empty(lat: info['lat'], lng: info['lng'], address: info['address'], rating: info['rating'])
     else
       info['lat'] = lat
       info['lng'] = lng
       # update info['img'] with locally generated url from paperclip
-      info['img'] = pictures.first.url
+      info['img'] = image.url
       info['address'] = address
       info['rating'] = rating
     end
@@ -99,9 +99,14 @@ class Company < ApplicationRecord
 
   def setting=(pairs)
     self.settings = {}
-    pairs.try(:each) do |key, value|
-      self.settings[value[:key]] = value[:value]
+    pairs.try(:each) do |_key, value|
+      settings[value[:key]] = value[:value]
     end
+  end
+
+  def update_empty(attributes)
+    attributes.each { |attr| attributes.delete(attr) unless read_attribute(attr).empty? }
+    update(attributes)
   end
 
   private

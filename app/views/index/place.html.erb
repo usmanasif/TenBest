@@ -126,7 +126,9 @@
                             icon: icon
                         });
                         $("#mapModal").on("shown.bs.modal", function () {
+                            var center = map2.getCenter()
                             google.maps.event.trigger(map2, "resize");
+                            map2.setCenter(center)
                         });
                     }
                     // google.maps.event.addDomListener(window, 'load', initialize);
