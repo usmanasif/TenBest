@@ -94,17 +94,11 @@ ActiveRecord::Schema.define(version: 20170821110932) do
     t.string   "url"
     t.boolean  "active"
     t.integer  "position"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "parent_id"
     t.string   "icon"
-    t.integer  "depth",          default: 0, null: false
-    t.integer  "lft",            default: 0, null: false
-    t.integer  "rgt",            default: 0, null: false
-    t.integer  "children_count", default: 0, null: false
-    t.index ["lft"], name: "index_nav_links_on_lft", using: :btree
-    t.index ["parent_id"], name: "index_nav_links_on_parent_id", using: :btree
-    t.index ["rgt"], name: "index_nav_links_on_rgt", using: :btree
+    t.integer  "depth"
   end
 
   create_table "pictures", force: :cascade do |t|

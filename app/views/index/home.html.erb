@@ -58,9 +58,9 @@
           <div class="main-place-container col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <div class="place-content-container">
               <%= link_to '', ranking_path(@categories[0].name), class: 'place-link' %>
-              <%= image_tag @categories[0].image.url, class: 'img-responsive', alt: @categories[0].name + ' in San Francisco' %>
+              <%= image_tag @categories[0].image.url, class: 'img-responsive large-image', alt: @categories[0].name + ' in San Francisco' %>
               <div class="info-container">
-                <div class="category-container">Best Food & Drink</div>
+                <div class="category-container">Best <%= @categories[0].name.titleize %></div>
                 <div class="title-container">TOP TEN <%= @categories[0].name.titleize %> IN SAN FRANCISCO</div>
                 <div class="social-container">
                   <ul class="social-list">
@@ -88,10 +88,10 @@
               <div class="col-md-6 col-lg-6 col-xs-12 col-sm-6 place-item">
                 <div class="place-content-container">
                   <%= link_to '', ranking_path(category.name), class: 'place-link' %>
-                  <%= image_tag category.image.url, class: 'img-responsive', alt: category.name + ' in San Francisco' %>
+                  <%= image_tag category.image.url, class: 'img-responsive loop-images', alt: category.name + ' in San Francisco' %>
                   <div class="info-container">
-                    <div class="category-container">Best Events</div>
-                    <div class="title-container"><%= category.name.titleize %></div>
+                    <div class="category-container">Best <%= category.name.titleize %></div>
+                    <div class="title-container">TOP TEN <%= category.name.titleize %> IN SAN FRANCISCO</div>
                     <div class="social-container">
                       <ul class="social-list">
                         <li class="share-button"><a href="#"></a></li>

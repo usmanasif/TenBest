@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'category was successfully created.' }
+        format.html { redirect_to categories_path, notice: 'category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { redirect_back(fallback_location: :back,alert: "category could not be created") }
@@ -48,7 +48,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.update(category_params)
         if @category.save
-          format.html { redirect_to @category, notice: 'category was successfully created.' }
+          format.html { redirect_to categories_path, notice: 'category was successfully created.' }
           format.json { render :show, status: :created, location: @category }
         else
           format.html { render :edit, alert: 'category could not be updated' }

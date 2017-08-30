@@ -41,12 +41,16 @@
                 <div class="directions-container col-md-2 col-xs-3 no-padding">
                     <a href="javascript:;" data-toggle="modal" data-target="#mapModal">Directions</a>
                 </div>
-                <div class="contact-container col-md-2 col-xs-3 no-padding">
-                    <%= link_to "Contact", "mailto:" + @company.contact, target: :_blank %>
-                </div>
-                <div class="website-container col-md-2 col-xs-3 no-padding">
-                    <%= link_to "Website", @company.url, target: :_blank %>
-                </div>
+                <% if !@company.contact.blank? %>
+                    <div class="contact-container col-md-2 col-xs-3 no-padding">
+                        <%= link_to "Contact", "mailto:" + @company.contact, target: :_blank %>
+                    </div>
+                <% end %>
+                <% if !@company.url.blank? %>
+                    <div class="website-container col-md-2 col-xs-3 no-padding">
+                        <%= link_to "Website", @company.url, target: :_blank %>
+                    </div>
+                <% end %>
                 <% if @company.setting.length > 0 %>
                     <div class="view-menu-container col-md-2 col-xs-3 no-padding">
                         <%= link_to @company.setting.first[0], @company.setting.first[1], target: :_blank, rel: "nofollow" %>

@@ -19,7 +19,7 @@ body {
 /*slidebar侧边栏*/
 .slidebar {
 	width: 15%;
-	min-height: 432px;
+	min-height: 395px;
 	float: left;
 	border-right: 1px solid rgb(235,235,235);
 	background-color: rgb(247,247,247);
@@ -332,10 +332,10 @@ body {
 	font-style: normal;
 }
 .slidebar {
-	  position: absolute;
-		left: 0;    
-		top: 138px;
-    z-index: 90;
+	position: absolute;
+	left: 0;    
+	top: 128px;
+	z-index: 90;
 }
 .admin-body {
 	margin-left: 195px;
@@ -352,11 +352,11 @@ body {
 	color: #cf0f45;
 }
 
-#header {
+/*#header {
 	float: left;
 	width: 100%;
 	min-height: 137px;
-}
+}*/
 
 
 .card {
@@ -385,9 +385,20 @@ body {
 }
 
 .nav-header {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 	.navbar {
 		min-height: 50px;
     margin-bottom: 0;
 	}
+}
+
+.large-image {
+	width: 100%;
+}
+
+.cities-inner .pull-right {
+	margin-right: 30px;
+}
+.loop-images {
+	height:240px !important;
 }
