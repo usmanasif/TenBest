@@ -12,13 +12,13 @@ class Company < ApplicationRecord
   # after_update :get_info
 
   def self.required_columns
-    ['name', 'category_id', 'lat', 'lng', 'address']
+    ['name', 'contact', 'address','url','rating','city', 'settings']
   end
 
   def self.invalid(company)
     name = company['name']
     present = Company.find_by_name(name).present?
-    present || company['name'].blank? || company['category_id'].blank? || company['lat'].blank? || company['lng'].blank? || company['address'].blank?
+    present || company['name'].blank?
   end
 
   def get_info

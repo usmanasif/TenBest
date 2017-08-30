@@ -87,6 +87,14 @@ class CompaniesController < ApplicationController
     if @csv_companies.present?
       @correct_companies = []
       @csv_companies.each do |company|
+        puts ":::::::::::::::::::::::"
+        puts ":::::::::::::::::::::::"
+        puts company.inspect
+        puts ":::::::::::::::::::::::"
+        puts ":::::::::::::::::::::::"
+        company['settings'] = YAML.load(company['settings'].tr('’', '\'').tr('‘','\''))
+        puts "ppppppppppppppppppp after ppppppppp "
+        puts company.inspect
         if Company.invalid company
           company['error'] = true
         else
@@ -103,9 +111,14 @@ class CompaniesController < ApplicationController
     companies = params[:companies]
     category = params[:category_select]
     companies.each do |company|
-      company = company.slice(:name, :city, :category_id, :lat, :lng, :address)
+      company = company.slice(:name, :city, :address,:url,:rating,:contact,:settings)
       company[:category_id] = category
-      Company.find_or_create_by! company.to_hash unless Company.invalid company
+      puts "..............................."
+      puts "..............................."
+      puts company.to_hash
+      puts "..............................."
+      puts "..............................."
+      Company.create company.to_hash unless Company.invalid company
     end
     redirect_to companies_url, notice: 'Companies were successfully imported.'
   end

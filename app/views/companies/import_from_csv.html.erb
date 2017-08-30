@@ -22,8 +22,9 @@
                 <th>Name</th>
                 <th>City</th>
                 <th>Category</th>
-                <th>Latitute</th>
-                <th>Longitute</th>
+                <th>URL</th>
+                <th>Rating</th>
+                <th>Contact</th>
                 <th>Address</th>
               </tr>
             </thead>
@@ -40,10 +41,13 @@
                     <%= @category %>
                   </td>
                   <td>
-                    <%= temp["lat"] %>
+                    <%= temp["url"] %>
                   </td>
                   <td>
-                    <%= temp["lng"] %>
+                    <%= temp["rating"] %>
+                  </td>
+                  <td>
+                    <%= temp["contact"] %>
                   </td>
                   <td>
                     <%= temp["address"] %>
