@@ -105,8 +105,9 @@ class Company < ApplicationRecord
   end
 
   def update_empty(attributes)
-    attributes.each { |attr| attributes.delete(attr) unless read_attribute(attr).empty? }
-    update(attributes)
+    attributes.each do  |attr| 
+      attributes.delete(attr.first) unless read_attribute(attr.first).blank? 
+    end
   end
 
   private
