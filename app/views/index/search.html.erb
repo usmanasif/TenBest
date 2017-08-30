@@ -1,4 +1,4 @@
-<% category = Category.find(@category).name unless @category.nil? %>
+<% category = Category.find(@category_id).name unless @category_id.nil? %>
 <% provide(:title, "SEARCH | \"#{@search_str}\" | #{category}") %>
 <% provide(:body_class, "about-us-page") %>
 <!-- Search caption section -->
@@ -22,31 +22,31 @@
 <!-- Search Result Section -->
   <section class="search-result">
     <div class="container" style="text-align:center;">
-    	<% unless @companies.nil? or @companies.length <= 0 %>
+    	<% unless (@companies.nil? && @categories.nil?) || (@companies.length <= 0 && @categories.length <= 0) %>
 	        <div>
 	        <div class="search-result-div" >
 	        <style type="text/css">
 	        	.search-result-div{
-	        		height: <%= search_result_height @companies.length %>px;
+	        		height: <%= search_result_height (@companies.length + @categories.length) %>px;
 	        	}
 	        	@media only screen and (max-width: 980px){
 	        		.search-result-div{
-	        			height: <%= (search_result_height @companies.length ) * 2 - 270 %>px;
+	        			height: <%= (search_result_height (@companies.length + @categories.length) ) * 2 - 270 %>px;
 	        		}
 	        	}
 	        	@media only screen and (max-width: 600px){
 	        		.search-result-div{
-	        			height: <%= ( (search_result_height @companies.length ) * 2 - 270 ) * 0.8 %>px;
+	        			height: <%= ( (search_result_height (@companies.length + @categories.length) ) * 2 - 270 ) * 0.8 %>px;
 	        		}
 	        	}
 	        	@media only screen and (max-width: 450px){
 	        		.search-result-div{
-	        			height: <%= ( (search_result_height @companies.length ) * 2 - 270 ) * 0.6 %>px;
+	        			height: <%= ( (search_result_height (@companies.length + @categories.length) ) * 2 - 270 ) * 0.6 %>px;
 	        		}
 	        	}
 	        	@media only screen and (max-width: 320px){
 	        		.search-result-div{
-	        			height: <%= ( (search_result_height @companies.length ) * 2 - 270 ) * 0.5 %>px;
+	        			height: <%= ( (search_result_height (@companies.length + @categories.length) ) * 2 - 270 ) * 0.5 %>px;
 	        		}
 	        	}
 	        </style>
@@ -80,6 +80,36 @@
   				  		</style>
   			  		<% end %>
   			  	<% end %>
+				<% @categories.each_with_index do | category, index | %>
+					<%
+						position = position( index + @companies.length, 4 )
+						res_position = position( index + @companies.length, 2)
+					%>
+					<%= link_to ranking_path( url_code( category.name ) ) do %>
+						<div class="box" id = "box-<%= index + @companies.length %>" >
+							<div class="img-background">
+								<span class="<%= category.name.downcase %>"></span>
+								<span><%= set_title category.name %></span>
+								<div class="img-mask">
+									<span>Top <%= modal_text category %> <br>in San Francisco</span>
+								</div>
+							</div>
+						</div>
+						<style type="text/css">
+							#box-<%= index + @companies.length %>{
+								top:<%= position[:top] %>px;
+								left: <%= position[:left] %>px;
+							}
+
+							@media only screen and (max-width: 980px) {
+								#box-<%= index + @companies.length %>{
+									top:<%= res_position[:top] %>px;
+									left: <%= res_position[:left] %>px;
+								}
+							}
+						</style>
+					<% end %>
+				<% end %>
 	        </div>
 	        </div>
 	      </table>
@@ -90,7 +120,7 @@
 	      	<div class="row">
 	    		<div class="col-md-12">
 	    			<div class="button-container">
-	    				<%= link_to 'View More Results <span class="arrow">&#8594</span>'.html_safe, "#{search_url}?search=#{@search_str}&search_select=#{@category}&limit=all" %>
+	    				<%= link_to 'View More Results <span class="arrow">&#8594</span>'.html_safe, "#{search_url}?search=#{@search_str}&search_select=#{@category_id}&limit=all" %>
 	                </div>
 	    		</div>
 	    	</div>

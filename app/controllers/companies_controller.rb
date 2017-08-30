@@ -2,12 +2,13 @@ class CompaniesController < ApplicationController
   require 'net/http'
   before_action :authenticate_admin!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit]
   before_action :set_layout
 
   # GET /companies
   # GET /companies.json
   def index
-    # @companies = Company.all
+    @companies = Company.all
     @category = Category.new
     respond_to do |format|
       format.html
@@ -22,21 +23,15 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    @categories = Category.all
-    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 
   # GET /companies/1/edit
-  def edit
-    @categories = Category.all
-    @cities = ['San Francisco', 'New York', 'Honolulu']
-  end
+  def edit; end
 
   # POST /companies
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-
     respond_to do |format|
       if @company.save!
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
@@ -54,9 +49,15 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1.json
   def update
     respond_to do |format|
+      company_params[:setting] ||= {}
       if @company.update(company_params)
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: @company }
+        if @company.save!
+          format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+          format.json { render :show, status: :ok, location: @company }
+        else
+          format.html { render :new, alert: 'company could not be updated' }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit, alert: 'category could not be updated' }
         format.json { render json: @company.errors, status: :unprocessable_entity }
@@ -107,16 +108,23 @@ class CompaniesController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def company_params
-      params.require(:company).permit( :name, :city, :category_id, :lat, :lng, :address, :url)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def company_params
+    params.require(:company).permit(:name, :city, :category_id, :lat, :lng, :address, :url, :contact, images: [], settings: [:key, :value])
+    params.require(:company).permit!
+  end
 
-    def set_layout
-        self.class.layout "admin"
-    end
+  def set_layout
+    self.class.layout 'admin'
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.friendly.find(params[:id])
+    @company = Company.friendly.includes(:pictures).find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all
+    @cities = ['San Francisco', 'New York', 'Honolulu']
   end
 end

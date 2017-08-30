@@ -1,7 +1,11 @@
 module IndexHelper
-  def modal_text(company)
-    modal_text = company.category.name unless company.category_id.nil?
-    modal_text = company.subcategory.name unless company.subcategory_id.nil?
+  def modal_text(obj)
+    if obj.class.name == 'Company'
+      modal_text = obj.category.name unless obj.category_id.nil?
+      modal_text = obj.subcategory.name unless obj.subcategory_id.nil?
+    else
+      modal_text = obj.name
+    end
     modal_text
   end
 

@@ -29,7 +29,7 @@
 <div class="social-modal">
     <div class="container">
       <h1>Share</h1>
-      <%= social_share_button_tag(@company.name, :image => @company.photo.url) %>
+      <%= social_share_button_tag(@company.name, image: @company.image.url) %>
       <span class="glyphicon glyphicon-remove-circle"></span>
     </div>
 </div>
@@ -61,7 +61,7 @@
                 <% end %>
             </div>
                 <div class="image-container">
-                    <%= image_tag asset_path(@company.photo.url), class: 'img-responsive', alt: @keywords %>
+                    <%= image_tag asset_path(@company.image.url), class: 'img-responsive', alt: @keywords %>
                 </div>
                 <div class="google-map-container" style="float: left;
     width: 100%;">
