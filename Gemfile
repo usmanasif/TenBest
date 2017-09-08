@@ -6,6 +6,8 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Use sourcemaps for sass-rails
+gem 'sassc-rails'
 # Use bootstrap 3 sass port
 gem 'bootstrap-sass', '~> 3.3.6'
 # Also use Bootstrap's font-awesome-sass'

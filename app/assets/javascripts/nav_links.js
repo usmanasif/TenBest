@@ -47,6 +47,7 @@ function showErrorLabel() {
 
 // hide error on changing selection
 function hideErrorLabel() {
+  $('.label .label-danger .active_error').remove();
   var modal_body = $(".modal-body")
   modal_body.each(function (index, element) {
     if ($(this).children().first().is('label')) {

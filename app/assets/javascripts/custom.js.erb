@@ -94,6 +94,10 @@ $(document).on('turbolinks:load',function(){
         }
 
     });
+    //Stop inner nav-links event to bubble-up to parent category nav-link
+    $(".navbar .menu-list-wrapper .menu-header .menu-tabs-section .menu-tab li > a").on( 'click', function (event) {
+        event.stopPropagation();
+    });
 
     $('.search_field_input').blur(function() {
             $('.search-wrapper').removeClass("focus");

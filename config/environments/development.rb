@@ -26,7 +26,6 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  
   config.action_mailer.delivery_method = :sendmail
   # Defaults to:
   # config.action_mailer.sendmail_settings = {
@@ -67,12 +66,14 @@ Rails.application.configure do
   #   arguments: '-i -t'
   # }
   config.action_mailer.smtp_settings = {
-     address:              'smtp.gmail.com',
-     port:                 587,
-     domain:               'Gmail.com',
-     user_name:            Rails.application.secrets[:mailer_user],
-     password:             Rails.application.secrets[:mailer_pass],
-     authentication:       'plain',
-     enable_starttls_auto: true  
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'Gmail.com',
+    user_name:            Rails.application.secrets[:mailer_user],
+    password:             Rails.application.secrets[:mailer_pass],
+    authentication:       'plain',
+    enable_starttls_auto: true
   }
+
+  config.sass.inline_source_maps = true
 end
