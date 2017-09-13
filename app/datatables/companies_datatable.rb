@@ -39,7 +39,7 @@ class CompaniesDatatable
     companies = Company.order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
     if params[:sSearch].present?
-      companies = companies.where('name ILIKE :search or city ILIKE :search or CAST(category_id AS TEXT) ILIKE :search', search: "%#{params[:sSearch]}%")
+      companies = companies.joins(:category).where('companies.name ILIKE :search or companies.city ILIKE :search or categories.name ILIKE :search or CAST(companies.category_id AS TEXT) ILIKE :search', search: "%#{params[:sSearch]}%")
     end
     companies
   end

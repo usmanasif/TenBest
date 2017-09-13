@@ -102,11 +102,6 @@ class CompaniesController < ApplicationController
     companies.each do |company|
       company = company.slice(:name, :city, :address,:url,:rating,:contact,:settings)
       company[:category_id] = category
-      puts "..............................."
-      puts "..............................."
-      puts company.to_hash
-      puts "..............................."
-      puts "..............................."
       Company.create company.to_hash unless Company.invalid company
     end
     redirect_to companies_url, notice: 'Companies were successfully imported.'
