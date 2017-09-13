@@ -83,14 +83,7 @@ class CompaniesController < ApplicationController
     if @csv_companies.present?
       @correct_companies = []
       @csv_companies.each do |company|
-        puts ":::::::::::::::::::::::"
-        puts ":::::::::::::::::::::::"
-        puts company.inspect
-        puts ":::::::::::::::::::::::"
-        puts ":::::::::::::::::::::::"
         company['settings'] = YAML.load(company['settings'].tr('’', '\'').tr('‘','\''))
-        puts "ppppppppppppppppppp after ppppppppp "
-        puts company.inspect
         if Company.invalid company
           company['error'] = true
         else

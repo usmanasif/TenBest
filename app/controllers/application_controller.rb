@@ -77,15 +77,10 @@ class ApplicationController < ActionController::Base
     if (attributes - headers).blank?
       list = []
       CSV.foreach(file.path, headers: true) do |row|
-        puts "---------------------------"
-        puts "---------------------------"
-        puts row.inspect
-        puts "---------------------------"
-        puts "---------------------------"
         item = class_type.where(name: row[0][1]).first_or_initialize row.to_hash
         list.push item.attributes
       end
-      return list
+      return list.sort_by { |item| item[:rating] }.reverse!
     else
       return nil
     end
