@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
         item = class_type.where(name: row[0][1]).first_or_initialize row.to_hash
         list.push item.attributes
       end
-      return list.sort_by { |item| item[:rating] }.reverse!
+      return list.sort_by { |item| item[:rating] }
     else
       return nil
     end
